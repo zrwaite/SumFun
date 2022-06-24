@@ -1,0 +1,1 @@
+export { ActivitiesView } from './activitiesView'
