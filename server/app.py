@@ -4,7 +4,7 @@ from ariadne import load_schema_from_path, make_executable_schema, \
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
-from api.queries.user import listUsers_resolver, getUser_resolver
+from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver
 from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
 
 from api.queries.login import login_resolver
@@ -76,15 +76,12 @@ def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
 user = ObjectType('User')
 
 @user.field('activities')  
-def userActivities_resolver(obj, info):
-    # obj # instannce of MyGroup returned from `resolve_group`
-    return {
-        id: 1
-    }
+def getUser_activities(obj, info):
+    return getUser_activities_resolver(obj, info)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
-    type_defs, query, mutation, snake_case_fallback_resolvers
+    type_defs, query, mutation, user, snake_case_fallback_resolvers
 )
 
 
