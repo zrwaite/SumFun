@@ -1,20 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useState } from 'react'
+import { HomeView } from './app/screens/HomeView'
+import { LoginView } from './app/screens/LoginView/LoginView'
+import { client } from './client'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { GET_USER } from './queries'
+import { Alert } from 'react-native'
+import { LoadingScreen } from './app/screens/LoadingScreen'
+import { SettingsView } from './app/screens/SettingsView'
+import { UserContext } from './contexts'
+
+const Stack = createNativeStackNavigator() as any
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+	const [usernameState, setUsernameState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND'>('LOADING')
+	const tryGetUser = async () => {
+		const username = await AsyncStorage.getItem('username')
+		if (!username) {
+			setUsernameState('NOT_FOUND')
+			return
+		}
+		const response = await client.query({
+			query: GET_USER,
+			variables: { username },
+		})
+		if (!response.error) {
+			const data = response.data
+			if (data.getUser.success) {
+				setUser(data.getUser.user)
+			} else Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		setUsernameState('FOUND')
+	}
+	const [user, setUser] = useState<User | null>(null)
+	const userValue = { user, setUser }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+	if (usernameState === 'LOADING') {
+		setTimeout(tryGetUser, 1000)
+	}
+	return (
+		<UserContext.Provider value={userValue}>
+      {usernameState === 'LOADING' ? (
+        <LoadingScreen />
+      ) : (
+        <NavigationContainer>
+          <Stack.Navigator>
+            {usernameState === 'FOUND' ? (
+              <>
+                <Stack.Screen name="Home" component={HomeView} />
+                <Stack.Screen name="Login" component={LoginView} />
+              </>
+            ) : (
+              <>
+                <Stack.Screen name="Login" component={LoginView} />
+                <Stack.Screen name="Home" component={HomeView} />
+              </>
+            )}
+            <Stack.Screen name="Settings" component={SettingsView} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      )}
+		</UserContext.Provider>
+	)
+}
