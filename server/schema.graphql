@@ -6,9 +6,10 @@ schema {
 type User {
 	id: ID!
 	username: String!
-	hash: String!
 	display_name: String
 	created_at: String!
+	show_unverified: Boolean!
+	friend_ids: [ID]!
 }
 
 type UserResult {
@@ -37,3 +38,5 @@ type Mutation {
 	updateUser(id: ID!, username: String, display_name: String): UserResult!
 	deleteUser(id: ID!): UserResult!
 }
+
+
