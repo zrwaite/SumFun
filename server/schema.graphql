@@ -3,6 +3,39 @@ schema {
 	mutation: Mutation
 }
 
+enum RAIN {
+    NOT_ALLOWED
+    ENCOURAGED
+    ALLOWED
+	AFTER
+}
+
+type Activity {
+	id: ID!
+	name: String!
+	min_temp: Int!
+	max_temp: Int!
+	min_wind: Int!
+	max_wind: Int!
+	rain: RAIN!
+	created_at: String!
+	verified: Boolean!
+	public: Boolean!
+}
+
+type ActivityResult {
+	success: Boolean!
+	errors: [String]
+	activity: Activity
+}
+
+type ActivitiesResult {
+	success: Boolean!
+	errors: [String]
+	activities: [Activity]
+}
+
+
 type User {
 	id: ID!
 	username: String!
@@ -28,12 +61,18 @@ type Query {
 
 	listUsers: UsersResult!
 	getUser(username: String!): UserResult!
-
 	login(username: String!, password: String!): UserResult!
+
+	listActivities: ActivitiesResult!
+	getActivity(id: ID!): ActivityResult!
 }
 
 type Mutation {
 	createUser(username: String!, password: String!): UserResult!
 	updateUser(id: ID!, username: String, display_name: String): UserResult!
 	deleteUser(id: ID!): UserResult!
+
+	createActivity(name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
+	updateActivity(id: ID!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
+	deleteActivity(id: ID!): ActivityResult!
 }

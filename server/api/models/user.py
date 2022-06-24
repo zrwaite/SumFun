@@ -5,7 +5,7 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
-    hash = db.Column(db.String, nullable=False)
+    hash = db.Column(db.LargeBinary, nullable=False)
     display_name = db.Column(db.String, nullable=False)
     created_at = db.Column(db.Date, nullable=False)
 

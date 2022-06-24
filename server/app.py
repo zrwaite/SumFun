@@ -8,6 +8,9 @@ from api.queries.user import listUsers_resolver, getUser_resolver
 from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
 
 from api.queries.login import login_resolver
+
+from api.queries.activity import listActivities_resolver, getActivity_resolver
+from api.mutations.activity import createActivity_resolver, updateActivity_resolver, deleteActivity_resolver
 query = QueryType()
 mutation = MutationType()
 
@@ -44,6 +47,32 @@ def updateUser(obj, info, id, username, display_name):
 @query.field('login')
 def login(obj, info, username, password):
     return login_resolver(obj, info, username, password)
+
+
+
+@query.field('listActivities')
+def listActivities(obj, info):
+    return listActivities_resolver(obj, info)
+
+
+@query.field('getActivity')
+def getActivity(obj, info, id):
+    return getActivity_resolver(obj, info, id)
+
+
+@mutation.field('createActivity')
+def createActivity(obj, info, name, min_temp, max_temp, min_wind, max_wind, rain):
+    return createActivity_resolver(obj, info, name, min_temp, max_temp, min_wind, max_wind, rain)
+
+
+@mutation.field('deleteActivity')
+def deleteActivity(obj, info, id):
+    return deleteActivity_resolver(obj, info, id)
+
+
+@mutation.field('updateActivity')
+def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
+    return updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain)
 
 
 type_defs = load_schema_from_path("schema.graphql")

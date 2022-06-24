@@ -43,12 +43,17 @@ def updateUser_resolver(obj, info, id, username, display_name):
         if user:
             user.username = username
             user.display_name = display_name
-        db.session.add(user)
-        db.session.commit()
-        payload = {
-            "success": True,
-            "user": user.to_dict()
-        }
+            db.session.add(user)
+            db.session.commit()
+            payload = {
+                "success": True,
+                "user": user.to_dict()
+            }
+        else:
+            payload = {
+                "success": False,
+                "errors": ['user not found']
+            }
     except AttributeError as error:
         payload = {
             "success": False,
