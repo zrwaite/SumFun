@@ -21,10 +21,12 @@ def createActivity_resolver(obj, info, name, min_temp, max_temp, min_wind, max_w
                 name=name,
                 min_temp=min_temp,
                 max_temp=max_temp,
-                min_wind=minewind,
+                min_wind=min_wind,
                 max_wind=max_wind,
                 rain=rain,
                 created_at=today,
+                verified=False,
+                public=False
             )
             db.session.add(activity)
             db.session.commit()

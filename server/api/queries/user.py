@@ -1,7 +1,6 @@
-from ariadne import convert_kwargs_to_snake_case
+from ariadne import convert_kwargs_to_snake_case, ObjectType
 from traceback import print_exc
 from api.models.user import User
-
 
 def listUsers_resolver(obj, info):
     try:

@@ -42,6 +42,8 @@ type User {
 	hash: String!
 	display_name: String
 	created_at: String!
+	activity_ids: [ID]!
+	activities: [Activity]!
 }
 
 type UserResult {

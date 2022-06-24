@@ -14,7 +14,6 @@ from api.mutations.activity import createActivity_resolver, updateActivity_resol
 query = QueryType()
 mutation = MutationType()
 
-
 @query.field('health')
 def health(obj, info):
     return "Working!"
@@ -74,6 +73,14 @@ def deleteActivity(obj, info, id):
 def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
     return updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain)
 
+user = ObjectType('User')
+
+@user.field('activities')  
+def userActivities_resolver(obj, info):
+    # obj # instannce of MyGroup returned from `resolve_group`
+    return {
+        id: 1
+    }
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
