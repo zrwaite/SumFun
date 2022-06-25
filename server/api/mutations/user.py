@@ -27,7 +27,6 @@ def createUser_resolver(obj, info, username, password):
             db.session.commit()
             payload = {
                 "success": True,
-                "user": user.to_dict()
             }
     except ValueError:
         payload = {
