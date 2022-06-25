@@ -1,14 +1,19 @@
 import { gql } from '@apollo/client'
 
-export const LOGIN = gql`
-	query tryLogin($username: String!, $password: String!) {
-		login(username: $username, password: $password) {
-			user {
+export const LIST_EVENTS = gql`
+	query tryListEvents {
+		listEvents {
+			events {
 				id
-				username
+				name
+        date
+        start_time
+        location
+        duration
+        activity_id
 			}
 			success
 			errors
 		}
-	}
+}
 `

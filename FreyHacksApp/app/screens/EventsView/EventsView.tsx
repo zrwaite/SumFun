@@ -3,6 +3,7 @@ const logoImage = require('../../assets/icon.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
+const addImage = require('../../assets/add.png')
 
 export const EventsView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
