@@ -1,0 +1,1 @@
+export {FriendsNavigator} from "./FriendsNavigator"

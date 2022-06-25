@@ -4,7 +4,7 @@ import { useContext} from 'react'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
 
-export const ActivitiesView = ({ navigation }: { navigation: any }) => {
+export const MyActivitiesView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 	return (
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
