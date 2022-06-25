@@ -19,6 +19,9 @@ from api.mutations.event import createEvent_resolver, updateEvent_resolver, dele
 
 from api.models.validity import Validity
 
+from weather.add_user_weather_data import add_all_users_weather_data
+print(add_all_users_weather_data())
+
 query = QueryType()
 mutation = MutationType()
 
@@ -68,8 +71,8 @@ def getActivity(obj, info, id):
 
 
 @mutation.field('createActivity')
-def createActivity(obj, info, username, name, min_temp, max_temp, min_wind, max_wind, rain):
-    return createActivity_resolver(obj, info, username, name, min_temp, max_temp, min_wind, max_wind, rain)
+def createActivity(obj, info, username, name, ideal_temp, ideal_wind, rain, ideal_pop, ideal_visibility, ideal_uvi):
+    return createActivity_resolver(obj, info, username, name, ideal_temp, ideal_wind, rain,  ideal_pop, ideal_visibility, ideal_uvi)
 
 
 @mutation.field('deleteActivity')
@@ -78,8 +81,8 @@ def deleteActivity(obj, info, id):
 
 
 @mutation.field('updateActivity')
-def updateActivity(obj, info, username, id, min_temp=None, max_temp=None, min_wind=None, max_wind=None, rain=None):
-    return updateActivity_resolver(obj, info, username, id, min_temp, max_temp, min_wind, max_wind, rain)
+def updateActivity(obj, info, username, id, ideal_temp=None, ideal_wind=None, rain=None, ideal_pop=None, ideal_visibility=None, ideal_uvi=None):
+    return updateActivity_resolver(obj, info, username, id, ideal_temp, ideal_wind, rain, ideal_pop, ideal_visibility, ideal_uvi)
 
 user = ObjectType('User')
 
