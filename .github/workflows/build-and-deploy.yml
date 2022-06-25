@@ -48,7 +48,7 @@ jobs:
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
           # destroy all existing containers
           docker stop $(docker ps -a -q)
-          docker rm $(docker ps -a -q)
+          docker rm -fv $(docker ps -a -q)
           docker kill $(docker ps -a -q)
           # pull updated image
           docker pull ${{ steps.image-name.outputs.data }}
