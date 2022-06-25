@@ -30,7 +30,7 @@ jobs:
     - name: Build the Docker image
       run: docker compose build
     - name: Get image name from docker-compose.yml
-      id: image_name
+      id: image-name
       uses: KJ002/read-yaml@main
       with:
         file: './docker-compose.yml'
