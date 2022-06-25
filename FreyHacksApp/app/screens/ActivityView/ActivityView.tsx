@@ -2,12 +2,10 @@ import { StyleSheet, View, Text } from 'react-native'
 import { COLORS } from '../../settings'
 
 export const ActivityView = ({ route }: { route: { params: { activity: Activity } } }) => {
+	const activity = route.params.activity
 	return (
 		<View style={styles.container}>
-			{/* <Text style={styles.header}>{route.params.activity.headline}</Text>
-			<Text style={styles.description}>{route.params.activity.description}</Text>
-			<Text style={styles.content}>{route.params.activity.content}</Text> */}
-			<Text style={styles.footer}>- A Very Credible Source</Text>
+			<Text style={styles.header}>{activity.name}</Text>
 		</View>
 	)
 }

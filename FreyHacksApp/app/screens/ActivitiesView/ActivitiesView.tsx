@@ -3,13 +3,31 @@ import { StyleSheet, Alert, Text, TouchableOpacity, ActivityIndicator, ScrollVie
 import { useContext, useState } from 'react'
 import { client } from '../../../client'
 import { COLORS } from '../../settings'
-import { ActivitiesContext } from '../../../contexts'
+import { UserContext } from '../../../contexts'
+import { LIST_ACTIVITIES } from './queries'
 
 export const ActivitiesView = ({ navigation }: { navigation: any }) => {
-	const { activities, setActivities } = useContext(ActivitiesContext)
-
-	const [activitiesState, setActivitiesState] = useState<'LOADING' | 'LOADED'>('LOADING')
-
+	const { user } = useContext(UserContext)
+	const [activitiesState, setActivitiesState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND'>('LOADING')
+	const [activities, setActivities] = useState<Activity[]>([])
+	const tryListActivities = async () => {
+		const response = await client.query({
+			query: LIST_ACTIVITIES,
+		})
+		if (!response.error) {
+			const data = response.data
+			if (data.listActivities.success) {
+				setActivities(data.listActivities.activities)
+			} else {
+				Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				setActivitiesState('NOT_FOUND')
+			}
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		setActivitiesState('FOUND')
+	}
+	if (activitiesState === 'LOADING') {
+		tryListActivities()
+	}
 	return (
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
 			{activitiesState === 'LOADING' ? (
@@ -18,10 +36,7 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 				activities.map((activity, i) => {
 					return (
 						<TouchableOpacity key={i} style={styles.activitySection} onPress={() => navigation.navigate('Activity', { activity: activity })}>
-							{/* <Text style={styles.activitySectionHeader}>{activity.headline}</Text> */}
-							{/* <Text style={styles.activitySectionDescription}>{activity.description}...</Text> */}
-							<Text style={styles.activitySectionHeader}>activity headline</Text>
-							<Text style={styles.activitySectionDescription}>activity description...</Text>
+							<Text style={styles.activitySectionHeader}>{activity.name}</Text>
 						</TouchableOpacity>
 					)
 				})
