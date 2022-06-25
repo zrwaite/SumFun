@@ -2,7 +2,6 @@ import { StyleSheet, Alert, View, Image, Text, TextInput } from 'react-native'
 const logoImage = require('../../assets/icon.png')
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-import { StackActions } from '@react-navigation/native'
 import { useContext, useState } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
@@ -11,15 +10,7 @@ import { LOGIN } from './queries'
 import { SIGNUP } from './mutations'
 import { UserContext } from '../../../contexts'
 
-const loginRedirect = async (navigation: any) => {
-	const username = await AsyncStorage.getItem('username')
-	if (username) {
-		navigation.dispatch(StackActions.replace('Home'))
-	}
-}
-
-export const LoginView = ({ navigation }: { navigation: any }) => {
-	loginRedirect(navigation)
+export const LoginView = () => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const buttonsEnabled = username.length !== 0 && password.length !== 0
@@ -32,6 +23,7 @@ export const LoginView = ({ navigation }: { navigation: any }) => {
 		})
 		if (!response.error) {
 			const data = response.data
+			console.log(data)
 			if (data.login.success) {
 				try {
 					await AsyncStorage.setItem('username', username)

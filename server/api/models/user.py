@@ -12,6 +12,9 @@ class User(db.Model):
     friend_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
     event_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
     activity_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
+    validity_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
+    lon = db.Column(db.Float, nullable=False)
+    lat = db.Column(db.Float, nullable=False)
 
     def to_dict(self):
         return {
@@ -23,7 +26,10 @@ class User(db.Model):
             "show_unverified": self.show_unverified, 
             #"do_not_disturb": self.do_not_disturb,
             "friend_ids":self.friend_ids,
-            "event_ids":self.event_ids
+            "event_ids":self.event_ids,
+            "validity_ids":self.validity_ids,
+            "lon": self.lon,
+            "lat": self.lat,
         }
     
     def do_not_disturb():

@@ -10,17 +10,25 @@ enum RAIN {
 	AFTER
 }
 
+type Validity {
+	id: ID!
+	scores: [Float]! #length 12, float from 0-10
+}
+
 type Activity {
 	id: ID!
 	name: String
-	min_temp: Int!
-	max_temp: Int!
-	min_wind: Int!
-	max_wind: Int!
+	ideal_temp: Int!
+	ideal_wind: Int!
 	rain: RAIN!
+	ideal_pop: Int!
+	ideal_visibility: Int!
+	ideal_uvi: Int!
 	created_at: String!
 	verified: Boolean!
 	public: Boolean!
+	validity_id: Int
+	validity: Validity
 }
 
 type ActivityResult {
@@ -68,7 +76,9 @@ type Event {
 	end_time: String!
 	location: String!
 	activity_id: ID!
-	activity: Activity
+	activity: Activity!
+	validity_id: Int
+	validity: Validity
 }
 
 type EventResult {
@@ -95,6 +105,8 @@ type User {
 	friends: [User]!
 	event_ids: [ID]!
 	events: [Event]!
+	lon: Float!
+	lat: Float!
 }
 
 type UserResult {
@@ -129,8 +141,8 @@ type Mutation {
 	deleteUser(id: ID!): DeleteResult!
 	updateUser(username: String!, display_name: String): UserResult!
 
-	createActivity(username: String!, name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
-	updateActivity(id: ID!, username: String!, min_temp: Int, max_temp: Int, min_wind: Int, max_wind: Int, rain: RAIN): ActivityResult!
+	createActivity(username: String!, name: String!, ideal_temp: Int!, ideal_wind: Int!, rain: RAIN!, ideal_pop: Int!, ideal_visibility: Int!, ideal_uvi: Int!): ActivityResult!
+	updateActivity(id: ID!, username: String!, ideal_temp: Int, ideal_wind: Int, rain: RAIN, ideal_pop: Int, ideal_visibility: Int, ideal_uvi: Int): ActivityResult!
 	deleteActivity(id: ID!): DeleteResult!
 
 	createEvent(username: String!, name: String!, date: String!, start_time: String!, end_time: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!

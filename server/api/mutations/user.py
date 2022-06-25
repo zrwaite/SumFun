@@ -25,6 +25,9 @@ def createUser_resolver(obj, info, username, password):
                 activity_ids=[],
                 friend_ids=[],
                 event_ids=[],
+                validity_ids=[],
+                lon=0,
+                lat=0,
                 show_unverified=False,
             )
             db.session.add(user)
@@ -78,5 +81,31 @@ def deleteUser_resolver(obj, info, id):
         payload = {
             "success": False,
             "errors": ["user not found"]
+        }
+    return payload
+
+
+
+
+def updateUserValidityIds(username, validity_ids=[]):
+    try:
+        user = User.query.filter(User.username == username).scalar()
+        if user:
+            user.validity_ids = validity_ids
+            db.session.add(user)
+            db.session.commit()
+            payload = {
+                "success": True,
+                "user": user.to_dict()
+            }
+        else:
+            payload = {
+                "success": False,
+                "errors": ['user not found']
+            }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": ["user not found", str(error)]
         }
     return payload

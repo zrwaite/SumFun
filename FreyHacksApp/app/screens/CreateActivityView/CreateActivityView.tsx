@@ -14,17 +14,18 @@ const Picker = RNPickerSelect as any;
 export const CreateActivityView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 	const [name, setName] = useState('')
-	const [min_temp, setMinTemp] = useState(0)
-	const [max_temp, setMaxTemp] = useState(0)
-	const [min_wind, setMinWind] = useState(0)
-	const [max_wind, setMaxWind] = useState(0)
+	const [ideal_temp, setIdealTemp] = useState(0)
+	const [ideal_wind, setIdealWind] = useState(0)
+	const [ideal_pop, setIdealPop] = useState(0)
+	const [ideal_uvi, setIdealUvi] = useState(0)
+	const [ideal_visibility, setIdealVisibility] = useState(0)
 	const [rain, setRain] = useState<RAIN|''>('')
 	const buttonsEnabled = name.length !== 0  && rain.length !== 0
 
 	const tryCreateActivity = async () => {
 		const response = await client.mutate({
 			mutation: CREATE_ACTIVITY,
-			variables: { username: user?.username, name, min_temp, max_temp, min_wind, max_wind, rain},
+			variables: { username: user?.username, name, ideal_temp, ideal_wind, ideal_pop, rain, ideal_visibility, ideal_uvi }
 		})
 		if (!response.errors) {
 			const data = response.data
@@ -50,10 +51,8 @@ export const CreateActivityView = ({ navigation }: { navigation: any }) => {
 				<Text style={styles.headerText}>Create Activity</Text>
 			</View>
 			<TextInput style={styles.textInput} placeholder="Name" placeholderTextColor={COLORS.green} onChangeText={(newName) => setName(newName)} />
-			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Temp" placeholderTextColor={COLORS.green} onChangeText={(newMinTemp) => setMinTemp(parseInt(newMinTemp))} />
-			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Max Temp" placeholderTextColor={COLORS.green} onChangeText={(newMaxTemp) => setMaxTemp(parseInt(newMaxTemp))} />
-			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Wind" placeholderTextColor={COLORS.green} onChangeText={(newMinWind) => setMinWind(parseInt(newMinWind))} />
-			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Max Wind" placeholderTextColor={COLORS.green} onChangeText={(newMaxWind) => setMaxWind(parseInt(newMaxWind))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Temp" placeholderTextColor={COLORS.green} onChangeText={(newIdealTemp) => setIdealTemp(parseInt(newIdealTemp))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Wind" placeholderTextColor={COLORS.green} onChangeText={(newIdealWind) => setIdealWind(parseInt(newIdealWind))} />
 			<View style={styles.picker}>
 				<Picker
 					onValueChange={(newRain:RAIN) => setRain(newRain)}
