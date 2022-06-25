@@ -20,6 +20,8 @@ import { CreateActivityView } from './app/screens/CreateActivityView'
 import { FriendsView } from './app/screens/FriendsView'
 import { FriendView } from './app/screens/FriendView'
 import { EventView } from './app/screens/EventView'
+import { ProfileView } from './app/screens/ProfileView'
+
 
 const Stack = createNativeStackNavigator() as any
 
@@ -78,6 +80,7 @@ export default function App() {
 			<Stack.Screen name="Event" component={EventView} />
 			<Stack.Screen name="Friends" component={FriendsView} />
 			<Stack.Screen name="Friend" component={FriendView} />
+			<Stack.Screen name="Profile" component={ProfileView} />
 
           </Stack.Navigator>
         </NavigationContainer>
