@@ -1,7 +1,7 @@
 name: Deploy on DigitalOcean Droplet
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -16,11 +16,11 @@ jobs:
           envs: IMAGE_NAME, REGISTRY, {{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}, GITHUB_SHA
           script: |
             # login to registry
-            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
             # stop old containers
             docker stop $(echo $IMAGE_NAME)
-            # remove old containers
-            docker rm $(echo $IMAGE_NAME)
+            # pull updated containers
+            docker pull $(echo $IMAGE_NAME)
             # Run new container
             docker run -d \
             -- restart always \
