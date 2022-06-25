@@ -1,5 +1,5 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
-// import LinearGradient from 'react-native-linear-gradient'
+import LinearGradient from 'react-native-linear-gradient'
 const logoImage = require('../../assets/icon.png')
 const addImage = require('../../assets/add.png')
 const settingsImage = require('../../assets/settings-icon.png')
@@ -27,7 +27,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	return (
-		<View style={styles.container}>
+		<LinearGradient colors={['#00C6FB', '#005BEA']} style={styles.container}>
 			<View style={styles.header}>
 				<Image
 					source={activityImage}
@@ -132,7 +132,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 					<Text style={styles.clickSectionText}></Text>
 				</TouchableOpacity>
 			</View>	
-		</View>
+		</LinearGradient>
 	)
 }
 
