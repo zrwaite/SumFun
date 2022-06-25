@@ -1,1 +1,0 @@
-export { CreateEventsView } from './CreateEventsView'

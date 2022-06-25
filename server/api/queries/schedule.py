@@ -1,5 +1,4 @@
 from ariadne import convert_kwargs_to_snake_case
-from traceback import print_exc
 from api.models.schedule import Schedule
 
 @convert_kwargs_to_snake_case
