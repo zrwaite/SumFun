@@ -75,7 +75,6 @@ def get_score_list(weather_data, activity):
     # temp, wind speed, visibility and uvi
     # ideal_visibility and ideal_uvi still need to be added, ideal_pop
     scores = []
-    print(activity)
     ideal_temp = activity.ideal_temp
     ideal_wind_speed = activity.ideal_wind
     ideal_visibility = activity.ideal_visibility
