@@ -12,7 +12,7 @@ enum RAIN {
 
 type Activity {
 	id: ID!
-	name: String!
+	name: String
 	min_temp: Int!
 	max_temp: Int!
 	min_wind: Int!
@@ -68,6 +68,7 @@ type Event {
 	duration: String!
 	location: String!
 	activity_id: ID!
+	activity: Activity
 }
 
 type EventResult {

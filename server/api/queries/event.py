@@ -1,11 +1,11 @@
 from ariadne import convert_kwargs_to_snake_case
 from traceback import print_exc
 from api.models.event import Event
+from api.models.activity import Activity
 
 def listEvents_resolver(obj, info):
     try:
         events = [event.to_dict() for event in Event.query.all()]
-        print(events)
         payload = {
             'success': True,
             'events': events
@@ -38,3 +38,15 @@ def getEvent_resolver(obj, info, id):
             "errors": [str(error)]
         }
     return payload
+
+@convert_kwargs_to_snake_case
+def getEvent_activity_resolver(obj, info):
+    if (isinstance(obj, Event)):
+        event = obj.to_dict()
+    else:
+        event = obj
+    try:
+        activity = Activity.query.filter(Activity.id == event['activity_id']).scalar()
+        return activity
+    except Exception as error:
+        return []

@@ -14,7 +14,7 @@ from api.mutations.activity import createActivity_resolver, updateActivity_resol
 
 from api.queries.schedule import getSchedule_resolver
 from api.mutations.schedule import createSchedule_resolver, updateSchedule_resolver
-from api.queries.event import listEvents_resolver, getEvent_resolver
+from api.queries.event import listEvents_resolver, getEvent_resolver, getEvent_activity_resolver
 from api.mutations.event import createEvent_resolver, updateEvent_resolver, deleteEvent_resolver
 
 query = QueryType()
@@ -93,6 +93,14 @@ def getUser_friends(obj, info):
 def getUser_events(obj, info):
     return getUser_events_resolver(obj, info)
 
+event = ObjectType('Event')
+
+@event.field('activity')  
+def getEvent_activity(obj, info):
+    print("get activity")
+    return getEvent_activity_resolver(obj, info)
+
+
 # @query.field('getSchedule')
 # def getSchedule(obj, info, id):
 #     return getSchedule_resolver(obj, info, id)
@@ -131,7 +139,7 @@ def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=N
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
-    type_defs, query, mutation, user, snake_case_fallback_resolvers
+    type_defs, query, mutation, user, event, snake_case_fallback_resolvers
 )
 
 
