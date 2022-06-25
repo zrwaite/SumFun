@@ -50,8 +50,5 @@ jobs:
           docker kill $(docker ps -q)
           # pull updated image
           docker pull ${{ steps.image-name.outputs.data }}
-          # # Run new container
-          # docker run -d \
-          # -- restart always \
-          # --name $(echo $IMAGE_NAME) \
-          # $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+          # Run new container
+          docker run -d -p 80:80 --name server ${{ steps.image-name.outputs.data }}
