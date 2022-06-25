@@ -39,11 +39,12 @@ type ActivitiesResult {
 type User {
 	id: ID!
 	username: String!
-	hash: String!
 	display_name: String
 	created_at: String!
 	activity_ids: [ID]!
 	activities: [Activity]!
+	show_unverified: Boolean!
+	friend_ids: [ID]!
 }
 
 type UserResult {
@@ -78,3 +79,5 @@ type Mutation {
 	updateActivity(id: ID!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
 	deleteActivity(id: ID!): ActivityResult!
 }
+
+

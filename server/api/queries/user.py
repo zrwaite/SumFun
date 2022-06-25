@@ -16,7 +16,6 @@ def listUsers_resolver(obj, info):
         }
     return payload
 
-
 @convert_kwargs_to_snake_case
 def getUser_resolver(obj, info, username):
     try:
