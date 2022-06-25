@@ -11,12 +11,14 @@ import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
+import { NavBar } from "../../components/NavBar";
 
 const logout = async (navigation: any, setUser: Function) => {
 	await AsyncStorage.setItem('username', '')
 	navigation.dispatch(StackActions.replace('Login'))
 	setUser(null)
 }
+
 
 export const HomeView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
@@ -36,63 +38,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 			</View>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 			<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
-			<View style={styles.body}>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-					<Image
-						source={settingsImage}
-						style={{
-							height: 40,
-							width: 40,
-							marginRight: 20,
-						}}
-					/>
-					<Text style={styles.clickSectionText}></Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
-					<Image
-						source={eventsImage}
-						style={{
-							height: 40,
-							width: 40,
-							marginRight: 20,
-						}}
-					/>
-					<Text style={styles.clickSectionText}></Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
-					<Image
-						source={activityImage}
-						style={{
-							height: 40,
-							width: 40,
-							marginRight: 20,
-						}}
-					/>
-					<Text style={styles.clickSectionText}></Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
-					<Image
-						source={activityImage}
-						style={{
-							height: 40,
-							width: 40,
-							marginRight: 20,
-						}}
-					/>
-					<Text style={styles.clickSectionText}></Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
-					<Image
-						source={activityImage}
-						style={{
-							height: 40,
-							width: 40,
-							marginRight: 20,
-						}}
-					/>
-					<Text style={styles.clickSectionText}></Text>
-				</TouchableOpacity>
-			</View>
+			<NavBar navigation={navigation}/>
 		</View>
 	)
 }
