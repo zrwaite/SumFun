@@ -9,6 +9,7 @@ import { GET_USER } from './queries'
 import { Alert } from 'react-native'
 import { LoadingScreen } from './app/screens/LoadingScreen'
 import { SettingsView } from './app/screens/SettingsView'
+import { EventsView } from './app/screens/EventsView'
 import { UserContext } from './contexts'
 
 const Stack = createNativeStackNavigator() as any
@@ -58,6 +59,7 @@ export default function App() {
               </>
             )}
             <Stack.Screen name="Settings" component={SettingsView} />
+			<Stack.Screen name="Events" component={EventsView} />
           </Stack.Navigator>
         </NavigationContainer>
       )}
