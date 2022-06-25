@@ -7,6 +7,8 @@ import { UserContext } from '../../../contexts'
 const addImage = require('../../assets/add.png')
 import { LIST_ACTIVITIES } from './queries'
 
+
+
 export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 	const [activitiesState, setActivitiesState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND'>('LOADING')
@@ -30,6 +32,9 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 		tryListActivities()
 	}
 	return (
+
+
+
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
 			{activitiesState === 'LOADING' ? (
 				<ActivityIndicator size="large" />

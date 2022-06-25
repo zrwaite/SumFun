@@ -13,14 +13,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 import { NavBar } from "../../components/NavBar";
 
-const logout = async (navigation: any, setUser: Function) => {
+const logout = async ( setUser: Function) => {
 	await AsyncStorage.setItem('username', '')
-	navigation.dispatch(StackActions.replace('Login'))
+	// navigation.dispatch(StackActions.replace('Login'))
 	setUser(null)
 }
 
 
-export const HomeView = ({ navigation }: { navigation: any }) => {
+export const HomeView = () => {
 	const { user, setUser } = useContext(UserContext)
 
 	return (
@@ -36,9 +36,10 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				/>
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
-			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
+			<ZacButton onPress={() => logout(setUser)} text={'Logout'} color={'white'} />
+			{/* 
 			<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
-			<NavBar navigation={navigation}/>
+			<NavBar navigation={navigation}/> */}
 		</View>
 	)
 }

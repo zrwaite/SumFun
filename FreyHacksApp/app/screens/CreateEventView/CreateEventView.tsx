@@ -9,7 +9,7 @@ import { client } from '../../../client'
 import { CREATE_EVENT } from './queries'
 import { StackActions } from '@react-navigation/native'
 
-export const CreateEventsView = ({ navigation }: { navigation: any }) => {
+export const CreateEventView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	const tryCreateActivity = async () => {
