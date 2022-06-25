@@ -6,11 +6,11 @@ import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
 const profileImage = require('../../assets/profile-icon.png')
-const BioInput = () => {
-  const [text, onChangeText] = React.useState('Bio Input');
-  const [number, onChangeNumber] = React.useState(0);
+  
 
-const ProfileView = ({ navigation }: { navigation: any }) => {
+export const ProfileView = ({ navigation }: { navigation: any }) => {
+	const [text, onChangeText] = React.useState('Bio Input');
+  const [number, onChangeNumber] = React.useState(0);
   const { user } = useContext(UserContext)
 	return (
 		<View style={styles.container}>
@@ -44,7 +44,6 @@ const ProfileView = ({ navigation }: { navigation: any }) => {
       </SafeAreaView>
 		</View>
 	);
-};
 }
 
 const styles = StyleSheet.create({

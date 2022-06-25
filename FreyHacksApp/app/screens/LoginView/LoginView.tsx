@@ -10,7 +10,7 @@ import { LOGIN } from './queries'
 import { SIGNUP } from './mutations'
 import { UserContext } from '../../../contexts'
 
-export const LoginView = () => {
+export const LoginView = (props: {goHome: () => void }) => {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const buttonsEnabled = username.length !== 0 && password.length !== 0
@@ -29,6 +29,7 @@ export const LoginView = () => {
 					await AsyncStorage.setItem('username', username)
 					Alert.alert('Logged In', `You are logged in as "${username}"`, [{ text: 'OK' }])
 					setUser(data.login.user)
+					props.goHome()
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}

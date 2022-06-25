@@ -1,36 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useState } from 'react'
-import { HomeView } from './app/screens/HomeView'
 import { LoginView } from './app/screens/LoginView/LoginView'
 import { client } from './client'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { GET_USER } from './queries'
 import { Alert } from 'react-native'
 import { LoadingScreen } from './app/screens/LoadingScreen'
-import { SettingsView } from './app/screens/SettingsView'
-import { EventsView } from './app/screens/EventsView'
 import { UserContext } from './contexts'
-import { ActivitiesView } from './app/screens/ActivitiesView'
-import { ActivityView } from './app/screens/ActivityView'
-import { MyEventsView } from './app/screens/MyEventsView'
-import { FindEventsView } from './app/screens/FindEventsView'
-import { CreateEventView } from './app/screens/CreateEventView'
-import { CreateActivityView } from './app/screens/CreateActivityView'
-import { FriendsView } from './app/screens/FriendsView'
-import { FriendView } from './app/screens/FriendView'
-import { EventView } from './app/screens/EventView'
-import { ProfileView } from './app/screens/ProfileView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { EventsNavigator } from './app/navigators/EventsNavigator'
 import { HomeNavigator } from './app/navigators/HomeNavigator'
 import { ActivitiesNavigator } from './app/navigators/ActivitiesNavigator'
 import { FriendsNavigator } from './app/navigators/FriendsNavigator'
 import { ProfileNavigator } from './app/navigators/ProfileNavigator'
-const Tab = createBottomTabNavigator() as any    //added this
+const Tab = createBottomTabNavigator() as any    //added thi
 
-
-const Stack = createNativeStackNavigator() as any
+export let goLogin = () => {}
 
 export default function App() {
 	const [usernameState, setUsernameState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND'>('LOADING')
@@ -52,6 +38,7 @@ export default function App() {
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		setUsernameState('FOUND')
 	}
+	goLogin = () => {setUsernameState('NOT_FOUND')}
 	const [user, setUser] = useState<User | null>(null)
 	const userValue = { user, setUser }
 
@@ -64,7 +51,7 @@ export default function App() {
 	return (
 		<UserContext.Provider value={userValue}>
 		<NavigationContainer>
-	  	{usernameState === 'NOT_FOUND' && <LoginView/>}
+	  	{usernameState === 'NOT_FOUND' && <LoginView goHome={() => {setUsernameState('FOUND')}}/>}
 	  	{usernameState === 'FOUND' && (<>
 			<Tab.Navigator>
 				<Tab.Screen name="Home" component={HomeNavigator} options={{headerShown: false}}/>
@@ -73,19 +60,6 @@ export default function App() {
 				<Tab.Screen name="Friends" component={FriendsNavigator} options={{headerShown: false}}/>
 				<Tab.Screen name="Profile" component={ProfileNavigator} options={{headerShown: false}}/>
 			</Tab.Navigator>
-			{/* <Stack.Navigator>
-				<Stack.Screen name="Settings" component={SettingsView} />
-				<Stack.Screen name="My Events" component={MyEventsView} />
-				<Stack.Screen name="Find Events" component={FindEventsView} />
-				<Stack.Screen name="Create Event" component={CreateEventView} />
-				<Stack.Screen name="Create Activity" component={CreateActivityView} />
-				<Stack.Screen name="Activities" component={ActivitiesView} />
-				<Stack.Screen name="Activity" component={ActivityView} />
-				<Stack.Screen name="Events" component={EventsView} />
-				<Stack.Screen name="Event" component={EventView} />
-				<Stack.Screen name="Friends" component={FriendsView} />
-				<Stack.Screen name="Friend" component={FriendView} />
-			</Stack.Navigator> */}
 			</>)}
 			</NavigationContainer>
 		</UserContext.Provider>
