@@ -6,6 +6,14 @@ export const GET_USER = gql`
 			user {
 				id
 				username
+				activities {
+					name
+				}
+				friends {
+					username
+					id
+					display_name
+				}
 			}
 			success
 			errors

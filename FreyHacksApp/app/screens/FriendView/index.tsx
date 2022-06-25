@@ -1,0 +1,1 @@
+export { FriendView } from "./FriendView"

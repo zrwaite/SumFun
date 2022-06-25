@@ -81,7 +81,7 @@ def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
 
 user = ObjectType('User')
 
-@user.field('activities')  
+@user.field('activities')
 def getUser_activities(obj, info):
     return getUser_activities_resolver(obj, info)
 
