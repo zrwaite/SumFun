@@ -1,19 +1,11 @@
 import { gql } from '@apollo/client'
+import { DEFAULT_USER_DATA } from '../../../queries'
 
 export const LOGIN = gql`
 	query tryLogin($username: String!, $password: String!) {
 		login(username: $username, password: $password) {
 			user {
-				id
-				username
-				activities {
-					name
-				}
-				friends {
-					username
-					id
-					display_name
-				}
+				${DEFAULT_USER_DATA}
 			}
 			success
 			errors

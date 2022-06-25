@@ -3,7 +3,7 @@ interface ActivityEvent {
 	name: string
 	date: string
 	start_time: string
-	duration: string
+	end_time: string
 	location: string
-	activity_id: number
+	activity: Activity
 }

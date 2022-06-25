@@ -6,7 +6,7 @@ class Event(db.Model):
     name = db.Column(db.String, nullable=False)
     date = db.Column(db.String, nullable=False)
     start_time = db.Column(db.String, nullable=False)
-    duration = db.Column(db.String, nullable=False)
+    end_time = db.Column(db.String, nullable=False)
     location = db.Column(db.String, nullable=False)
     activity_id = db.Column(db.Integer, nullable=False)
     public = db.Column(db.Boolean, nullable=False)
@@ -18,7 +18,7 @@ class Event(db.Model):
             "name": self.name,
             "date": self.date,
             "start_time": self.start_time,
-            "duration": self.duration,
+            "end_time": self.end_time,
             "location": self.location,
             "activity_id": self.activity_id,
             "public": self.public,

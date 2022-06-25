@@ -24,7 +24,6 @@ def createSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, t
             sunday_end = sunday_end
         )
     except Exception as error:
-        print(error)
         payload = {
             'success': False,
             'errors': [str(error)]
@@ -51,7 +50,6 @@ def updateSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, t
         schedule.sunday_start = sunday_start, 
         schedule.sunday_end = sunday_end
     except Exception as error:
-        print(error)
         payload = {
             'success': False,
             'errors': [str(error)]

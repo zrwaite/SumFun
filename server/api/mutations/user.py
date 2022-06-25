@@ -23,13 +23,17 @@ def createUser_resolver(obj, info, username, password):
                 display_name='',
                 created_at=today,
                 activity_ids=[],
+                friend_ids=[],
+                event_ids=[],
+                lon=0,
+                lat=0,
                 show_unverified=False,
-                friend_ids=[]
             )
             db.session.add(user)
             db.session.commit()
             payload = {
                 "success": True,
+                "user": user
             }
     except ValueError:
         payload = {
