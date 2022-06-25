@@ -5,3 +5,4 @@ services:
         image: 'hargunm/freyhacks:1.0.0'
         ports:
             - '8006:8006'
+# checking if workflow is restricted to changes in this file
