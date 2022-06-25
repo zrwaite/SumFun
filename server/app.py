@@ -40,8 +40,8 @@ def deleteUser(obj, info, id):
 
 
 @mutation.field('updateUser')
-def updateUser(obj, info, id, username, display_name):
-    return updateUser_resolver(obj, info, id, username, display_name)
+def updateUser(obj, info, username, display_name=None):
+    return updateUser_resolver(obj, info, username, display_name)
 
 @query.field('login')
 def login(obj, info, username, password):
