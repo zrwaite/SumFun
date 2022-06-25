@@ -15,7 +15,7 @@ const logout = async (navigation: any, setUser: Function) => {
 	setUser(null)
 }
 
-export const HomeView = ({ navigation }: { navigation: any }) => {
+export const MyEventsView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	return (
@@ -32,37 +32,14 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
 			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-				<Image
+				{/* <Image
 					source={addImage}
 					style={{
-						height: 40,
-						width: 40,
+						height: 30,
+						width: 30,
 						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Settings</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Friends')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Friends</Text>
+					}}/> */}
+				<Text style={styles.clickSectionText}>this will be backend shit I think</Text>
 			</TouchableOpacity>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>
