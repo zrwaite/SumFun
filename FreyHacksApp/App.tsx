@@ -9,7 +9,10 @@ import { GET_USER } from './queries'
 import { Alert } from 'react-native'
 import { LoadingScreen } from './app/screens/LoadingScreen'
 import { SettingsView } from './app/screens/SettingsView'
+import { EventsView } from './app/screens/EventsView'
 import { UserContext } from './contexts'
+import { ActivitiesView } from './app/screens/ActivitiesView'
+import { ActivityView } from './app/screens/ActivityView'
 
 const Stack = createNativeStackNavigator() as any
 
@@ -29,7 +32,7 @@ export default function App() {
 			const data = response.data
 			if (data.getUser.success) {
 				setUser(data.getUser.user)
-			} else Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+			} else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		setUsernameState('FOUND')
 	}
@@ -58,6 +61,9 @@ export default function App() {
               </>
             )}
             <Stack.Screen name="Settings" component={SettingsView} />
+            <Stack.Screen name="Activities" component={ActivitiesView} />
+			<Stack.Screen name="Activity" component={ActivityView} />
+			<Stack.Screen name="Events" component={EventsView} />
           </Stack.Navigator>
         </NavigationContainer>
       )}

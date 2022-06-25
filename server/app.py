@@ -14,6 +14,8 @@ from api.mutations.activity import createActivity_resolver, updateActivity_resol
 
 from api.queries.schedule import getSchedule_resolver
 from api.mutations.schedule import createSchedule_resolver, updateSchedule_resolver
+from api.queries.event import listEvents_resolver, getEvent_resolver
+from api.mutations.event import createEvent_resolver, updateEvent_resolver, deleteEvent_resolver
 
 query = QueryType()
 mutation = MutationType()
@@ -44,8 +46,8 @@ def deleteUser(obj, info, id):
 
 
 @mutation.field('updateUser')
-def updateUser(obj, info, id, username, display_name):
-    return updateUser_resolver(obj, info, id, username, display_name)
+def updateUser(obj, info, username, display_name=None):
+    return updateUser_resolver(obj, info, username, display_name)
 
 @query.field('login')
 def login(obj, info, username, password):
@@ -98,6 +100,30 @@ def getUser_friends(obj, info):
 # @mutation.field('updateSchedule')
 # def updateSchedule(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end):
 #     return updateSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
+
+@query.field('listEvents')
+def listEvents(obj, info):
+    return listEvents_resolver(obj, info)
+
+
+@query.field('getEvent')
+def getEvent(obj, info, id):
+    return getEvent_resolver(obj, info, id)
+
+
+@mutation.field('createEvent')
+def createEvent(obj, info, name, date, start_time, duration, location, activity_id, public):
+    return createEvent_resolver(obj, info, name, date, start_time, duration, location, activity_id, public)
+
+
+@mutation.field('deleteEvent')
+def deleteEvent(obj, info, id):
+    return deleteEvent_resolver(obj, info, id)
+
+
+@mutation.field('updateEvent')
+def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, location=None, activity_id=None, public=None):
+    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, location, activity_id, public)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
