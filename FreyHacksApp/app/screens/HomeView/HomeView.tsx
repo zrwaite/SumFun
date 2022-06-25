@@ -54,6 +54,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				<Text style={styles.clickSectionText}>Events</Text>
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Friends')}>
+
 				<Image
 					source={addImage}
 					style={{
