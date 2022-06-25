@@ -1,1 +1,1 @@
-export { ActivitiesView } from './activitiesView'
+export { ActivitiesView } from './ActivitiesView'

@@ -9,12 +9,6 @@ import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 
-const logout = async (navigation: any, setUser: Function) => {
-	await AsyncStorage.setItem('username', '')
-	navigation.dispatch(StackActions.replace('Login'))
-	setUser(null)
-}
-
 export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
@@ -29,9 +23,9 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 						marginRight: 10,
 					}}
 				/>
-				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
+				<Text style={styles.headerText}>Top suggested activities for {user?.username} today</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+			{/* <TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Post', { post: post })}>
 				<Image
 					source={addImage}
 					style={{
@@ -40,9 +34,9 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 						marginRight: 20,
 					}}
 				/>
-				<Text style={styles.clickSectionText}>Settings</Text>
-			</TouchableOpacity>
-			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
+				<Text style={styles.clickSectionText}>Activity1</Text>
+			</TouchableOpacity> */}
+			
 		</View>
 	)
 }
