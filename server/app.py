@@ -19,9 +19,6 @@ from api.mutations.event import createEvent_resolver, updateEvent_resolver, dele
 
 from api.models.validity import Validity
 
-from weather.add_user_weather_data import add_all_users_weather_data
-print(add_all_users_weather_data())
-
 query = QueryType()
 mutation = MutationType()
 
