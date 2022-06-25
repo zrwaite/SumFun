@@ -16,7 +16,7 @@ jobs:
     - name: populate .env file
       run: |
           touch server/.env
-          echo ${{ secrets.ENV_FILE }} >> server/.env
+          echo "${{ secrets.ENV_FILE }}" >> server/.env
           cat server/.env
           # testing whether the .env file is populated
           touch server/test.txt
