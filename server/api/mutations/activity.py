@@ -77,7 +77,7 @@ def deleteActivity_resolver(obj, info, id):
         activity = Activity.query.get(id)
         db.session.delete(activity)
         db.session.commit()
-        payload = {"success": True, "activity": activity.to_dict()}
+        payload = {"success": True}
     except AttributeError:
         payload = {
             "success": False,

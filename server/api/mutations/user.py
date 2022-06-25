@@ -27,7 +27,6 @@ def createUser_resolver(obj, info, username, password):
             db.session.commit()
             payload = {
                 "success": True,
-                "user": user.to_dict()
             }
     except ValueError:
         payload = {
@@ -38,12 +37,12 @@ def createUser_resolver(obj, info, username, password):
 
 
 @convert_kwargs_to_snake_case
-def updateUser_resolver(obj, info, id, username, display_name):
+def updateUser_resolver(obj, info, username, display_name):
     try:
-        user = User.query.get(id)
+        user = User.query.filter(User.username == username).scalar()
         if user:
-            user.username = username
-            user.display_name = display_name
+            if display_name != None:
+                user.display_name = display_name
             db.session.add(user)
             db.session.commit()
             payload = {

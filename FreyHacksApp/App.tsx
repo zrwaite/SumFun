@@ -9,6 +9,7 @@ import { GET_USER } from './queries'
 import { Alert } from 'react-native'
 import { LoadingScreen } from './app/screens/LoadingScreen'
 import { SettingsView } from './app/screens/SettingsView'
+import { EventsView } from './app/screens/EventsView'
 import { UserContext } from './contexts'
 import { ActivitiesView } from './app/screens/ActivitiesView'
 import { ActivityView } from './app/screens/ActivityView'
@@ -62,6 +63,7 @@ export default function App() {
             <Stack.Screen name="Settings" component={SettingsView} />
             <Stack.Screen name="Activities" component={ActivitiesView} />
 			<Stack.Screen name="Activity" component={ActivityView} />
+			<Stack.Screen name="Events" component={EventsView} />
           </Stack.Navigator>
         </NavigationContainer>
       )}

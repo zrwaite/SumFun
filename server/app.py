@@ -4,13 +4,17 @@ from ariadne import load_schema_from_path, make_executable_schema, \
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
-from api.queries.user import listUsers_resolver, getUser_resolver
+from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver
 from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
 
 from api.queries.login import login_resolver
 
 from api.queries.activity import listActivities_resolver, getActivity_resolver
 from api.mutations.activity import createActivity_resolver, updateActivity_resolver, deleteActivity_resolver
+
+from api.queries.event import listEvents_resolver, getEvent_resolver
+from api.mutations.event import createEvent_resolver, updateEvent_resolver, deleteEvent_resolver
+
 query = QueryType()
 mutation = MutationType()
 
@@ -40,8 +44,8 @@ def deleteUser(obj, info, id):
 
 
 @mutation.field('updateUser')
-def updateUser(obj, info, id, username, display_name):
-    return updateUser_resolver(obj, info, id, username, display_name)
+def updateUser(obj, info, username, display_name=None):
+    return updateUser_resolver(obj, info, username, display_name)
 
 @query.field('login')
 def login(obj, info, username, password):
@@ -76,15 +80,37 @@ def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
 user = ObjectType('User')
 
 @user.field('activities')  
-def userActivities_resolver(obj, info):
-    # obj # instannce of MyGroup returned from `resolve_group`
-    return {
-        id: 1
-    }
+def getUser_activities(obj, info):
+    return getUser_activities_resolver(obj, info)
+
+
+@query.field('listEvents')
+def listEvents(obj, info):
+    return listEvents_resolver(obj, info)
+
+
+@query.field('getEvent')
+def getEvent(obj, info, id):
+    return getEvent_resolver(obj, info, id)
+
+
+@mutation.field('createEvent')
+def createEvent(obj, info, name, date, start_time, duration, location, activity_id, public):
+    return createEvent_resolver(obj, info, name, date, start_time, duration, location, activity_id, public)
+
+
+@mutation.field('deleteEvent')
+def deleteEvent(obj, info, id):
+    return deleteEvent_resolver(obj, info, id)
+
+
+@mutation.field('updateEvent')
+def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, location=None, activity_id=None, public=None):
+    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, location, activity_id, public)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
-    type_defs, query, mutation, snake_case_fallback_resolvers
+    type_defs, query, mutation, user, snake_case_fallback_resolvers
 )
 
 

@@ -35,6 +35,34 @@ type ActivitiesResult {
 	activities: [Activity]
 }
 
+type DeleteResult {
+	success: Boolean!
+	errors: [String]
+}
+
+# should there be something for current temps for an event?
+
+type Event {
+	id: ID!
+	name: String!
+	date: String!
+	start_time: String!
+	duration: String!
+	location: String!
+	activity_id: ID!
+}
+
+type EventResult {
+	success: Boolean!
+	errors: [String]
+	event: Event
+}
+
+type EventsResult {
+	success: Boolean!
+	errors: [String]
+	events: [Event]
+}
 
 type User {
 	id: ID!
@@ -67,14 +95,22 @@ type Query {
 
 	listActivities: ActivitiesResult!
 	getActivity(id: ID!): ActivityResult!
+
+	listEvents: EventsResult!
+	getEvent(id: ID!): EventResult!
 }
 
 type Mutation {
 	createUser(username: String!, password: String!): UserResult!
-	updateUser(id: ID!, username: String, display_name: String): UserResult!
-	deleteUser(id: ID!): UserResult!
+
+	deleteUser(id: ID!): DeleteResult!
+	updateUser(username: String!, display_name: String): UserResult!
 
 	createActivity(name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
 	updateActivity(id: ID!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
-	deleteActivity(id: ID!): ActivityResult!
+	deleteActivity(id: ID!): DeleteResult!
+
+	createEvent(name: String!, date: String!, start_time: String!, duration: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
+	updateEvent(id: ID!, name: String, date: String, start_time: String, duration: String, location: String, activity_id: ID, public: Boolean): EventResult!
+	deleteEvent(id: ID!): DeleteResult!
 }
