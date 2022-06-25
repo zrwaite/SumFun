@@ -61,12 +61,10 @@ type Schedule {
 	sunday_end: Int!
 }
 
-type DeleteResult {
+type Result {
 	success: Boolean!
 	errors: [String]
 }
-
-# should there be something for current temps for an event?
 
 type Event {
 	id: ID!
@@ -138,14 +136,17 @@ type Query {
 type Mutation {
 	createUser(username: String!, password: String!): UserResult!
 
-	deleteUser(id: ID!): DeleteResult!
+	deleteUser(id: ID!): Result!
 	updateUser(username: String!, display_name: String): UserResult!
 
 	createActivity(username: String!, name: String!, ideal_temp: Int!, ideal_wind: Int!, rain: RAIN!, ideal_pop: Int!, ideal_visibility: Int!, ideal_uvi: Int!): ActivityResult!
 	updateActivity(id: ID!, username: String!, ideal_temp: Int, ideal_wind: Int, rain: RAIN, ideal_pop: Int, ideal_visibility: Int, ideal_uvi: Int): ActivityResult!
-	deleteActivity(id: ID!): DeleteResult!
+	deleteActivity(id: ID!): Result!
+
+	subscribeToActivity(id: ID!, username: String!): Result!
+	registerForEvent(id: ID!, username: String!): Result!
 
 	createEvent(username: String!, name: String!, date: String!, start_time: String!, end_time: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
 	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, end_time: String, location: String, activity_id: ID, public: Boolean): EventResult!
-	deleteEvent(id: ID!): DeleteResult!
+	deleteEvent(id: ID!): Result!
 }
