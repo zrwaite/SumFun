@@ -58,7 +58,6 @@ def getUser_friends_resolver(obj, info):
         user = obj
     try:
         friends = User.query.filter(User.id.in_(user['friend_ids'])).all()
-        print(friends)
         return friends
     except Exception as error:
         return []

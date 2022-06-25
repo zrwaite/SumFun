@@ -1,5 +1,4 @@
 from ariadne import convert_kwargs_to_snake_case
-from traceback import print_exc
 from api.models.event import Event
 from api.models.activity import Activity
 
@@ -11,7 +10,6 @@ def listEvents_resolver(obj, info):
             'events': events
         }
     except Exception as error:
-        print(error)
         payload = {
             'success': False,
             'errors': [str(error)]

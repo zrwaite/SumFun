@@ -97,7 +97,6 @@ event = ObjectType('Event')
 
 @event.field('activity')  
 def getEvent_activity(obj, info):
-    print("get activity")
     return getEvent_activity_resolver(obj, info)
 
 
