@@ -12,16 +12,13 @@ export const MyEventsView = ({ navigation }: { navigation: any }) => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Image
-					source={logoImage}
-					style={{
-						height: 40,
-						width: 80,
-						marginRight: 10,
-					}}
-				/>
-				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
+			<View style={styles.text}>
+				<Text style={styles.headerText}>Upcoming Events:</Text>
+				<Text style={styles.headerText}>Maybe some backend stuff here?</Text>
+			</View>
+			<View style={styles.text}>
+				<Text style={styles.headerText}>Past Events:</Text>
+				<Text style={styles.headerText}>Maybe some backend stuff here?</Text>
 			</View>
 			{user?.events.map((event, i) => {
 				return (
@@ -45,6 +42,15 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
+	},
+	text:{
+		margin: 20,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width:'100%',
+		borderColor: 'black',
+		borderWidth: 3,
 	},
 	headerText: {
 		color: 'white',

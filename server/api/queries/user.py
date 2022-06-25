@@ -45,12 +45,9 @@ def getUser_resolver(obj, info, username):
 
 
 def getUserActivities(user):
-    print(user)
     try:
         validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
         activities =db.session.query(Activity).filter(Activity.id.in_(user['activity_ids'])).all()
-        print(activities)
-        print(validities)
         if len(validities) == len(activities):
             for activity in activities:
                 activity_validity_found = False
