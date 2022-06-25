@@ -1,11 +1,22 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 const logoImage = require('../../assets/icon.png')
+const addImage = require('../../assets/add.png')
+const postsImage = require('../../assets/add.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
+import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { StackActions } from '@react-navigation/native'
 
-export const EventsView = ({ navigation }: { navigation: any }) => {
-	const { user } = useContext(UserContext)
+const logout = async (navigation: any, setUser: Function) => {
+	await AsyncStorage.setItem('username', '')
+	navigation.dispatch(StackActions.replace('Login'))
+	setUser(null)
+}
+
+export const MyEventsView = ({ navigation }: { navigation: any }) => {
+	const { user, setUser } = useContext(UserContext)
 
 	return (
 		<View style={styles.container}>
@@ -20,22 +31,17 @@ export const EventsView = ({ navigation }: { navigation: any }) => {
 				/>
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Events')}>
-				<Text style={styles.clickSectionText}>My Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Find Events')}>
-				<Text style={styles.clickSectionText}>Find Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Events')}>
-				<Image
+			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+				{/* <Image
 					source={addImage}
 					style={{
 						height: 30,
 						width: 30,
 						marginRight: 20,
-					}}/>
-				<Text style={styles.clickSectionText}>Create Events</Text>
+					}}/> */}
+				<Text style={styles.clickSectionText}>this will be backend shit I think</Text>
 			</TouchableOpacity>
+			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>
 	)
 }
