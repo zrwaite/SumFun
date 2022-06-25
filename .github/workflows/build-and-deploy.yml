@@ -49,6 +49,7 @@ jobs:
           # destroy all existing containers
           docker stop $(docker ps -a -q)
           docker rm $(docker ps -a -q)
+          docker kill $(docker ps -a -q)
           # pull updated image
           docker pull ${{ steps.image-name.outputs.data }}
           # Run new container
