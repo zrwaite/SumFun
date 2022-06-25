@@ -1,5 +1,4 @@
 name: Docker Image CI
-
 on:
   push:
     branches: [ "main" ]
@@ -15,12 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: populate .env file
-      env: 
-        ENV_FILE: ${{ secrets.ENV_FILE }}
       run: |
           touch server/.env
-          cat $ENV_FILE > server/.env
-          # cat server/.env
+          echo ${{ secrets.ENV_FILE }} >> server/.env
+          cat server/.env
     - name: docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
