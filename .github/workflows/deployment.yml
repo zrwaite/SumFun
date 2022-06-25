@@ -5,7 +5,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: github.event.action == 'push'
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v1
