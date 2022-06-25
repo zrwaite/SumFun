@@ -70,6 +70,8 @@ type User {
 	hash: String!
 	display_name: String
 	created_at: String!
+	activity_ids: [ID]!
+	activities: [Activity]!
 }
 
 type UserResult {
@@ -100,8 +102,9 @@ type Query {
 
 type Mutation {
 	createUser(username: String!, password: String!): UserResult!
-	updateUser(id: ID!, username: String, display_name: String): UserResult!
+
 	deleteUser(id: ID!): DeleteResult!
+	updateUser(username: String!, display_name: String): UserResult!
 
 	createActivity(name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
 	updateActivity(id: ID!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!

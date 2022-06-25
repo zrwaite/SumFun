@@ -4,7 +4,7 @@ from ariadne import load_schema_from_path, make_executable_schema, \
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
-from api.queries.user import listUsers_resolver, getUser_resolver
+from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver
 from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
 
 from api.queries.login import login_resolver
@@ -17,7 +17,6 @@ from api.mutations.event import createEvent_resolver, updateEvent_resolver, dele
 
 query = QueryType()
 mutation = MutationType()
-
 
 @query.field('health')
 def health(obj, info):
@@ -45,8 +44,8 @@ def deleteUser(obj, info, id):
 
 
 @mutation.field('updateUser')
-def updateUser(obj, info, id, username, display_name):
-    return updateUser_resolver(obj, info, id, username, display_name)
+def updateUser(obj, info, username, display_name=None):
+    return updateUser_resolver(obj, info, username, display_name)
 
 @query.field('login')
 def login(obj, info, username, password):
@@ -78,6 +77,11 @@ def deleteActivity(obj, info, id):
 def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
     return updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain)
 
+user = ObjectType('User')
+
+@user.field('activities')  
+def getUser_activities(obj, info):
+    return getUser_activities_resolver(obj, info)
 
 
 @query.field('listEvents')
@@ -106,7 +110,7 @@ def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=N
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
-    type_defs, query, mutation, snake_case_fallback_resolvers
+    type_defs, query, mutation, user, snake_case_fallback_resolvers
 )
 
 

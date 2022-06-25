@@ -1,18 +1,15 @@
-from ariadne import convert_kwargs_to_snake_case
-from traceback import print_exc
+from ariadne import convert_kwargs_to_snake_case, ObjectType
 from api.models.activity import Activity
 
 
 def listActivities_resolver(obj, info):
     try:
-        activites = [activity.to_dict() for activity in Activity.query.all()]
-        print(activities)
+        activities = [activity.to_dict() for activity in Activity.query.all()]
         payload = {
             'success': True,
             'activities': activities
         }
     except Exception as error:
-        print(error)
         payload = {
             'success': False,
             'errors': [str(error)]
