@@ -35,6 +35,24 @@ type ActivitiesResult {
 	activities: [Activity]
 }
 
+type Schedule {
+	id: ID!
+	monday_start: Int!
+	monday_end: Int!
+	tuesday_start: Int!
+	tuesday_end: Int!
+	wednesday_start: Int!
+	wednesday_end: Int!
+	thursday_start: Int!
+	thursday_end: Int!
+	friday_start: Int!
+	friday_end: Int!
+	saturday_start: Int!
+	saturday_end: Int!
+	sunday_start: Int!
+	sunday_end: Int!
+}
+
 type DeleteResult {
 	success: Boolean!
 	errors: [String]
@@ -67,11 +85,13 @@ type EventsResult {
 type User {
 	id: ID!
 	username: String!
-	hash: String!
 	display_name: String
 	created_at: String!
 	activity_ids: [ID]!
 	activities: [Activity]!
+	show_unverified: Boolean!
+	friend_ids: [ID]!
+	friends: [User]!
 }
 
 type UserResult {

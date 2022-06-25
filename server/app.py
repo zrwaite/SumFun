@@ -4,7 +4,7 @@ from ariadne import load_schema_from_path, make_executable_schema, \
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
-from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver
+from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver, getUser_friends_resolver
 from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
 
 from api.queries.login import login_resolver
@@ -12,6 +12,8 @@ from api.queries.login import login_resolver
 from api.queries.activity import listActivities_resolver, getActivity_resolver
 from api.mutations.activity import createActivity_resolver, updateActivity_resolver, deleteActivity_resolver
 
+from api.queries.schedule import getSchedule_resolver
+from api.mutations.schedule import createSchedule_resolver, updateSchedule_resolver
 from api.queries.event import listEvents_resolver, getEvent_resolver
 from api.mutations.event import createEvent_resolver, updateEvent_resolver, deleteEvent_resolver
 
@@ -83,6 +85,21 @@ user = ObjectType('User')
 def getUser_activities(obj, info):
     return getUser_activities_resolver(obj, info)
 
+@user.field('friends')  
+def getUser_friends(obj, info):
+    return getUser_friends_resolver(obj, info)
+
+# @query.field('getSchedule')
+# def getSchedule(obj, info, id):
+#     return getSchedule_resolver(obj, info, id)
+
+# @mutation.field('createSchedule')
+# def createSchedule(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end):
+#     return createSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
+
+# @mutation.field('updateSchedule')
+# def updateSchedule(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end):
+#     return updateSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
 
 @query.field('listEvents')
 def listEvents(obj, info):
