@@ -11,6 +11,10 @@ from api.queries.login import login_resolver
 
 from api.queries.activity import listActivities_resolver, getActivity_resolver
 from api.mutations.activity import createActivity_resolver, updateActivity_resolver, deleteActivity_resolver
+
+from api.queries.schedule import getSchedule_resolver
+from api.mutations.schedule import createSchedule_resolver, updateSchedule_resolver
+
 query = QueryType()
 mutation = MutationType()
 
@@ -74,6 +78,17 @@ def deleteActivity(obj, info, id):
 def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
     return updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain)
 
+@query.field('getSchedule')
+def getSchedule(obj, info, id):
+    return getSchedule_resolver(obj, info, id)
+
+@mutation.field('createSchedule')
+def createSchedule(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
+    return createSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
+
+@mutation.field('updateSchedule')
+def updateSchedule(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
+    return updateSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(

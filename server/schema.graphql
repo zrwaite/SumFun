@@ -35,6 +35,23 @@ type ActivitiesResult {
 	activities: [Activity]
 }
 
+type Schedule {
+	id: ID!
+	monday_start: Int!
+	monday_end: Int!
+	tuesday_start: Int!
+	tuesday_end: Int!
+	wednesday_start: Int!
+	wednesday_end: Int!
+	thursday_start: Int!
+	thursday_end: Int!
+	friday_start: Int!
+	friday_end: Int!
+	saturday_start: Int!
+	saturday_end: Int!
+	sunday_start: Int!
+	sunday_end: Int!
+}
 
 type User {
 	id: ID!
@@ -66,6 +83,7 @@ type Query {
 
 	listActivities: ActivitiesResult!
 	getActivity(id: ID!): ActivityResult!
+
 }
 
 type Mutation {
@@ -76,6 +94,7 @@ type Mutation {
 	createActivity(name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
 	updateActivity(id: ID!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
 	deleteActivity(id: ID!): ActivityResult!
+
 }
 
 
