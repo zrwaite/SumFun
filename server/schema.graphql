@@ -10,6 +10,11 @@ enum RAIN {
 	AFTER
 }
 
+type Validity {
+	id: ID!
+	scores: [Float]! #length 12, float from 0-10
+}
+
 type Activity {
 	id: ID!
 	name: String
@@ -21,6 +26,8 @@ type Activity {
 	created_at: String!
 	verified: Boolean!
 	public: Boolean!
+	validity_id: Int
+	validity: Validity
 }
 
 type ActivityResult {
@@ -68,7 +75,9 @@ type Event {
 	end_time: String!
 	location: String!
 	activity_id: ID!
-	activity: Activity
+	activity: Activity!
+	validity_id: Int
+	validity: Validity
 }
 
 type EventResult {
@@ -95,6 +104,8 @@ type User {
 	friends: [User]!
 	event_ids: [ID]!
 	events: [Event]!
+	lon: Float!
+	lat: Float!
 }
 
 type UserResult {

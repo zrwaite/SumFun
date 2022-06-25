@@ -23,7 +23,9 @@ class User(db.Model):
             "show_unverified": self.show_unverified, 
             #"do_not_disturb": self.do_not_disturb,
             "friend_ids":self.friend_ids,
-            "event_ids":self.event_ids
+            "event_ids":self.event_ids,
+            "lon": self.lon,
+            "lat": self.lat,
         }
     
     def do_not_disturb():

@@ -17,6 +17,8 @@ from api.mutations.schedule import createSchedule_resolver, updateSchedule_resol
 from api.queries.event import listEvents_resolver, getEvent_resolver, getEvent_activity_resolver
 from api.mutations.event import createEvent_resolver, updateEvent_resolver, deleteEvent_resolver
 
+from api.models.validity import Validity
+
 query = QueryType()
 mutation = MutationType()
 

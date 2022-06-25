@@ -25,6 +25,8 @@ def createUser_resolver(obj, info, username, password):
                 activity_ids=[],
                 friend_ids=[],
                 event_ids=[],
+                lon=0,
+                lat=0,
                 show_unverified=False,
             )
             db.session.add(user)

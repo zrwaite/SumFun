@@ -3,7 +3,7 @@ from api.models.user import User
 from api.models.activity import Activity
 from api.models.event import Event
 
-def listUsers_resolver(obj, info):
+def listUsers():
     try:
         users = [user.to_dict() for user in User.query.all()]
         payload = {
@@ -16,6 +16,9 @@ def listUsers_resolver(obj, info):
             'errors': [str(error)]
         }
     return payload
+
+def listUsers_resolver(obj, info):
+   return listUsers()
 
 @convert_kwargs_to_snake_case
 def getUser_resolver(obj, info, username):
