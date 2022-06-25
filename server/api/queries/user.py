@@ -44,4 +44,11 @@ def getUser_activities_resolver(obj, info):
         return activities
     except Exception as error:
         return []
-    return payload
+
+@convert_kwargs_to_snake_case
+def getUser_friends_resolver(obj, info):
+    try:
+        friends = User.query.filter(User.id.in_(obj['friend_ids'])).all()
+        return friends
+    except Exception as error:
+        return []

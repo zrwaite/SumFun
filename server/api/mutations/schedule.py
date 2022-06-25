@@ -36,21 +36,20 @@ def createSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, t
 def updateSchedule_resolver(obj,info, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, saturday_start, saturday_end, sunday_start, sunday_end):
     try:
         schedule = User.query.get(id)
-            schedule.monday_start = monday_start, 
-            schedule.monday_end = monday_end, 
-            schedule.tuesday_start = tuesday_start, 
-            schedule.tuesday_end = tuesday_end, 
-            schedule.wednesday_start = wednesday_start, 
-            schedule.wednesday_end = wednesday_end, 
-            schedule.thursday_start = thursday_start, 
-            schedule.thursday_end = thursday_end, 
-            schedule.friday_start = friday_start, 
-            schedule.friday_end = friday_end, 
-            schedule.saturday_start = saturday_start, 
-            schedule.saturday_end = saturday_end, 
-            schedule.sunday_start = sunday_start, 
-            schedule.sunday_end = sunday_end
-        
+        schedule.monday_start = monday_start, 
+        schedule.monday_end = monday_end, 
+        schedule.tuesday_start = tuesday_start, 
+        schedule.tuesday_end = tuesday_end, 
+        schedule.wednesday_start = wednesday_start, 
+        schedule.wednesday_end = wednesday_end, 
+        schedule.thursday_start = thursday_start, 
+        schedule.thursday_end = thursday_end, 
+        schedule.friday_start = friday_start, 
+        schedule.friday_end = friday_end, 
+        schedule.saturday_start = saturday_start, 
+        schedule.saturday_end = saturday_end, 
+        schedule.sunday_start = sunday_start, 
+        schedule.sunday_end = sunday_end
     except Exception as error:
         print(error)
         payload = {

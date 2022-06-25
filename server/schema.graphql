@@ -62,6 +62,7 @@ type User {
 	activities: [Activity]!
 	show_unverified: Boolean!
 	friend_ids: [ID]!
+	friends: [User]!
 }
 
 type UserResult {
@@ -98,5 +99,3 @@ type Mutation {
 	deleteActivity(id: ID!): ActivityResult!
 
 }
-
-

@@ -1,5 +1,6 @@
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
+import flask_sqlalchemy
 from api import db
 from api.models.user import User
 from modules.hash import hash_password
@@ -21,7 +22,9 @@ def createUser_resolver(obj, info, username, password):
                 hash=hash_password(password),
                 display_name='',
                 created_at=today,
-                activity_ids=[]
+                activity_ids=[],
+                show_unverified=False,
+                friend_ids=[]
             )
             db.session.add(user)
             db.session.commit()
