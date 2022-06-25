@@ -65,7 +65,7 @@ type Event {
 	name: String!
 	date: String!
 	start_time: String!
-	duration: String!
+	end_time: String!
 	location: String!
 	activity_id: ID!
 	activity: Activity
@@ -133,7 +133,7 @@ type Mutation {
 	updateActivity(id: ID!, username: String!, min_temp: Int, max_temp: Int, min_wind: Int, max_wind: Int, rain: RAIN): ActivityResult!
 	deleteActivity(id: ID!): DeleteResult!
 
-	createEvent(name: String!, date: String!, start_time: String!, duration: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
-	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, duration: String, location: String, activity_id: ID, public: Boolean): EventResult!
+	createEvent(username: String!, name: String!, date: String!, start_time: String!, end_time: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
+	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, end_time: String, location: String, activity_id: ID, public: Boolean): EventResult!
 	deleteEvent(id: ID!): DeleteResult!
 }

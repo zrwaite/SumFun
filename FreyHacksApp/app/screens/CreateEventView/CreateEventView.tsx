@@ -1,22 +1,31 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Alert } from 'react-native'
 const logoImage = require('../../assets/icon.png')
 const addImage = require('../../assets/add.png')
-const postsImage = require('../../assets/add.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { client } from '../../../client'
+import { CREATE_EVENT } from './queries'
 import { StackActions } from '@react-navigation/native'
-
-const logout = async (navigation: any, setUser: Function) => {
-	await AsyncStorage.setItem('username', '')
-	navigation.dispatch(StackActions.replace('Login'))
-	setUser(null)
-}
 
 export const CreateEventsView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
+
+	const tryCreateActivity = async () => {
+		const response = await client.mutate({
+			mutation: CREATE_EVENT,
+			variables: { },
+		})
+		if (!response.errors) {
+			const data = response.data
+			if (data.createEvent.success) {
+				Alert.alert('Event Created!', `View it here`, [{ text: 'OK' }])
+				if (user) setUser({...user, events: [...user.events, data.createEvent.event]})
+				navigation.dispatch(StackActions.replace('Event', { activity: data.createEvent.event }))
+			} else Alert.alert('Error', JSON.stringify(data.createEvent.errors), [{ text: 'OK' }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK' }])
+	}
 
 	return (
 		<View style={styles.container}>
@@ -41,7 +50,6 @@ export const CreateEventsView = ({ navigation }: { navigation: any }) => {
 					}}/>
 				<Text style={styles.clickSectionText}>You have no loved ones</Text>
 			</TouchableOpacity>
-			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>
 	)
 }
