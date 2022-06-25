@@ -9,13 +9,8 @@ import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 
-const logout = async (navigation: any, setUser: Function) => {
-	await AsyncStorage.setItem('username', '')
-	navigation.dispatch(StackActions.replace('Login'))
-	setUser(null)
-}
-
-export const HomeView = ({ navigation }: { navigation: any }) => {
+export const ActivityView = ({ navigation, route }: { navigation: any, route: { params: { activity: Activity } } }) => {
+	const activity = route.params.activity
 	const { user, setUser } = useContext(UserContext)
 
 	return (
@@ -29,32 +24,28 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 						marginRight: 10,
 					}}
 				/>
-				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
+				<Text style={styles.headerText}>{activity.name}</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Settings</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Events</Text>
-			</TouchableOpacity>
-			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
-		</View>
+			<Image
+                source={addImage}
+                style={{
+                    height: 40,
+                    width: 40,
+                    marginRight: 20,
+                }}
+            />
+            <Text style={styles.clickSectionText}>Water level</Text>
+            <Image
+                source={addImage}
+                style={{
+                    height: 40,
+                    width: 40,
+                    marginRight: 20,
+                }}
+            />
+            <Text style={styles.clickSectionText}>Temperature</Text>
+        </View>
+            
 	)
 }
 
@@ -62,7 +53,7 @@ const styles = StyleSheet.create({
 	header: {
 		margin: 20,
 		flexDirection: 'row',
-		alignItems: 'center',
+		alignItems: 'flex-start',
 		justifyContent: 'center',
 		width: '100%',
 	},
@@ -91,4 +82,8 @@ const styles = StyleSheet.create({
 		color: 'black',
 		fontSize: 25,
 	},
-})
+
+
+
+	}
+)
