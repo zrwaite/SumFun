@@ -1,6 +1,9 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 const logoImage = require('../../assets/icon.png')
 const addImage = require('../../assets/add.png')
+const settingsImage = require('../../assets/settings-icon.png')
+const eventsImage = require('../../assets/Events-icon.png')
+const activityImage = require('../../assets/activity-icon.png')
 const postsImage = require('../../assets/add.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
@@ -76,6 +79,64 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				<Text style={styles.clickSectionText}>Activities</Text>
 			</TouchableOpacity>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
+		<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
+			<View style={styles.body}>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+					<Image
+						source={settingsImage}
+						style={{
+							height: 40,
+							width: 40,
+							marginRight: 20,
+						}}
+					/>
+					<Text style={styles.clickSectionText}></Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
+					<Image
+						source={eventsImage}
+						style={{
+							height: 40,
+							width: 40,
+							marginRight: 20,
+						}}
+					/>
+					<Text style={styles.clickSectionText}></Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
+					<Image
+						source={activityImage}
+						style={{
+							height: 40,
+							width: 40,
+							marginRight: 20,
+						}}
+					/>
+					<Text style={styles.clickSectionText}></Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
+					<Image
+						source={activityImage}
+						style={{
+							height: 40,
+							width: 40,
+							marginRight: 20,
+						}}
+					/>
+					<Text style={styles.clickSectionText}></Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
+					<Image
+						source={activityImage}
+						style={{
+							height: 40,
+							width: 40,
+							marginRight: 20,
+						}}
+					/>
+					<Text style={styles.clickSectionText}></Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	)
 }
@@ -87,6 +148,21 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
+	},
+	body:{
+		margin: 575,
+		borderRadius: 0,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		width: '100%',
+	},
+	loginButton:{
+		margin:20,
+		borderRadius: 20,
+		flexDirection: 'column',
+		alignItems: 'flex-start',
+		justifyContent: 'flex-end',
 	},
 	headerText: {
 		color: 'white',
@@ -101,13 +177,14 @@ const styles = StyleSheet.create({
 	},
 	clickSection: {
 		backgroundColor: 'white',
-		width: '80%',
+		height: 50,
 		margin: 20,
 		flexDirection: 'row',
 		padding: 10,
-		borderRadius: 20,
+		borderRadius: 0,
 		alignItems: 'center',
 		justifyContent: 'center',
+		aspectRatio: 1
 	},
 	clickSectionText: {
 		color: 'black',
