@@ -129,11 +129,11 @@ type Mutation {
 	deleteUser(id: ID!): DeleteResult!
 	updateUser(username: String!, display_name: String): UserResult!
 
-	createActivity(name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
-	updateActivity(id: ID!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
+	createActivity(username: String!, name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
+	updateActivity(id: ID!, username: String!, min_temp: Int, max_temp: Int, min_wind: Int, max_wind: Int, rain: RAIN): ActivityResult!
 	deleteActivity(id: ID!): DeleteResult!
 
 	createEvent(name: String!, date: String!, start_time: String!, duration: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
-	updateEvent(id: ID!, name: String, date: String, start_time: String, duration: String, location: String, activity_id: ID, public: Boolean): EventResult!
+	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, duration: String, location: String, activity_id: ID, public: Boolean): EventResult!
 	deleteEvent(id: ID!): DeleteResult!
 }

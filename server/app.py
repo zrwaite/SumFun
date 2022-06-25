@@ -66,8 +66,8 @@ def getActivity(obj, info, id):
 
 
 @mutation.field('createActivity')
-def createActivity(obj, info, name, min_temp, max_temp, min_wind, max_wind, rain):
-    return createActivity_resolver(obj, info, name, min_temp, max_temp, min_wind, max_wind, rain)
+def createActivity(obj, info, username, name, min_temp, max_temp, min_wind, max_wind, rain):
+    return createActivity_resolver(obj, info, username, name, min_temp, max_temp, min_wind, max_wind, rain)
 
 
 @mutation.field('deleteActivity')
@@ -76,8 +76,8 @@ def deleteActivity(obj, info, id):
 
 
 @mutation.field('updateActivity')
-def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
-    return updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain)
+def updateActivity(obj, info, username, id, min_temp=None, max_temp=None, min_wind=None, max_wind=None, rain=None):
+    return updateActivity_resolver(obj, info, username, id, min_temp, max_temp, min_wind, max_wind, rain)
 
 user = ObjectType('User')
 
@@ -123,8 +123,8 @@ def getEvent(obj, info, id):
 
 
 @mutation.field('createEvent')
-def createEvent(obj, info, name, date, start_time, duration, location, activity_id, public):
-    return createEvent_resolver(obj, info, name, date, start_time, duration, location, activity_id, public)
+def createEvent(obj, info, username, name, date, start_time, duration, location, activity_id, public):
+    return createEvent_resolver(obj, info, username, name, date, start_time, duration, location, activity_id, public)
 
 
 @mutation.field('deleteEvent')
