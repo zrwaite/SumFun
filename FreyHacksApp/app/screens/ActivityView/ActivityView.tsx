@@ -1,5 +1,8 @@
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, View, Text } from 'react-native'
 import { COLORS } from '../../settings'
+
+
 
 export const ActivityView = ({ route }: { route: { params: { activity: Activity } } }) => {
 	const activity = route.params.activity

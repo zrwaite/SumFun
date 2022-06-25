@@ -1,1 +1,1 @@
-export { CreateEventsView } from './CreateEventView'
+export { CreateEventView } from './CreateEventView'

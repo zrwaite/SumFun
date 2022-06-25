@@ -9,36 +9,53 @@ This is our code repository for our project submission for FreyHacks
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="50rem" height="50rem" /> 
 <img src=".github/flask-original.svg" alt="flask" width="50rem" height="50rem" /> 
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg" alt="python" width="50rem" height="50rem" /> 
-</div>
+</div>o
 
 ## Team Members:
 * Zac: Full Stack Developer and Project Leader
 * Luke: Frontend and Integration Developer
 * Greyson: Frontend Developer and UI Designer
 * Kellan: Frontend Developer and UI Designer
-* Matthew: Backend Python Developer
+* Matthew: Backend Python Developer (backbone of the project)
 * Scott: Backend Python Developer
 * Hargun: DevOps Engineer
 
 ## Project Description 📝:
-<!-- While identifying covid-related issues in our community, one problem that came to mind were the excessive lineups stores accumulate due to capacity restrictions, as well as the inability to accurately keep track of total occupants in a given store. Brainstorming several ideas for this solution, engineers Zac, Kellan, Luke and Greyson were able to come up with a solution; While using distance sensors to keep track of how many people leave/enter a store, this information can then be transferred to a server which can keep track of current capacities of any nearby stores, as well as comparing the current capacities with one another. Once we finished designing a hardware prototype, we began creating templates for the pages of our website, which we could code soon after. We wanted to make sure that the website would allow for the sensors to input information to our servers, analyzing the data itself in various pie charts, and statistics. We had hoped that the sensors would transfer data to a radio signal, eventually leading to our server, however due to multiple difficulties with the radio, and code, we were unable to do so. That would definitely be one of our greatest next steps, as that would give users the ability to compare the capacities of all grocery stores, deciding which to go to.
 
-The project consisted of many ups and downs, and a lot of things came unexpectedly. A lot of our technology was limited due to covid/budgeting, some of our equipment was malfunctioning, and there were some problems that we were not quite able to solve in the given time frame. -->
+- helps find ideal times for activities that depend on weather         conditions   
+- especially water sports
+- 
+
+As the weather gets warmer and more activties become accessible, it becomes increasingly difficult to chose what to do in your past time. Our team has developed an app that can solve that problem. our carefully formulated software is capable of processing local weather data and reccommending weather dependant activities based on current and future weather conditions.
 
 ## Inspiration💡:
-<!-- Several of our group members work in grocery stores, and all of us have seen the impact of COVID with how consumers interact with businesses. Being able to find a less crowded location is important, and this seemed like a simple yet scalable way to make a difference -->
+- We are lonely and want to find friends who do fun things
+
 ## What it does 📱:
-<!-- Our product allows business to keep track of the capacity in their store with a manual clicker system on a phone or computer, or even allows the process to be automated with our scanner hardware that tells when someone enters a door.  -->
+- helps people plan and attend activities
+- feature to find and add friends
+- feature to find public events
+- suggests activities and events based on conditions (weather, location, time, etc.)
+
 ## How we built it 💻:
-<!-- The hardware was built with IR scanners, plywood, wiring, arduinos, power supply, LEDs, etc. Our system lies flat for storage and shipping, then folds out to allow a passage way for people to walk through. The sensors send wired signals to the arduino, which reads this information, parses it, and determines if a signal needs to be sent. 
-The software was not able to be fully implanted in the time frame, but it takes requests to the server from businesses to update their status. An admin page also allows for edits to things like address, and the max capacity. Businesses can keep track of how many people are in their store between all of their workers, but an even larger benefit is to customers. The data about capacity will be publicly available, meaning that you can see how busy stores in your area are before you go there. Stores that are very busy can't accept more people anyways, so it isn't a detriment to them. Stores that aren't busy, especially small business, can benefit from people being assured about their safe experience.  -->
+
 ## Challenges we ran into 💥:
+- nested queries in graphql didn't work
+- sql alchemy is refusing to have multiple subsequent queries
+- most of us had never written in the language our whole job was in
 
 ## Accomplishments that we're proud of 🍀🍾:
+- getting the weather api to work
+- solving nested queries issue
+- completely custom cidc piplines through github actions digitalocean ssh
 
 ## What we learned 🧠👍:
+- Learned how to access and integrate data from an api
 
-## What's next for ___ 🥚🐣🐥:
+## What's next for Activity 🥚🐣🐥:
+- Adding more activities
+- Adding more paramaters to validity
+- Improving UI
 
 ## Frontend
 - React Native with TypeScript
@@ -47,3 +64,4 @@ The software was not able to be fully implanted in the time frame, but it takes 
 - GraphQL API in python with flask
 
 ## Hardware 
+- Probably nothing is gonna happen here

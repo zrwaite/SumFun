@@ -2,6 +2,8 @@ from ariadne import convert_kwargs_to_snake_case, ObjectType
 from api.models.user import User
 from api.models.activity import Activity
 from api.models.event import Event
+from api.models.validity import Validity
+from app import db
 
 def listUsers():
     try:
@@ -41,17 +43,40 @@ def getUser_resolver(obj, info, username):
         }
     return payload
 
+
+def getUserActivities(user):
+    print(user)
+    try:
+        validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
+        activities =db.session.query(Activity).filter(Activity.id.in_(user['activity_ids'])).all()
+        print(activities)
+        print(validities)
+        if len(validities) == len(activities):
+            for activity in activities:
+                activity_validity_found = False
+                for validity in validities:
+                    if validity.activity_id == activity.id:
+                        activity.validity = validity
+                        activity_validity_found = True
+                if not activity_validity_found:
+                    print('failed to find matching activity and validity')
+                    return []
+            return activities
+        else:
+            print('invalid data')
+            return []
+    except Exception as error:
+        print('failed to get validities')
+        print(str(error))
+        return []
+
 @convert_kwargs_to_snake_case
 def getUser_activities_resolver(obj, info):
     if (isinstance(obj, User)):
         user = obj.to_dict()
     else:
         user = obj
-    try:
-        activities = Activity.query.filter(Activity.id.in_(user['activity_ids'])).all()
-        return activities
-    except Exception as error:
-        return []
+    return getUserActivities(user)
 
 @convert_kwargs_to_snake_case
 def getUser_friends_resolver(obj, info):
