@@ -78,6 +78,8 @@ export default function App() {
 			<Stack.Screen name="Event" component={EventView} />
 			<Stack.Screen name="Friends" component={FriendsView} />
 			<Stack.Screen name="Friend" component={FriendView} />
+			<Stack.Screen name="Home" component={HomeView} />
+
           </Stack.Navigator>
         </NavigationContainer>
       )}
