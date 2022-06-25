@@ -1,10 +1,9 @@
 name: Deploy on DigitalOcean Droplet
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,7 +12,7 @@ jobs:
         id: image-name
         uses: KJ002/read-yaml@main
         with:
-          file: '../../docker-compose.yml'
+          file: './docker-compose.yml'
           key-path: '["services", "server", "image"]'
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.3
