@@ -5,12 +5,8 @@ from config import env
 def get_all_location_weather(lat, lon):
 	weather_api_key = env['WEATHER_API_KEY']
 	url = "https://api.openweathermap.org/data/2.5/onecall?lat="+str(lat)+"&lon="+str(lon)+"&exclude=alerts,minutely&units=metric&appid="+weather_api_key
-	print(url)
 	response = urlopen(url)
 	data_json = json.loads(response.read())
-  
-	# print the json response
-	# print(data_json)
 	return get_12_timeframe_average(data_json)
 
 def get_12_timeframe_average(weather_data):

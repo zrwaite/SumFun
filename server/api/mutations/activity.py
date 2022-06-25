@@ -5,10 +5,10 @@ from api.models.activity import Activity
 from api.models.user import User
 from modules.hash import hash_password
 
-	# createActivity(name: String!, min_temp: Int!, max_temp: Int!, min_wind: Int!, max_wind: Int!, rain: RAIN!): ActivityResult!
+	# createActivity(name: String!, ideal_temp: Int!, ideal_wind: Int!, rain: RAIN!): ActivityResult!
 
 @convert_kwargs_to_snake_case
-def createActivity_resolver(obj, info, username, name, min_temp, max_temp, min_wind, max_wind, rain):
+def createActivity_resolver(obj, info, username, name, ideal_temp, ideal_wind, rain, ideal_pop, ideal_visibility, ideal_uvi):
     try:
         prev_activity = Activity.query.filter(Activity.name == name).scalar()
         if prev_activity:
@@ -22,10 +22,11 @@ def createActivity_resolver(obj, info, username, name, min_temp, max_temp, min_w
                 today = date.today()
                 activity = Activity(
                     name=name,
-                    min_temp=min_temp,
-                    max_temp=max_temp,
-                    min_wind=min_wind,
-                    max_wind=max_wind,
+                    ideal_temp=ideal_temp,
+                    ideal_wind=ideal_wind,
+                    ideal_visibility=ideal_visibility,
+                    ideal_pop=ideal_pop,
+                    ideal_uvi=ideal_uvi,
                     rain=rain,
                     created_at=today,
                     verified=False,
@@ -55,18 +56,20 @@ def createActivity_resolver(obj, info, username, name, min_temp, max_temp, min_w
 
 
 @convert_kwargs_to_snake_case
-def updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
+def updateActivity_resolver(obj, info, id, ideal_temp, ideal_wind, ideal_visibility, ideal_pop, ideal_uvi, rain):
     try:
         activity = User.query.get(id)
         if activity:
-            if min_temp != None:
-                activity.min_temp = min_temp
-            if max_temp != None:
-                activity.max_temp = max_temp
-            if min_wind != None:
-                activity.min_wind = min_wind
-            if max_wind != None:
-                activity.max_wind = max_wind
+            if ideal_temp != None:
+                activity.ideal_temp = ideal_temp
+            if ideal_wind != None:
+                activity.ideal_wind = ideal_wind
+            if ideal_visibility != None:
+                activity.ideal_visibility = ideal_visibility
+            if ideal_pop != None:
+                activity.ideal_pop = ideal_pop
+            if ideal_uvi != None:
+                activity.ideal_uvi = ideal_uvi
             if rain != None:
                 activity.rain = rain
             db.session.add(activity)
