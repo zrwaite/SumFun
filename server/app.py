@@ -11,6 +11,10 @@ from api.queries.login import login_resolver
 
 from api.queries.activity import listActivities_resolver, getActivity_resolver
 from api.mutations.activity import createActivity_resolver, updateActivity_resolver, deleteActivity_resolver
+
+from api.queries.event import listEvents_resolver, getEvent_resolver
+from api.mutations.event import createEvent_resolver, updateEvent_resolver, deleteEvent_resolver
+
 query = QueryType()
 mutation = MutationType()
 
@@ -74,6 +78,31 @@ def deleteActivity(obj, info, id):
 def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
     return updateActivity_resolver(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain)
 
+
+
+@query.field('listEvents')
+def listEvents(obj, info):
+    return listEvents_resolver(obj, info)
+
+
+@query.field('getEvent')
+def getEvent(obj, info, id):
+    return getEvent_resolver(obj, info, id)
+
+
+@mutation.field('createEvent')
+def createEvent(obj, info, name, date, start_time, duration, location, activity_id, public):
+    return createEvent_resolver(obj, info, name, date, start_time, duration, location, activity_id, public)
+
+
+@mutation.field('deleteEvent')
+def deleteEvent(obj, info, id):
+    return deleteEvent_resolver(obj, info, id)
+
+
+@mutation.field('updateEvent')
+def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, location=None, activity_id=None, public=None):
+    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, location, activity_id, public)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
