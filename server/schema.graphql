@@ -87,11 +87,13 @@ type User {
 	username: String!
 	display_name: String
 	created_at: String!
+	show_unverified: Boolean!
 	activity_ids: [ID]!
 	activities: [Activity]!
-	show_unverified: Boolean!
 	friend_ids: [ID]!
 	friends: [User]!
+	event_ids: [ID]!
+	events: [Event]!
 }
 
 type UserResult {

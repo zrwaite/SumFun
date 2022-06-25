@@ -1,6 +1,7 @@
 from ariadne import convert_kwargs_to_snake_case, ObjectType
 from api.models.user import User
 from api.models.activity import Activity
+from api.models.event import Event
 
 def listUsers_resolver(obj, info):
     try:
@@ -50,5 +51,13 @@ def getUser_friends_resolver(obj, info):
     try:
         friends = User.query.filter(User.id.in_(obj['friend_ids'])).all()
         return friends
+    except Exception as error:
+        return []
+
+@convert_kwargs_to_snake_case
+def getUser_events_resolver(obj, info):
+    try:
+        events = Event.query.filter(Event.id.in_(obj['event_ids'])).all()
+        return events
     except Exception as error:
         return []

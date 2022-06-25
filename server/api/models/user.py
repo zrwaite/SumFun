@@ -7,10 +7,11 @@ class User(db.Model):
     hash = db.Column(db.LargeBinary, nullable=False)
     display_name = db.Column(db.String, nullable=False)
     created_at = db.Column(db.Date, nullable=False)
-    activity_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
     show_unverified = db.Column(db.Boolean, nullable=False)
     #do_not_disturb = db.Column(db.dict, nullable=False)
     friend_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
+    event_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
+    activity_ids = db.Column(db.ARRAY(db.Integer), nullable=False)
 
     def to_dict(self):
         return {
@@ -21,7 +22,8 @@ class User(db.Model):
             "created_at": str(self.created_at.strftime('%d-%m-%Y')),
             "show_unverified": self.show_unverified, 
             #"do_not_disturb": self.do_not_disturb,
-            "friend_ids":self.friend_ids
+            "friend_ids":self.friend_ids,
+            "event_ids":self.event_ids
         }
     
     def do_not_disturb():

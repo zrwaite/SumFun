@@ -14,6 +14,13 @@ export const GET_USER = gql`
 					id
 					display_name
 				}
+				events {
+					name
+					date
+					start_time
+					duration
+					location
+				}
 			}
 			success
 			errors

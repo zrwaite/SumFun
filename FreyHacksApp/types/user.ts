@@ -14,4 +14,5 @@ interface User {
 	activities: Activity[]
 	show_unverified: boolean
 	friends: NestedUser[]
+	events: ActivityEvent[]
 }

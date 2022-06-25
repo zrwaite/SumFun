@@ -6,17 +6,9 @@ import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { StackActions } from '@react-navigation/native'
-
-const logout = async (navigation: any, setUser: Function) => {
-	await AsyncStorage.setItem('username', '')
-	navigation.dispatch(StackActions.replace('Login'))
-	setUser(null)
-}
 
 export const MyEventsView = ({ navigation }: { navigation: any }) => {
-	const { user, setUser } = useContext(UserContext)
+	const { user } = useContext(UserContext)
 
 	return (
 		<View style={styles.container}>
@@ -31,17 +23,17 @@ export const MyEventsView = ({ navigation }: { navigation: any }) => {
 				/>
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-				{/* <Image
-					source={addImage}
-					style={{
-						height: 30,
-						width: 30,
-						marginRight: 20,
-					}}/> */}
-				<Text style={styles.clickSectionText}>this will be backend shit I think</Text>
-			</TouchableOpacity>
-			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
+			{user?.events.map((event, i) => {
+				return (
+				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+					<View>
+						<Text style={styles.clickSectionText}>{event.name}</Text>
+						<Text style={styles.clickSectionText}>Date: {event.date}</Text>
+						<Text style={styles.clickSectionText}>Location: {event.location}</Text>
+					</View>
+				</TouchableOpacity>
+				)
+			})}
 		</View>
 	)
 }

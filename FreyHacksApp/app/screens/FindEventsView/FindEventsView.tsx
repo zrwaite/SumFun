@@ -45,17 +45,12 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 			</View>
 			{events.map((event, i) => {
 				return (
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-					<Image
-						source={addImage}
-						style={{
-							height: 30,
-							width: 30,
-							marginRight: 20,
-						}}/>
-					<Text style={styles.clickSectionText}>{event.name}</Text>
-					<Text style={styles.clickSectionText}>Date: {event.date}</Text>
-					<Text style={styles.clickSectionText}>Location: {event.location}</Text>
+				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+					<View>
+						<Text style={styles.clickSectionText}>{event.name}</Text>
+						<Text style={styles.clickSectionText}>Date: {event.date}</Text>
+						<Text style={styles.clickSectionText}>Location: {event.location}</Text>
+					</View>
 				</TouchableOpacity>
 				)
 			})}
