@@ -1,22 +1,11 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 const logoImage = require('../../assets/icon.png')
-const addImage = require('../../assets/add.png')
-const postsImage = require('../../assets/add.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
-import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { StackActions } from '@react-navigation/native'
-
-const logout = async (navigation: any, setUser: Function) => {
-	await AsyncStorage.setItem('username', '')
-	navigation.dispatch(StackActions.replace('Login'))
-	setUser(null)
-}
 
 export const EventsView = ({ navigation }: { navigation: any }) => {
-	const { user, setUser } = useContext(UserContext)
+	const { user } = useContext(UserContext)
 
 	return (
 		<View style={styles.container}>
@@ -47,7 +36,6 @@ export const EventsView = ({ navigation }: { navigation: any }) => {
 					}}/>
 				<Text style={styles.clickSectionText}>Create Events</Text>
 			</TouchableOpacity>
-			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>
 	)
 }
