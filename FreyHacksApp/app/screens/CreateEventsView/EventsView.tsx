@@ -15,7 +15,7 @@ const logout = async (navigation: any, setUser: Function) => {
 	setUser(null)
 }
 
-export const HomeView = ({ navigation }: { navigation: any }) => {
+export const CreateEventsView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	return (
@@ -31,39 +31,21 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				/>
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Settings</Text>
+			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My ')}>
+				<Text style={styles.clickSectionText}>My Events</Text>
 			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Events</Text>
+			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('FindEvents')}>
+				<Text style={styles.clickSectionText}>Find Events</Text>
 			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Friends')}>
-
+			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('CreateEvents')}>
 				<Image
 					source={addImage}
 					style={{
-						height: 40,
-						width: 40,
+						height: 30,
+						width: 30,
 						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Friends</Text>
+					}}/>
+				<Text style={styles.clickSectionText}>Create Events</Text>
 			</TouchableOpacity>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>

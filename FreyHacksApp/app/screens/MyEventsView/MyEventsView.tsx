@@ -1,11 +1,13 @@
 import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 const logoImage = require('../../assets/icon.png')
+const addImage = require('../../assets/add.png')
+const postsImage = require('../../assets/add.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
+import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
-const addImage = require('../../assets/add.png')
 
-export const EventsView = ({ navigation }: { navigation: any }) => {
+export const MyEventsView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 
 	return (
@@ -21,22 +23,17 @@ export const EventsView = ({ navigation }: { navigation: any }) => {
 				/>
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Events')}>
-				<Text style={styles.clickSectionText}>My Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Find Events')}>
-				<Text style={styles.clickSectionText}>Find Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Events')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 30,
-						width: 30,
-						marginRight: 20,
-					}}/>
-				<Text style={styles.clickSectionText}>Create Events</Text>
-			</TouchableOpacity>
+			{user?.events.map((event, i) => {
+				return (
+				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+					<View>
+						<Text style={styles.clickSectionText}>{event.name}</Text>
+						<Text style={styles.clickSectionText}>Date: {event.date}</Text>
+						<Text style={styles.clickSectionText}>Location: {event.location}</Text>
+					</View>
+				</TouchableOpacity>
+				)
+			})}
 		</View>
 	)
 }

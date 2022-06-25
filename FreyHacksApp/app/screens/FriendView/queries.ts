@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const GET_USER = gql`
+export const GET_FRIEND = gql`
 	query tryGetUser($username: String!) {
 		getUser(username: $username) {
 			user {
@@ -13,13 +13,6 @@ export const GET_USER = gql`
 					username
 					id
 					display_name
-				}
-				events {
-					name
-					date
-					start_time
-					duration
-					location
 				}
 			}
 			success

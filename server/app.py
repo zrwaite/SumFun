@@ -4,7 +4,7 @@ from ariadne import load_schema_from_path, make_executable_schema, \
 from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
-from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver, getUser_friends_resolver
+from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver, getUser_friends_resolver, getUser_events_resolver
 from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
 
 from api.queries.login import login_resolver
@@ -81,13 +81,17 @@ def updateActivity(obj, info, id, min_temp, max_temp, min_wind, max_wind, rain):
 
 user = ObjectType('User')
 
-@user.field('activities')  
+@user.field('activities')
 def getUser_activities(obj, info):
     return getUser_activities_resolver(obj, info)
 
 @user.field('friends')  
 def getUser_friends(obj, info):
     return getUser_friends_resolver(obj, info)
+
+@user.field('events')  
+def getUser_events(obj, info):
+    return getUser_events_resolver(obj, info)
 
 # @query.field('getSchedule')
 # def getSchedule(obj, info, id):

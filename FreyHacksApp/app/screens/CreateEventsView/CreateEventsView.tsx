@@ -15,7 +15,7 @@ const logout = async (navigation: any, setUser: Function) => {
 	setUser(null)
 }
 
-export const HomeView = ({ navigation }: { navigation: any }) => {
+export const CreateEventsView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 
 	return (
@@ -35,35 +35,11 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 				<Image
 					source={addImage}
 					style={{
-						height: 40,
-						width: 40,
+						height: 30,
+						width: 30,
 						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Settings</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Friends')}>
-
-				<Image
-					source={addImage}
-					style={{
-						height: 40,
-						width: 40,
-						marginRight: 20,
-					}}
-				/>
-				<Text style={styles.clickSectionText}>Friends</Text>
+					}}/>
+				<Text style={styles.clickSectionText}>You have no loved ones</Text>
 			</TouchableOpacity>
 			<ZacButton onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>

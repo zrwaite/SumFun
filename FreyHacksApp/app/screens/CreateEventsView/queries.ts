@@ -6,21 +6,6 @@ export const LOGIN = gql`
 			user {
 				id
 				username
-				activities {
-					name
-				}
-				friends {
-					username
-					id
-					display_name
-				}
-				events {
-					name
-					date
-					start_time
-					duration
-					location
-				}
 			}
 			success
 			errors
