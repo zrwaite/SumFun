@@ -19,7 +19,7 @@ jobs:
         ENV_FILE: ${{ secrets.ENV_FILE }}
       run: |
           touch server/.env
-          cat $ENV_FILE >> server/.env
+          $(cat $ENV_FILE) >> server/.env
           # cat server/.env
     - name: docker login
       env:
