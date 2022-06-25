@@ -2,6 +2,6 @@ services:
     server:
         env_file: './server/.env'
         build: './'
-        image: 'zrwaite/freyhacks:1.0.0'
+        image: 'hargunm/freyhacks:1.0.0'
         ports:
             - '8006:8006'
