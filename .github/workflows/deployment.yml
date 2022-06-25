@@ -15,14 +15,14 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           envs: IMAGE_NAME, REGISTRY, {{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}, GITHUB_SHA
           script: |
-            # login to registry
+            # login to dockerhub
             echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
-            # stop old containers
-            docker stop $(echo $IMAGE_NAME)
-            # pull updated containers
-            docker pull $(echo $IMAGE_NAME)
-            # Run new container
-            docker run -d \
-            -- restart always \
-            --name $(echo $IMAGE_NAME) \
-            $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
+            # # stop old containers
+            # docker stop $(echo $IMAGE_NAME)
+            # # pull updated containers
+            # docker pull $(echo $IMAGE_NAME)
+            # # Run new container
+            # docker run -d \
+            # -- restart always \
+            # --name $(echo $IMAGE_NAME) \
+            # $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
