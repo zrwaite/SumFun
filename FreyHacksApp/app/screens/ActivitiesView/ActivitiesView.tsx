@@ -1,9 +1,10 @@
-import { StyleSheet, Alert, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
+import { StyleSheet, Alert, Text, TouchableOpacity, ActivityIndicator, ScrollView, Image } from 'react-native'
 
 import { useContext, useState } from 'react'
 import { client } from '../../../client'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
+const addImage = require('../../assets/add.png')
 import { LIST_ACTIVITIES } from './queries'
 
 export const ActivitiesView = ({ navigation }: { navigation: any }) => {
@@ -32,15 +33,25 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
 			{activitiesState === 'LOADING' ? (
 				<ActivityIndicator size="large" />
-			) : (
-				activities.map((activity, i) => {
+			) : (<>
+				{activities.map((activity, i) => {
 					return (
 						<TouchableOpacity key={i} style={styles.activitySection} onPress={() => navigation.navigate('Activity', { activity: activity })}>
 							<Text style={styles.activitySectionHeader}>{activity.name}</Text>
 						</TouchableOpacity>
 					)
-				})
-			)}
+				})}
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Activity')}>
+					<Image
+						source={addImage}
+						style={{
+							height: 30,
+							width: 30,
+							marginRight: 20,
+						}}/>
+					<Text style={styles.clickSectionText}>Create Activity</Text>
+				</TouchableOpacity>
+			</>)}
 		</ScrollView>
 	)
 }
@@ -83,5 +94,19 @@ const styles = StyleSheet.create({
 		color: 'grey',
 		fontSize: 15,
 		textAlign: 'center',
+	},
+	clickSection: {
+		backgroundColor: 'white',
+		width: '80%',
+		margin: 20,
+		flexDirection: 'row',
+		padding: 10,
+		borderRadius: 20,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	clickSectionText: {
+		color: 'black',
+		fontSize: 25,
 	},
 })

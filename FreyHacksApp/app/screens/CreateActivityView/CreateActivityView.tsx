@@ -1,21 +1,30 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Alert, TextInput } from 'react-native'
 const logoImage = require('../../assets/icon.png')
 const addImage = require('../../assets/add.png')
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
 import { client } from '../../../client'
 import { CREATE_ACTIVITY } from './queries'
 import { StackActions } from '@react-navigation/native'
+import RNPickerSelect from "react-native-picker-select";
+const Picker = RNPickerSelect as any;
 
-export const CreateEventsView = ({ navigation }: { navigation: any }) => {
+export const CreateActivityView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
+	const [name, setName] = useState('')
+	const [min_temp, setMinTemp] = useState(0)
+	const [max_temp, setMaxTemp] = useState(0)
+	const [min_wind, setMinWind] = useState(0)
+	const [max_wind, setMaxWind] = useState(0)
+	const [rain, setRain] = useState<RAIN|''>('')
+	const buttonsEnabled = name.length !== 0  && rain.length !== 0
 
 	const tryCreateActivity = async () => {
 		const response = await client.mutate({
 			mutation: CREATE_ACTIVITY,
-			variables: { },
+			variables: { username: user?.username, name, min_temp, max_temp, min_wind, max_wind, rain},
 		})
 		if (!response.errors) {
 			const data = response.data
@@ -38,18 +47,25 @@ export const CreateEventsView = ({ navigation }: { navigation: any }) => {
 						marginRight: 10,
 					}}
 				/>
-				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
+				<Text style={styles.headerText}>Create Activity</Text>
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 30,
-						width: 30,
-						marginRight: 20,
-					}}/>
-				<Text style={styles.clickSectionText}>You have no loved ones</Text>
-			</TouchableOpacity>
+			<TextInput style={styles.textInput} placeholder="Name" placeholderTextColor={COLORS.green} onChangeText={(newName) => setName(newName)} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Temp" placeholderTextColor={COLORS.green} onChangeText={(newMinTemp) => setMinTemp(parseInt(newMinTemp))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Max Temp" placeholderTextColor={COLORS.green} onChangeText={(newMaxTemp) => setMaxTemp(parseInt(newMaxTemp))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Wind" placeholderTextColor={COLORS.green} onChangeText={(newMinWind) => setMinWind(parseInt(newMinWind))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Max Wind" placeholderTextColor={COLORS.green} onChangeText={(newMaxWind) => setMaxWind(parseInt(newMaxWind))} />
+			<View style={styles.picker}>
+				<Picker
+					onValueChange={(newRain:RAIN) => setRain(newRain)}
+					items={[
+						{ label: "Not Allowed", value: "NOT_ALLOWED" },
+						{ label: "Encouraged", value: "ENCOURAGED" },
+						{ label: "Allowed", value: "ALLOWED" },
+						{ label: "After the rain", value: "AFTER" },
+					]}
+				/>
+			</View>
+			<ZacButton style={{ marginTop: 30 }} onPress={tryCreateActivity} color={COLORS.blue} text={'Create Activity'} enabled={buttonsEnabled} />
 		</View>
 	)
 }
@@ -86,5 +102,22 @@ const styles = StyleSheet.create({
 	clickSectionText: {
 		color: 'black',
 		fontSize: 25,
+	},
+	textInput: {
+		height: 50,
+		textAlign: 'center',
+		width: '80%',
+		backgroundColor: 'white',
+		borderRadius: 20,
+		margin: 10,
+		fontSize: 20,
+	},
+	picker: {
+		backgroundColor: 'white',
+		margin: 10,
+		width: '80%',
+		padding: 15,
+		textAlign: 'center',
+		borderRadius: 20,
 	},
 })

@@ -8,7 +8,7 @@ export const CREATE_EVENT = gql`
 				name
 				date
 				start_time
-				duration
+				end_time
 				location
 				activity {
 					id

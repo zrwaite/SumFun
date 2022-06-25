@@ -4,3 +4,5 @@ interface Activity {
     verified: boolean
     public: boolean
 }
+
+type RAIN = 'NOT_ALLOWED' | 'ENCOURAGED' | 'ALLOWED' | 'AFTER'
