@@ -5,5 +5,5 @@ interface ActivityEvent {
 	start_time: string
 	duration: string
 	location: string
-	activity_id: number
+	activity: Activity
 }

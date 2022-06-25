@@ -45,7 +45,7 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 			</View>
 			{events.map((event, i) => {
 				return (
-				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
+				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Event',  { event: event })}>
 					<View>
 						<Text style={styles.clickSectionText}>{event.name}</Text>
 						<Text style={styles.clickSectionText}>Date: {event.date}</Text>

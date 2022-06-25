@@ -6,11 +6,16 @@ export const LIST_EVENTS = gql`
 			events {
 				id
 				name
-        date
-        start_time
-        location
-        duration
-        activity_id
+				date
+				start_time
+				location
+				duration
+				activity {
+					name
+					id
+					verified
+					public
+				}
 			}
 			success
 			errors
