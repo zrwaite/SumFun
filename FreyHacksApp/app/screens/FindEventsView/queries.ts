@@ -8,7 +8,8 @@ export const LIST_EVENTS = gql`
 				name
 				date
 				start_time
-				location
+				lon
+				lat
 				end_time
 				activity {
 					name

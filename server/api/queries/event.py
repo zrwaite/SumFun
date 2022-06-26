@@ -37,14 +37,17 @@ def getEvent_resolver(obj, info, id):
         }
     return payload
 
+def getEventActivity(event):
+    try:
+        activity = Activity.query.filter(Activity.id == event['activity_id']).scalar()
+        return activity
+    except Exception as error:
+        return None
+
 @convert_kwargs_to_snake_case
 def getEvent_activity_resolver(obj, info):
     if (isinstance(obj, Event)):
         event = obj.to_dict()
     else:
         event = obj
-    try:
-        activity = Activity.query.filter(Activity.id == event['activity_id']).scalar()
-        return activity
-    except Exception as error:
-        return []
+    return getEventActivity(event)

@@ -29,7 +29,8 @@ export const DEFAULT_USER_DATA = `
 		date
 		start_time
 		end_time
-		location
+		lat
+		lon
 		activity {
 			id
 			name

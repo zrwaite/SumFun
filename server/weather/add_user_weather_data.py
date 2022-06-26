@@ -7,8 +7,9 @@
 # use weather data and activity ideal conditions to calculate score
 # delete all previous validities
 # add new validity scores to database
-from api.queries.user import listUsers, getUserActivities
+from api.queries.user import listUsers, getUserActivities, getUserEvents
 from api.mutations.user import updateUserValidityIds
+from api.queries.event import getEventActivity
 from api.mutations.validity import deleteValidity, createValidity
 from .get_location_weather import get_all_location_weather
 
@@ -16,6 +17,7 @@ from .get_location_weather import get_all_location_weather
 def add_user_weather_data(user):
     weather_data = get_all_location_weather(user['lat'], user['lon'])
     activities = getUserActivities(user)
+    events = getUserEvents(user)
     new_validity_ids = []
     for activity in activities:
         scores = get_score_list(weather_data, activity)
@@ -24,6 +26,18 @@ def add_user_weather_data(user):
             print('failed to delete data')
         validityResult = createValidity(
             user['username'], scores, activity.id, None)
+        if not validityResult['success']:
+            print(validityResult['errors'])
+            return print("failed to create validity")
+        new_validity_ids.append(validityResult['validity']['id'])
+    for event in events:
+        activity = getEventActivity(event)
+        # format the time above
+        deleteResult = deleteValidity(event.validity.id)
+        if not deleteResult['success']:
+            print('failed to delete data')
+        validityResult = createValidity(
+            user['username'], [score], None, event.id)
         if not validityResult['success']:
             print(validityResult['errors'])
             return print("failed to create validity")
@@ -98,3 +112,5 @@ def get_score_list(weather_data, activity):
     # assign needed data to variables
     # compare said variables with ideal conditions
     # take absolute value of the difference between the conditions and find the percent difference between ideal and the change
+
+    

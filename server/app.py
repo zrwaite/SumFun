@@ -135,8 +135,8 @@ def deleteEvent(obj, info, id):
 
 
 @mutation.field('updateEvent')
-def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, location=None, activity_id=None, public=None):
-    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, location, activity_id, public)
+def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, lat=None, lon=None, activity_id=None, public=None):
+    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, lat, lon, activity_id, public)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
