@@ -75,7 +75,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 						marginRight: 10,
 					}}
 				/>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
 					<Text style={styles.clickSectionText}>Upcoming Events</Text>
 				</TouchableOpacity>
 			</View>

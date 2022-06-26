@@ -30,14 +30,6 @@ export const CreateEventView = ({ navigation }: { navigation: any }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<Image
-					source={logoImage}
-					style={{
-						height: 40,
-						width: 80,
-						marginRight: 10,
-					}}
-				/>
 				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
 			</View>
 			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Settings')}>
@@ -48,7 +40,7 @@ export const CreateEventView = ({ navigation }: { navigation: any }) => {
 						width: 30,
 						marginRight: 20,
 					}}/>
-				<Text style={styles.clickSectionText}>You have no loved ones</Text>
+				<Text style={styles.clickSectionText}>Create New Event</Text>
 			</TouchableOpacity>
 		</View>
 	)

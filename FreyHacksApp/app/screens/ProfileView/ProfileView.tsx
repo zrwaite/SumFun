@@ -1,4 +1,6 @@
-
+import { ZacButton } from '../../components/ZacButton'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import {goLogin} from "../../../App"
 import React from "react"
 import { StyleSheet, View, Image, Text, SafeAreaView, TextInput } from 'react-native'
 const logoImage = require('../../assets/icon.png')
@@ -9,35 +11,52 @@ const profileImage = require('../../assets/profile-icon.png')
 const sumFun = require('../../assets/SumFun.png')
 
 export const ProfileView = ({ navigation }: { navigation: any }) => {
-	const [text, onChangeText] = React.useState('Bio Input');
-  const [number, onChangeNumber] = React.useState(0);
+	
   const { user } = useContext(UserContext)
+  const testGeolocate = async () => {
+	const options = {
+		enableHighAccuracy: true,
+		timeout: 5000,
+		maximumAge: 0
+	};
+	
+	function success(pos:any) {
+		const crd = pos.coords;
+		let lat = crd.latitude;
+		let lon = crd.longitude;
+	}
+	
+	function error(err:any) {
+		console.warn(`ERROR(${err.code}): ${err.message}`);
+	}
+	
+	navigator.geolocation.getCurrentPosition(success, error, options);
+}
+
+
+const logout = async (navigation: any, setUser: Function) => {
+	await AsyncStorage.setItem('username', '')
+	goLogin()
+	setUser(null)
+}
+
+export const HomeView = ({ navigation }: { navigation: any }) => {
+	const { user, setUser } = useContext(UserContext)
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>				
 				<Text style={styles.headerText}>Profile:</Text>
 			</View>
-			<View style={styles.header}>
-				<Text style={styles.bodyText}>{user?.username}</Text>
-			</View>
-      <SafeAreaView>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText}
-          value={text}
-        />
-    
-      </SafeAreaView>
 	    <View style={styles.text}>	
-						<Image
-							source={sumFun}
-							style={{
-								height:114,
-								width:320,
-								marginRight: 0,
-							
-							}}/>
+			<Image
+				source={sumFun}
+				style={{
+					height:114,
+					width:320,
+					marginRight: 0,
+				}}/>
 		</View>
+		<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 	 </View>
 	);
 }
@@ -49,7 +68,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     padding: 10,
-  },
+    },
 	header: {
 		margin: 20,
 		flexDirection: 'row',
@@ -94,9 +113,16 @@ const styles = StyleSheet.create({
 		color: 'black',
 		fontSize: 25,
 	},
+	loginButton: {
+		margin: 20,
+		borderRadius: 20,
+		flexDirection: 'column',
+		alignItems: 'flex-start',
+		justifyContent: 'center',
+	},
   	bodyText: {
     	color: 'black',
     	fontSize: 27,
 		textAlign: 'left',
-  	}
-});
+  	},
+})

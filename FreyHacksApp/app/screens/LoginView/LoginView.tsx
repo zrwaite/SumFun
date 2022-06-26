@@ -9,6 +9,7 @@ import { client } from '../../../client'
 import { LOGIN } from './queries'
 import { SIGNUP } from './mutations'
 import { UserContext } from '../../../contexts'
+const sumFun = require('../../assets/SumFun.png')
 
 export const LoginView = (props: {goHome: () => void }) => {
 	const [username, setUsername] = useState('')
@@ -59,18 +60,20 @@ export const LoginView = (props: {goHome: () => void }) => {
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 	return (
-		<View style={styles.container}>
-			<Text style={styles.title}>Frey Hacks App</Text>
-			<Image
-				source={logoImage}
-				style={{
-					height: 120,
-					width: 240,
-					marginBottom: 50,
-				}}
-			/>
-			<TextInput style={styles.textInput} placeholder="Username" placeholderTextColor={COLORS.green} onChangeText={(username) => setUsername(username)} />
-			<TextInput style={styles.textInput} placeholder="Password" placeholderTextColor={COLORS.green} onChangeText={(password) => setPassword(password)} />
+		<View style={styles.container}>		
+			<View style={styles.text}>	
+				<Image
+					source={sumFun}
+					style={{
+						height:114,
+						width:320,
+						marginRight: 0,
+							
+				}}/>
+			</View>
+
+			<TextInput style={styles.textInput} placeholder="Username" placeholderTextColor={COLORS.lightblue} onChangeText={(username) => setUsername(username)} />
+			<TextInput style={styles.textInput} placeholder="Password" placeholderTextColor={COLORS.lightblue} onChangeText={(password) => setPassword(password)} />
 			<ZacButton style={{ marginTop: 30 }} onPress={tryLogin} color={COLORS.blue} text={'Login'} enabled={buttonsEnabled} />
 			<ZacButton onPress={trySignUp} color={COLORS.yellow} text={'Sign Up'} enabled={buttonsEnabled} />
 		</View>
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: 'black',
+		backgroundColor: COLORS.lightgrey,
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 	},
@@ -98,5 +101,13 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		margin: 10,
 		fontSize: 20,
+	},
+	text: {
+		marginTop: 150,
+		marginBottom: 60,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: '80%',
 	},
 })

@@ -33,15 +33,7 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<Image
-					source={logoImage}
-					style={{
-						height: 40,
-						width: 80,
-						marginRight: 10,
-					}}
-				/>
-				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
+				<Text style={styles.headerText}>Future events near you</Text>
 			</View>
 			{events.map((event, i) => {
 				return (
