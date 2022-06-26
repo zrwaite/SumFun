@@ -1,2 +1,2 @@
-from weather.add_user_weather_data import add_all_users_weather_data
-print(add_all_users_weather_data())
+arr = [1, 2, 3, 4, 5]
+print(5 in arr)

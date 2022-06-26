@@ -25,8 +25,8 @@ export const MyEventsView = ({ navigation }: { navigation: any }) => {
 				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Event',  { event: event })}>
 					<View>
 						<Text style={styles.clickSectionText}>{event.name}</Text>
-						<Text style={styles.clickSectionText}>Date: {event.date}</Text>
-						<Text style={styles.clickSectionText}>Location: {event.location}</Text>
+						<Text style={styles.clickSectionText}>Lon: {event.lon}</Text>
+						<Text style={styles.clickSectionText}>Lat: {event.lat}</Text>
 					</View>
 				</TouchableOpacity>
 				)

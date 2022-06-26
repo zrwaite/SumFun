@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { LoginView } from './app/screens/LoginView/LoginView'
 import { client } from './client'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { GET_USER } from './queries'
+import { GET_USER, tryGetSetUser } from './queries'
 import { Alert } from 'react-native'
 import { LoadingScreen } from './app/screens/LoadingScreen'
 import { UserContext } from './contexts'
@@ -14,41 +14,31 @@ import { HomeNavigator } from './app/navigators/HomeNavigator'
 import { ActivitiesNavigator } from './app/navigators/ActivitiesNavigator'
 import { FriendsNavigator } from './app/navigators/FriendsNavigator'
 import { ProfileNavigator } from './app/navigators/ProfileNavigator'
+import { ErrorScreen } from './app/screens/ErrorScreen'
 const Tab = createBottomTabNavigator() as any    //added thi
 
 
 export let goLogin = () => {}
 
 export default function App() {
-	const [usernameState, setUsernameState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND'>('LOADING')
-	const tryGetUser = async () => {
-		const username = await AsyncStorage.getItem('username')
-		if (!username) {
-			setUsernameState('NOT_FOUND')
-			return
-		}
-		const response = await client.query({
-			query: GET_USER,
-			variables: { username },
-		})
-		if (!response.error) {
-			const data = response.data
-			if (data.getUser.success) {
-				setUser(data.getUser.user)
-			} else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
-		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
-		setUsernameState('FOUND')
-	}
-	goLogin = () => {setUsernameState('NOT_FOUND')}
+	const [usernameState, setUsernameState] = useState<'LOADING' | 'NOT_FOUND' | 'FOUND' | 'ERROR'>('LOADING')
 	const [user, setUser] = useState<User | null>(null)
 	const userValue = { user, setUser }
 
-	if (usernameState === 'LOADING') {
-		setTimeout(tryGetUser, 1000)
+	const tryGetUserSetUserState = async () => {
+		const status = await tryGetSetUser(setUser)
+		if (status===404) setUsernameState("NOT_FOUND")
+		else if (status===400) setUsernameState("ERROR")
+		else if (status===200) setUsernameState("FOUND")
 	}
+	goLogin = () => {setUsernameState('NOT_FOUND')}
+	
+
 	if (usernameState === 'LOADING') {
+		tryGetUserSetUserState()
 		return <LoadingScreen/>
 	}
+	if (usernameState === 'ERROR') return <ErrorScreen/>
 	return (
 		<UserContext.Provider value={userValue}>
 		<NavigationContainer>

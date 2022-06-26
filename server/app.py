@@ -5,7 +5,7 @@ from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
 from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver, getUser_friends_resolver, getUser_events_resolver
-from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver
+from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver, subscribeToActivity_resolver, registerForEvent_resolver, unregisterFromEvent_resolver, unsubscribeFromActivity_resolver
 
 from api.queries.login import login_resolver
 
@@ -55,6 +55,21 @@ def updateUser(obj, info, username, display_name=None):
 def login(obj, info, username, password):
     return login_resolver(obj, info, username, password)
 
+@mutation.field('subscribeToActivity')
+def subscribeToActivity(obj, info, id, username):
+    return subscribeToActivity_resolver(obj, info, id, username)
+
+@mutation.field('registerForEvent')
+def registerForEvent(obj, info, id, username):
+    return registerForEvent_resolver(obj, info, id, username)
+
+@mutation.field('unsubscribeFromActivity')
+def unsubscribeFromActivity(obj, info, id, username):
+    return unsubscribeFromActivity_resolver(obj, info, id, username)
+
+@mutation.field('unregisterFromEvent')
+def unregisterFromEvent(obj, info, id, username):
+    return unregisterFromEvent_resolver(obj, info, id, username)
 
 
 @query.field('listActivities')
@@ -135,8 +150,8 @@ def deleteEvent(obj, info, id):
 
 
 @mutation.field('updateEvent')
-def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, location=None, activity_id=None, public=None):
-    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, location, activity_id, public)
+def updateEvent(obj, info, id, name=None, date=None, start_time=None, duration=None, lat=None, lon=None, activity_id=None, public=None):
+    return updateEvent_resolver(obj, info, id, name, date, start_time, duration, lat, lon, activity_id, public)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(

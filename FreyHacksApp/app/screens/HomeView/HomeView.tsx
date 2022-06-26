@@ -18,6 +18,29 @@ import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 import {goLogin} from "../../../App"
+import RNLocation from 'react-native-location'
+import Geolocation from 'react-native-geolocation-service'
+
+const testGeolocate = async () => {
+	const options = {
+		enableHighAccuracy: true,
+		timeout: 5000,
+		maximumAge: 0
+	};
+	
+	function success(pos:any) {
+		const crd = pos.coords;
+		let lat = crd.latitude;
+		let lon = crd.longitude;
+	}
+	
+	function error(err:any) {
+		console.warn(`ERROR(${err.code}): ${err.message}`);
+	}
+	
+	navigator.geolocation.getCurrentPosition(success, error, options);
+}
+
 
 const logout = async (navigation: any, setUser: Function) => {
 	await AsyncStorage.setItem('username', '')
@@ -27,10 +50,9 @@ const logout = async (navigation: any, setUser: Function) => {
 
 export const HomeView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
-
-	return (	
-	<ScrollView>
-		<View style={styles.container}>	
+	return (
+		<ScrollView>
+			<View>
 			<View style={styles.header}>
 				<Image
 					source={sumFun}
