@@ -92,6 +92,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderRadius: 10,
 		margin: 40,
+		marginTop: 10,
+		marginBottom: 10,
 		fontSize: 20,
 	},
 	picker: {
