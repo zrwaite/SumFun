@@ -80,5 +80,6 @@ const styles = StyleSheet.create({
 	clickSectionText: {
 		color: 'black',
 		fontSize: 25,
+		textAlign: 'center',
 	},
 })
