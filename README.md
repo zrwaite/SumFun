@@ -25,7 +25,7 @@ This is our code repository for our project submission for FreyHacks
 
 ## Project Description 📝:
 
-As the weather gets warmer and more activties become accessible, it becomes increasingly difficult to chose what to do in your past time. Our team has developed an app that can solve that problem. our carefully formulated software is capable of processing local weather data and reccommending weather dependant activities based on current and future weather conditions. Not only is the schedule capable of reccomding activities based on weather conditions, the app can also be used to plan events for you and your friends all within the app.
+As the weather gets warmer and more activties become accessible, it becomes increasingly difficult to chose what to do in your past time. Our team has developed an app that can solve that problem. Our carefully formulated software is capable of processing local weather data and reccommending weather dependant activities based on current and future weather conditions. Not only is the schedule capable of reccomding activities based on weather conditions, the app can also be used to plan events for you and your friends all within the app.
 
 ## Inspiration💡:
 
