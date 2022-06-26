@@ -2,11 +2,13 @@ import { StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native'
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
+import { ZacButton } from '../../components/ZacButton'
 
 export const FriendsView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 	return (
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
+			<Text style={styles.header}>My Friends:</Text>
 			{user?.friends.map((friend, i) => {
 				return (
 					<TouchableOpacity key={i} style={styles.friendSection} onPress={() => navigation.navigate('Friend', { friend: friend })}>
@@ -15,6 +17,11 @@ export const FriendsView = ({ navigation }: { navigation: any }) => {
 					</TouchableOpacity>					
 				)
 			})}
+			{user?.friends.length===0 && (<>
+				<Text>
+					You don't have any friends, RIP.
+				</Text>
+			</>)}
 		</ScrollView>		
 	)
 }
@@ -22,6 +29,8 @@ export const FriendsView = ({ navigation }: { navigation: any }) => {
 const styles = StyleSheet.create({
 	header: {
 		margin: 20,
+		fontSize: 40,
+		textAlign: 'center',
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',

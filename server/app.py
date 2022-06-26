@@ -140,8 +140,8 @@ def getEvent(obj, info, id):
 
 
 @mutation.field('createEvent')
-def createEvent(obj, info, username, name, date, start_time, end_time, location, activity_id, public):
-    return createEvent_resolver(obj, info, username, name, date, start_time, end_time, location, activity_id, public)
+def createEvent(obj, info, username, name, date, start_time, end_time, lat, lon, activity_id, public):
+    return createEvent_resolver(obj, info, username, name, date, start_time, end_time, lat, lon, activity_id, public)
 
 
 @mutation.field('deleteEvent')

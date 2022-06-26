@@ -2,7 +2,7 @@ services:
     server:
         env_file: './server/.env'
         build: './'
-        image: 'zrwaite/freyhacks:1.0.1'
+        image: 'zrwaite/freyhacks:1.0.2'
         ports:
             - '8006:8006'
 # checking if workflow is restricted to changes in this file

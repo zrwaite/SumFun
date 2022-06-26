@@ -13,6 +13,19 @@ from api.queries.event import getEventActivity
 from api.mutations.validity import deleteValidity, createValidity
 from .get_location_weather import get_all_location_weather
 
+def get_replace_activity_validity(weather_data, user, activity):
+    scores = get_score_list(weather_data, activity)
+    deleteResult = deleteValidity(activity.validity.id)
+    if not deleteResult['success']:
+        print('failed to delete data')
+    validityResult = createValidity(
+        user['username'], scores, activity.id, None)
+    if not validityResult['success']:
+        print(validityResult['errors'])
+        print("failed to create validity")
+        return None
+    return validityResult['validity']['id']
+
 
 def add_user_weather_data(user):
     weather_data = get_all_location_weather(user['lat'], user['lon'])
@@ -20,16 +33,11 @@ def add_user_weather_data(user):
     events = getUserEvents(user)
     new_validity_ids = []
     for activity in activities:
-        scores = get_score_list(weather_data, activity)
-        deleteResult = deleteValidity(activity.validity.id)
-        if not deleteResult['success']:
-            print('failed to delete data')
-        validityResult = createValidity(
-            user['username'], scores, activity.id, None)
-        if not validityResult['success']:
-            print(validityResult['errors'])
-            return print("failed to create validity")
-        new_validity_ids.append(validityResult['validity']['id'])
+        new_validity_id = get_replace_activity_validity(weather_data, user, activity)
+        if new_validity_id:
+            new_validity_ids.append(new_validity_id)
+        else:
+            return print('Failed to get new validity id')
     for event in events:
         activity = getEventActivity(event)
         # format the time above

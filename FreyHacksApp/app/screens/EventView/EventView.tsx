@@ -5,12 +5,12 @@ import { UserContext } from '../../../contexts'
 import { tryGetSetUser } from '../../../queries'
 import { ZacButton } from '../../components/ZacButton'
 import { COLORS } from '../../settings'
-import { REGISTER } from './mutations'
+import { REGISTER, UNREGISTER } from './mutations'
 
 export const EventView = ({ route, navigation }: { navigation: any, route: { params: { event: ActivityEvent } } }) => {
 	const { user, setUser} = useContext(UserContext)
 	const event = route.params.event
-	const registered = user?.event_ids.includes(event.id)
+	const registered = user?.event_ids.includes(parseInt(event.id))
 	const tryRegister = async () => {
 		const response = await client.mutate({
 			mutation: REGISTER,
@@ -19,12 +19,20 @@ export const EventView = ({ route, navigation }: { navigation: any, route: { par
 		if (!response.errors) {
 			const data = response.data
 			if (data.registerForEvent.success) tryGetSetUser(setUser)
-			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+			else Alert.alert('Error', JSON.stringify(data.registerForEvent.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 
-	const tryUnRegister = () => {
-
+	const tryUnRegister = async () => {
+		const response = await client.mutate({
+			mutation: UNREGISTER,
+			variables: {id: event.id, username: user?.username}
+		})
+		if (!response.errors) {
+			const data = response.data
+			if (data.unregisterFromEvent.success) tryGetSetUser(setUser)
+			else Alert.alert('Error', JSON.stringify(data.unregisterFromEvent.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 	return (
 		<View style={styles.container}>
@@ -36,7 +44,7 @@ export const EventView = ({ route, navigation }: { navigation: any, route: { par
 				<Text>{event.activity.name}</Text>
 			</TouchableOpacity>
 			<ZacButton 
-				text={registered?'Unsubscribe from Activity':'Subscribe To Activity'} 
+				text={registered?'Unregister':'Register'} 
 				onPress={registered?tryUnRegister:tryRegister} 
 			/>
 		</View>

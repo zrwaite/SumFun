@@ -13,7 +13,7 @@ import { SUBSCRIBE, UNSUBSCRIBE } from './mutations';
 export const ActivityView = ({ route }: { route: { params: { activity: Activity } } }) => {
 	const { user, setUser} = useContext(UserContext)
 	const activity = route.params.activity
-	const subscribed = user?.activity_ids.includes(activity.id)
+	const subscribed = user?.activity_ids.includes(parseInt(activity.id))
 	const trySubscribe = async () => {
 		const response = await client.mutate({
 			mutation: SUBSCRIBE,
