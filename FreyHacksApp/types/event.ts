@@ -1,5 +1,5 @@
 interface ActivityEvent {
-	id: number
+	id: string
 	name: string
 	date: string
 	start_time: string

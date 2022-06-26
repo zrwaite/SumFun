@@ -1,6 +1,6 @@
 interface Activity {
     name: string
-    id: number
+    id: string
     verified: boolean
     public: boolean
 }

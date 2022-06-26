@@ -10,27 +10,44 @@ import { UserContext } from '../../../contexts'
 export const MyEventsView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 
+	const upcomingEvents:ActivityEvent[] = []
+	const pastEvents:ActivityEvent[] = []
+	user?.events.forEach((event, i) => {
+		if (new Date(event.date) > new Date()) upcomingEvents.push(event)
+		else pastEvents.push(event)
+	})
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.text}>
 				<Text style={styles.headerText}>Upcoming Events:</Text>
-				<Text style={styles.headerText}>Maybe some backend stuff here?</Text>
+				{upcomingEvents.map((event, i) => {
+					return (
+						<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Event',  { event: event })}>
+							<View>
+								<Text style={styles.clickSectionText}>{event.name}</Text>
+								<Text style={styles.clickSectionText}>Lon: {event.lon}</Text>
+								<Text style={styles.clickSectionText}>Lat: {event.lat}</Text>
+							</View>
+						</TouchableOpacity>
+					)
+				})}
 			</View>
 			<View style={styles.text}>
 				<Text style={styles.headerText}>Past Events:</Text>
-				<Text style={styles.headerText}>Maybe some backend stuff here?</Text>
+				{pastEvents.map((event, i) => {
+					return (
+						<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Event',  { event: event })}>
+							<View>
+								<Text style={styles.clickSectionText}>{event.name}</Text>
+								<Text style={styles.clickSectionText}>Lon: {event.lon}</Text>
+								<Text style={styles.clickSectionText}>Lat: {event.lat}</Text>
+							</View>
+						</TouchableOpacity>
+					)
+				})}
 			</View>
-			{user?.events.map((event, i) => {
-				return (
-				<TouchableOpacity key={i} style={styles.clickSection} onPress={() => navigation.navigate('Event',  { event: event })}>
-					<View>
-						<Text style={styles.clickSectionText}>{event.name}</Text>
-						<Text style={styles.clickSectionText}>Lon: {event.lon}</Text>
-						<Text style={styles.clickSectionText}>Lat: {event.lat}</Text>
-					</View>
-				</TouchableOpacity>
-				)
-			})}
+			
 		</View>
 	)
 }

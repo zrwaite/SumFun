@@ -12,6 +12,6 @@ export const ActivitiesNavigator = () => {
             <ActivitiesStack.Screen name="Activity" component={ActivityView} />
             <ActivitiesStack.Screen name="My Activities" component={MyActivitiesView} />
             <ActivitiesStack.Screen name="Create Activity" component={CreateActivityView} />
-    </ActivitiesStack.Navigator>
+        </ActivitiesStack.Navigator>
     )
 }
