@@ -129,7 +129,7 @@ def subscribeToActivity_resolver(obj, info, id, username):
                 else:
                     payload = {
                         "success": False,
-                        "errors": ["you are subscribed"]
+                        "errors": ["you are already subscribed"]
                     }
             else: 
                 payload = {
@@ -166,7 +166,7 @@ def registerForEvent_resolver(obj, info, id, username):
                 else:
                     payload = {
                         "success": False,
-                        "errors": ["you are registered"]
+                        "errors": ["you are already registered"]
                     }
             else: 
                 payload = {
