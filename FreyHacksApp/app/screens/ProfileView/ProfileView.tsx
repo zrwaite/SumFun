@@ -9,6 +9,7 @@ import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
 const profileImage = require('../../assets/profile-icon.png')
 const sumFun = require('../../assets/SumFun.png')
+const profileIcon = require('../../assets/profile-icon.png')
 
 /*
 export const ProfileView = ({ navigation }: { navigation: any }) => {
@@ -46,20 +47,29 @@ export const ProfileView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>				
+			<View style={styles.header}>					
 				<Text style={styles.headerText}>Profile:</Text>
-			</View>
-	    <View style={styles.text}>	
+			</View>			
 			<Image
-				source={sumFun}
-				style={{
-					height:114,
-					width:320,
-					marginRight: 0,
-				}}/>
+			source={profileIcon}
+			style={{
+				height:130,
+				width: 130,
+				marginRight: 0,
+			}}/>
+			<Text style={styles.bodyText}>{user?.username}</Text>
+			<Text style={styles.bodyText}># Friends: {user?.friends.length}</Text>
+			<View style={styles.text}>	
+				<Image
+					source={sumFun}
+					style={{
+						height:114,
+						width:320,
+						marginRight: 0,
+					}}/>
+			</View>
+			<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 		</View>
-		<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
-	 </View>
 	)
 }
 
@@ -84,7 +94,7 @@ const styles = StyleSheet.create({
 		textAlign: 'left',
 	},
 	text: {
-		marginTop: 310,
+		marginTop: 210,
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'flex-end',
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
 	},
   	bodyText: {
     	color: 'black',
-    	fontSize: 27,
+    	fontSize: 35,
 		textAlign: 'left',
   	},
 })
