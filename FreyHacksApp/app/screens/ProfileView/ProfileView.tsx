@@ -32,6 +32,7 @@ export const ProfileView = ({ navigation }: { navigation: any }) => {
 	
 	navigator.geolocation.getCurrentPosition(success, error, options);
 }
+}
 
 
 const logout = async (navigation: any, setUser: Function) => {
@@ -58,7 +59,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 		</View>
 		<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
 	 </View>
-	);
+	)
 }
 
 const styles = StyleSheet.create({
