@@ -16,6 +16,7 @@ import { FriendsNavigator } from './app/navigators/FriendsNavigator'
 import { ProfileNavigator } from './app/navigators/ProfileNavigator'
 const Tab = createBottomTabNavigator() as any    //added thi
 
+
 export let goLogin = () => {}
 
 export default function App() {

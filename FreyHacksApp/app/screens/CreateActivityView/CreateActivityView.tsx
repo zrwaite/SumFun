@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 	},
 	clickSection: {
-		backgroundColor: 'white',
+		backgroundColor: COLORS.lightblue,
 		width: '80%',
 		margin: 20,
 		flexDirection: 'row',

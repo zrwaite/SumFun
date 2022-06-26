@@ -11,7 +11,7 @@ export const ZacButton = (props: { onPress: () => void; text: string; color?: st
 			width: '50%',
 			margin: 10,
 			borderRadius: 20,
-			backgroundColor: props.color ?? 'grey',
+			backgroundColor: props.color ?? 'lightgrey',
 			...props.style,
 		},
 		text: {
