@@ -6,7 +6,7 @@ import { UserContext } from '../../../contexts';
 import { tryGetSetUser } from '../../../queries';
 import { ZacButton } from '../../components/ZacButton';
 import { COLORS } from '../../settings'
-import { SUBSCRIBE } from './mutations';
+import { SUBSCRIBE, UNSUBSCRIBE } from './mutations';
 
 
 
@@ -25,8 +25,16 @@ export const ActivityView = ({ route }: { route: { params: { activity: Activity 
 			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
-	const tryUnSubscribe = () => {
-
+	const tryUnSubscribe = async () => {
+		const response = await client.mutate({
+			mutation: UNSUBSCRIBE,
+			variables: {id: activity.id, username: user?.username}
+		})
+		if (!response.errors) {
+			const data = response.data
+			if (data.unsubscribeFromActivity.success) tryGetSetUser(setUser)
+			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 
 	return (

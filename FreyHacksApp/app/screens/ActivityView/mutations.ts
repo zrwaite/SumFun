@@ -8,3 +8,12 @@ export const SUBSCRIBE = gql`
 		}
 	}
 `
+
+export const UNSUBSCRIBE = gql`
+	mutation tryUnSubscribe($id: ID!, $username: String!) {
+		unsubscribeFromActivity(id: $id, username: $username) {
+			success
+			errors
+		}
+	}
+`

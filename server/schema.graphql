@@ -146,6 +146,9 @@ type Mutation {
 	subscribeToActivity(id: ID!, username: String!): Result!
 	registerForEvent(id: ID!, username: String!): Result!
 
+	unsubscribeFromActivity(id: ID!, username: String!): Result!
+	unregisterFromEvent(id: ID!, username: String!): Result!
+
 	createEvent(username: String!, name: String!, date: String!, start_time: String!, end_time: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
 	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, end_time: String, location: String, activity_id: ID, public: Boolean): EventResult!
 	deleteEvent(id: ID!): Result!

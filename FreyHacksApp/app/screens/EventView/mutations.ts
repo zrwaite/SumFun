@@ -8,3 +8,12 @@ export const REGISTER = gql`
 		}
 	}
 `
+
+export const UNREGISTER = gql`
+	mutation tryUnRegister($id: ID!, $username: String!) {
+		unregisterFromEvent(id: $id, username: $username) {
+			success
+			errors
+		}
+	}
+`

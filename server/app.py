@@ -5,7 +5,7 @@ from ariadne.constants import PLAYGROUND_HTML
 from flask import request, jsonify
 
 from api.queries.user import listUsers_resolver, getUser_resolver, getUser_activities_resolver, getUser_friends_resolver, getUser_events_resolver
-from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver, subscribeToActivity_resolver, registerForEvent_resolver
+from api.mutations.user import createUser_resolver, updateUser_resolver, deleteUser_resolver, subscribeToActivity_resolver, registerForEvent_resolver, unregisterFromEvent_resolver, unsubscribeFromActivity_resolver
 
 from api.queries.login import login_resolver
 
@@ -62,6 +62,14 @@ def subscribeToActivity(obj, info, id, username):
 @mutation.field('registerForEvent')
 def registerForEvent(obj, info, id, username):
     return registerForEvent_resolver(obj, info, id, username)
+
+@mutation.field('unsubscribeFromActivity')
+def unsubscribeFromActivity(obj, info, id, username):
+    return unsubscribeFromActivity_resolver(obj, info, id, username)
+
+@mutation.field('unregisterFromEvent')
+def unregisterFromEvent(obj, info, id, username):
+    return unregisterFromEvent_resolver(obj, info, id, username)
 
 
 @query.field('listActivities')

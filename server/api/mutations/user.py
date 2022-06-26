@@ -119,13 +119,18 @@ def subscribeToActivity_resolver(obj, info, id, username):
         if user:
             activity = Activity.query.get(id)
             if activity:
-                if id not in user.activity_ids:
+                if int(id) not in user.activity_ids:
                     user.activity_ids = user.activity_ids + [id]
                     db.session.add(user)
                     db.session.commit()
-                payload = {
-                    "success": True,
-                }
+                    payload = {
+                        "success": True,
+                    }
+                else:
+                    payload = {
+                        "success": False,
+                        "errors": ["you are subscribed"]
+                    }
             else: 
                 payload = {
                     "success": False,
@@ -151,12 +156,18 @@ def registerForEvent_resolver(obj, info, id, username):
         if user:
             event = Event.query.get(id)
             if event:
-                user.event_ids = user.event_ids + [id]
-                db.session.add(user)
-                db.session.commit()
-                payload = {
-                    "success": True,
-                }
+                if int(id) not in user.event_ids:
+                    user.activity_ids = user.event_ids + [id]
+                    db.session.add(user)
+                    db.session.commit()
+                    payload = {
+                        "success": True,
+                    }
+                else:
+                    payload = {
+                        "success": False,
+                        "errors": ["you are registered"]
+                    }
             else: 
                 payload = {
                     "success": False,
@@ -171,5 +182,71 @@ def registerForEvent_resolver(obj, info, id, username):
         payload = {
             "success": False,
             "errors": ["user not found", str(error)]
+        }
+    return payload
+
+
+@convert_kwargs_to_snake_case
+def unsubscribeFromActivity_resolver(obj, info, id, username):
+    try:
+        user = User.query.filter(User.username == username).scalar()
+        print(user.activity_ids)
+        print(type(id))
+        print(type(user.activity_ids[0]))
+        if user:
+            if int(id) not in user.activity_ids:
+                payload = {
+                    "success": False,
+                    "errors": ['you arent subscribed']
+                }
+            else:
+                new_activity_ids = user.activity_ids.copy()
+                new_activity_ids.remove(int(id))
+                user.activity_ids = new_activity_ids
+                db.session.add(user)
+                db.session.commit()
+                payload = {
+                    "success": True,
+                }
+        else:
+            payload = {
+                "success": False,
+                "errors": ['user not found']
+            }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
+        }
+    return payload
+
+@convert_kwargs_to_snake_case
+def unregisterFromEvent_resolver(obj, info, id, username):
+    try:
+        user = User.query.filter(User.username == username).scalar()
+        if user:
+            if int(id) not in user.event_ids:
+                payload = {
+                    "success": False,
+                    "errors": ['you arent registered']
+                }
+            else:
+                new_event_ids = user.event_ids.copy()
+                new_event_ids.remove(int(id))
+                user.event_ids = new_event_ids
+                db.session.add(user)
+                db.session.commit()
+                payload = {
+                    "success": True,
+                }
+        else:
+            payload = {
+                "success": False,
+                "errors": ['user not found']
+            }
+    except Exception as error:
+        payload = {
+            "success": False,
+            "errors": [str(error)]
         }
     return payload
