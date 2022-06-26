@@ -1,4 +1,26 @@
 import { gql } from '@apollo/client'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Alert } from 'react-native'
+import { client } from './client'
+
+export const tryGetSetUser = async (setUser:(newUser:User)=>void):Promise<400|404|200> => {
+	const username = await AsyncStorage.getItem('username')
+	if (!username) {
+		return 404
+	}
+	const response = await client.query({
+		query: GET_USER,
+		variables: { username },
+	})
+	if (!response.error) {
+		const data = response.data
+		if (data.getUser.success) {
+			setUser(data.getUser.user)
+			return 200
+		} else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+	} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+	return 400
+}
 
 export const DEFAULT_USER_DATA = `
 	id
@@ -24,6 +46,7 @@ export const DEFAULT_USER_DATA = `
 			name
 		}
 	}
+	activity_ids
 	events {
 		name
 		date
@@ -37,6 +60,7 @@ export const DEFAULT_USER_DATA = `
 			public
 		}
 	}
+	event_ids
 `
 
 export const GET_USER = gql`
