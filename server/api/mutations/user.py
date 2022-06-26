@@ -3,6 +3,8 @@ from ariadne import convert_kwargs_to_snake_case
 import flask_sqlalchemy
 from api import db
 from api.models.user import User
+from api.models.activity import Activity
+from api.models.event import Event
 from modules.hash import hash_password
 
 
@@ -104,6 +106,68 @@ def updateUserValidityIds(username, validity_ids=[]):
                 "errors": ['user not found']
             }
     except Exception as error:
+        payload = {
+            "success": False,
+            "errors": ["user not found", str(error)]
+        }
+    return payload
+
+@convert_kwargs_to_snake_case
+def subscribeToActivity_resolver(obj, info, id, username):
+    try:
+        user = User.query.filter(User.username == username).scalar()
+        if user:
+            activity = Activity.query.get(id)
+            if activity:
+                if id not in user.activity_ids:
+                    user.activity_ids = user.activity_ids + [id]
+                    db.session.add(user)
+                    db.session.commit()
+                payload = {
+                    "success": True,
+                }
+            else: 
+                payload = {
+                    "success": False,
+                    "errors": ['activity not found']
+                }
+        else:
+            payload = {
+                "success": False,
+                "errors": ['user not found']
+            }
+    except AttributeError as error:
+        payload = {
+            "success": False,
+            "errors": ["user not found", str(error)]
+        }
+    return payload
+
+
+@convert_kwargs_to_snake_case
+def registerForEvent_resolver(obj, info, id, username):
+    try:
+        user = User.query.filter(User.username == username).scalar()
+        if user:
+            event = Event.query.get(id)
+            if event:
+                user.event_ids = user.event_ids + [id]
+                db.session.add(user)
+                db.session.commit()
+                payload = {
+                    "success": True,
+                }
+            else: 
+                payload = {
+                    "success": False,
+                    "errors": ['activity not found']
+                }
+        else:
+            payload = {
+                "success": False,
+                "errors": ['user not found']
+            }
+    except AttributeError as error:
         payload = {
             "success": False,
             "errors": ["user not found", str(error)]

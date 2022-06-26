@@ -1,14 +1,41 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StyleSheet, View, Text } from 'react-native'
+import { useContext } from 'react';
+import { StyleSheet, View, Text, Alert } from 'react-native'
+import { client } from '../../../client';
+import { UserContext } from '../../../contexts';
+import { tryGetSetUser } from '../../../queries';
+import { ZacButton } from '../../components/ZacButton';
 import { COLORS } from '../../settings'
+import { SUBSCRIBE } from './mutations';
 
 
 
 export const ActivityView = ({ route }: { route: { params: { activity: Activity } } }) => {
+	const { user, setUser} = useContext(UserContext)
 	const activity = route.params.activity
+	const subscribed = user?.activity_ids.includes(activity.id)
+	const trySubscribe = async () => {
+		const response = await client.mutate({
+			mutation: SUBSCRIBE,
+			variables: {id: activity.id, username: user?.username}
+		})
+		if (!response.errors) {
+			const data = response.data
+			if (data.subscribeToActivity.success) tryGetSetUser(setUser)
+			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+	}
+	const tryUnSubscribe = () => {
+
+	}
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.header}>{activity.name}</Text>
+			<ZacButton 
+				text={subscribed?'Unsubscribe from Activity':'Subscribe To Activity'} 
+				onPress={subscribed?tryUnSubscribe:trySubscribe} 
+			/>
 		</View>
 	)
 }
