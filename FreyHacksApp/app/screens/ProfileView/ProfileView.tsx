@@ -10,6 +10,7 @@ import { UserContext } from '../../../contexts'
 const profileImage = require('../../assets/profile-icon.png')
 const sumFun = require('../../assets/SumFun.png')
 
+/*
 export const ProfileView = ({ navigation }: { navigation: any }) => {
 	
   const { user } = useContext(UserContext)
@@ -33,7 +34,7 @@ export const ProfileView = ({ navigation }: { navigation: any }) => {
 	navigator.geolocation.getCurrentPosition(success, error, options);
 }
 }
-
+*/
 
 const logout = async (navigation: any, setUser: Function) => {
 	await AsyncStorage.setItem('username', '')
@@ -41,7 +42,7 @@ const logout = async (navigation: any, setUser: Function) => {
 	setUser(null)
 }
 
-export const HomeView = ({ navigation }: { navigation: any }) => {
+export const ProfileView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 	return (
 		<View style={styles.container}>
