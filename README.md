@@ -61,3 +61,10 @@ As the weather gets warmer and more activties become accessible, it becomes incr
 
 ## Hardware 
 - Probably nothing is gonna happen here
+
+## CI/CD Pipeline
+- Automated by Github Actions
+- Builds docker image, and pushes to Docker Hub
+- Authenticates by SSH into Digital Ocean droplet linux server
+- Pulls image from Docker hub into remote server and runs container
+- GraphQL domain is live: sum-fun.xyz/graphql
