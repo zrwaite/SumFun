@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity, Alert } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, Alert, ScrollView } from 'react-native'
 const logoImage = require('../../assets/icon.png')
 const addImage = require('../../assets/add.png')
 import { useContext, useState } from 'react'
@@ -31,7 +31,7 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 	}
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container} contentContainerStyle={{alignItems: 'center',justifyContent: 'flex-start',}}>
 			<View style={styles.header}>
 				<Image
 					source={logoImage}
@@ -54,7 +54,7 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 				</TouchableOpacity>
 				)
 			})}
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -74,8 +74,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.green,
-		alignItems: 'center',
-		justifyContent: 'flex-start',
 	},
 	clickSection: {
 		backgroundColor: 'white',

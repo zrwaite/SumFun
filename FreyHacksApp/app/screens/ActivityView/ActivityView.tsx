@@ -13,7 +13,9 @@ import { SUBSCRIBE, UNSUBSCRIBE } from './mutations';
 export const ActivityView = ({ route }: { route: { params: { activity: Activity } } }) => {
 	const { user, setUser} = useContext(UserContext)
 	const activity = route.params.activity
-	const subscribed = user?.activity_ids.includes(parseInt(activity.id))
+	console.log(user?.activity_ids)
+	console.log(activity.id)
+	const subscribed = user?.activity_ids.includes(activity.id)
 	const trySubscribe = async () => {
 		const response = await client.mutate({
 			mutation: SUBSCRIBE,
@@ -21,8 +23,10 @@ export const ActivityView = ({ route }: { route: { params: { activity: Activity 
 		})
 		if (!response.errors) {
 			const data = response.data
-			if (data.subscribeToActivity.success) tryGetSetUser(setUser)
-			else Alert.alert('Error', JSON.stringify(data.subscribeToActivity.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+			if (data.subscribeToActivity.success) {
+				Alert.alert('Subscribed!', 'You are subscribed to '+activity.name, [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				if (user) setUser({...user, activity_ids: [...user?.activity_ids, activity.id]})
+			} else Alert.alert('Error', JSON.stringify(data.subscribeToActivity.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 	const tryUnSubscribe = async () => {
@@ -32,7 +36,9 @@ export const ActivityView = ({ route }: { route: { params: { activity: Activity 
 		})
 		if (!response.errors) {
 			const data = response.data
-			if (data.unsubscribeFromActivity.success) tryGetSetUser(setUser)
+			if (data.unsubscribeFromActivity.success) {
+				if (user) setUser({...user, activity_ids: [...user?.activity_ids].filter(id => id != activity.id)})
+			}
 			else Alert.alert('Error', JSON.stringify(data.unsubscribeFromActivity.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}

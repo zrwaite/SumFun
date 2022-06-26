@@ -10,7 +10,7 @@ import { REGISTER, UNREGISTER } from './mutations'
 export const EventView = ({ route, navigation }: { navigation: any, route: { params: { event: ActivityEvent } } }) => {
 	const { user, setUser} = useContext(UserContext)
 	const event = route.params.event
-	const registered = user?.event_ids.includes(parseInt(event.id))
+	const registered = user?.event_ids.includes(event.id)
 	const tryRegister = async () => {
 		const response = await client.mutate({
 			mutation: REGISTER,
@@ -18,7 +18,10 @@ export const EventView = ({ route, navigation }: { navigation: any, route: { par
 		})
 		if (!response.errors) {
 			const data = response.data
-			if (data.registerForEvent.success) tryGetSetUser(setUser)
+			if (data.registerForEvent.success) {
+				Alert.alert('Registered!', 'Registered for '+event.name, [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				if (user) setUser({...user, event_ids: [...user?.event_ids, event.id]})
+			}
 			else Alert.alert('Error', JSON.stringify(data.registerForEvent.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
@@ -30,7 +33,9 @@ export const EventView = ({ route, navigation }: { navigation: any, route: { par
 		})
 		if (!response.errors) {
 			const data = response.data
-			if (data.unregisterFromEvent.success) tryGetSetUser(setUser)
+			if (data.unregisterFromEvent.success) {
+				if (user) setUser({...user, event_ids: [...user?.event_ids].filter(id => id != event.id)})
+			}
 			else Alert.alert('Error', JSON.stringify(data.unregisterFromEvent.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}

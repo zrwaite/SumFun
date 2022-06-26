@@ -1,5 +1,5 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity, Alert, TextInput } from 'react-native'
-const logoImage = require('../../assets/icon.png')
+import { StyleSheet, View, Image, Text, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native'
+const logoImage = require('../../assets/SumFun.png')
 const addImage = require('../../assets/add.png')
 import { useContext, useState } from 'react'
 import { COLORS } from '../../settings'
@@ -38,21 +38,32 @@ export const CreateActivityView = ({ navigation }: { navigation: any }) => {
 	}
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container} contentContainerStyle={{alignItems: 'center', justifyContent: 'flex-start',}}>
 			<View style={styles.header}>
 				<Image
 					source={logoImage}
 					style={{
 						height: 40,
-						width: 80,
+						width: 110,
 						marginRight: 10,
 					}}
 				/>
 				<Text style={styles.headerText}>Create Activity</Text>
+				<Image
+					source={addImage}
+					style={{
+						height: 40,
+						width: 40,
+						marginLeft: 10,
+					}}
+				/>
 			</View>
 			<TextInput style={styles.textInput} placeholder="Name" placeholderTextColor={COLORS.green} onChangeText={(newName) => setName(newName)} />
-			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Temp" placeholderTextColor={COLORS.green} onChangeText={(newIdealTemp) => setIdealTemp(parseInt(newIdealTemp))} />
-			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Min Wind" placeholderTextColor={COLORS.green} onChangeText={(newIdealWind) => setIdealWind(parseInt(newIdealWind))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Ideal Temp" placeholderTextColor={COLORS.green} onChangeText={(newIdealTemp) => setIdealTemp(parseInt(newIdealTemp))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Ideal Wind" placeholderTextColor={COLORS.green} onChangeText={(newIdealWind) => setIdealWind(parseInt(newIdealWind))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Ideal % Precipitation" placeholderTextColor={COLORS.green} onChangeText={(newIdealPop) => setIdealPop(parseInt(newIdealPop))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Ideal UVI" placeholderTextColor={COLORS.green} onChangeText={(newIdealUvi) => setIdealUvi(parseInt(newIdealUvi))} />
+			<TextInput style={styles.textInput} keyboardType={'numeric'} placeholder="Ideal Visibility" placeholderTextColor={COLORS.green} onChangeText={(newIdealVisibility) => setIdealVisibility(parseInt(newIdealVisibility))} />
 			<View style={styles.picker}>
 				<Picker
 					onValueChange={(newRain:RAIN) => setRain(newRain)}
@@ -64,8 +75,8 @@ export const CreateActivityView = ({ navigation }: { navigation: any }) => {
 					]}
 				/>
 			</View>
-			<ZacButton style={{ marginTop: 30 }} onPress={tryCreateActivity} color={COLORS.blue} text={'Create Activity'} enabled={buttonsEnabled} />
-		</View>
+			<ZacButton style={{ marginTop: 30 }} onPress={tryCreateActivity} color={COLORS.blue} text={'Create Activity +'} enabled={buttonsEnabled} />
+		</ScrollView>
 	)
 }
 
@@ -73,9 +84,9 @@ const styles = StyleSheet.create({
 	header: {
 		margin: 20,
 		flexDirection: 'row',
+		width: '100%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
 	},
 	headerText: {
 		color: 'white',
@@ -85,8 +96,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.green,
-		alignItems: 'center',
-		justifyContent: 'flex-start',
 	},
 	clickSection: {
 		backgroundColor: COLORS.lightblue,
