@@ -12,7 +12,7 @@ This is our code repository for our project submission for FreyHacks
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="postgresql" width="50rem" height="50rem" /> 
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github" width="50rem" height="50rem" /> 
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg" alt="digitalocean" width="50rem" height="50rem" /> 
-</div>o
+</div>
 
 ## Team Members:
 * Zac: Full Stack Developer and Project Leader
@@ -51,11 +51,14 @@ The main objective of our app is to allow people to find the best time to do the
 
 
 ## CI/CD Pipeline :
-- Automated by **Github Actions**
+- Automated by **Github Actions** on each push/pr to the main branch
 - Builds docker image, and pushes to Docker Hub
-- Authenticates by SSH into **Digital Ocean** droplet linux server
+- Authenticates by SSH into **Digital Ocean** droplet linux server for deployment
 - Pulls image from Docker hub into remote server and runs container
-- GraphQL domain is live: sum-fun.xyz/graphql
+- GraphQL domain is live: [sum-fun.xyz/graphql](sum-fun.xyz/graphql)
+
+<img src="https://media.discordapp.net/attachments/929889176097275928/990483858258546758/non-transparent.png?width=538&height=663">
+
 
 
 
@@ -64,6 +67,8 @@ The main objective of our app is to allow people to find the best time to do the
 The first intial roadblock our team ran into was acquiring a suitable API. Many APIs required a key, and a majority of the time the key requries a payment. Our team then found a suitable API that was free. However, the key could not be activated till hours later. This left us unable to make any progress on the weather aspect of our code until we acquiried a working key. 
 
 When designing a function for the event aspect of our app, we thought it would be a good idea to include a validity score. When trying to code this function, we intially realized that any event that was more than 48 hours away, we could not provide a validity report due to limitations in the API. The API can only provide an hourly report up to 48 hours. Another problem that we ran into was our API provided times in epoch time and convertering the users event date into epoch time became very time consuming, and we ended up scraping the event validity ideas.
+
+Creating the data pipeline was quite challenging, since our DevOps engineer had taken a an unfamiliar route in its development, with new technologies. There was a lot of debugging and difficulty especially when trying to deploy the docker image to the remote server, as port configuration and credentials were finicky to set up. In the end, a robust pipeline was made that updates with each push/pr.
 
 - nested queries in graphql didn't work
 - sql alchemy is refusing to have multiple subsequent queries
