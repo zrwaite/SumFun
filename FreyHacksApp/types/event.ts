@@ -4,6 +4,7 @@ interface ActivityEvent {
 	date: string
 	start_time: string
 	end_time: string
-	location: string
+	lat: number
+	lon: number
 	activity: Activity
 }

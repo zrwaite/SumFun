@@ -43,25 +43,43 @@ def getUser_resolver(obj, info, username):
         }
     return payload
 
+def getUserEvents(user):
+    try:
+        validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
+        events = db.session.query(Event).filter(Event.id.in_(user['event_ids'])).all()
+        if not len(validities) == len(events):
+            print('warning invalid data')
+        for event in events:
+            event_validity_found = False
+            for validity in validities:
+                if validity.event_id == event.id:
+                    event.validity = validity
+                    event_validity_found = True
+            if not event_validity_found:
+                print('failed to find matching event and validity')
+                return []
+        return events
+    except Exception as error:
+        print('failed to get validities')
+        print(str(error))
+        return []
 
 def getUserActivities(user):
     try:
         validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
         activities =db.session.query(Activity).filter(Activity.id.in_(user['activity_ids'])).all()
-        if len(validities) == len(activities):
-            for activity in activities:
-                activity_validity_found = False
-                for validity in validities:
-                    if validity.activity_id == activity.id:
-                        activity.validity = validity
-                        activity_validity_found = True
-                if not activity_validity_found:
-                    print('failed to find matching activity and validity')
-                    return []
-            return activities
-        else:
+        if not len(validities) == len(activities):
             print('invalid data')
-            return []
+        for activity in activities:
+            activity_validity_found = False
+            for validity in validities:
+                if validity.activity_id == activity.id:
+                    activity.validity = validity
+                    activity_validity_found = True
+            if not activity_validity_found:
+                print('failed to find matching activity and validity')
+                return []
+        return activities
     except Exception as error:
         print('failed to get validities')
         print(str(error))

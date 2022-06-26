@@ -29,10 +29,9 @@ export const EventView = ({ route, navigation }: { navigation: any, route: { par
 	return (
 		<View style={styles.container}>
 			<Text style={styles.header}>{event.name}</Text>
-			<Text style={styles.header}>Date: {event.date}</Text>
-			<Text style={styles.header}>Start Time: {event.start_time}</Text>
 			<Text style={styles.header}>End Time: {event.end_time}</Text>
-			<Text style={styles.header}>Location: {event.location}</Text>
+			<Text style={styles.header}>Lat: {event.lat}</Text>
+			<Text style={styles.header}>Lon: {event.lon}</Text>
 			<TouchableOpacity style={styles.activitySection} onPress={() => navigation.navigate('Activity', { activity: event.activity })}>
 				<Text>{event.activity.name}</Text>
 			</TouchableOpacity>

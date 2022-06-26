@@ -6,7 +6,7 @@ from api.models.user import User
 from modules.hash import hash_password
 
 @convert_kwargs_to_snake_case
-def createEvent_resolver(obj, info, username, name, event_date, start_time, end_time, location, activity_id, public):
+def createEvent_resolver(obj, info, username, name, event_date, start_time, end_time, lat, lon, activity_id, public):
     try:
         user = User.query.filter(User.username == username).scalar()
         if user:
@@ -16,7 +16,8 @@ def createEvent_resolver(obj, info, username, name, event_date, start_time, end_
                 date=event_date,
                 start_time=start_time,
                 end_time=end_time,
-                location=location,
+                lat=lat,
+                lon=lon,
                 activity_id=activity_id,
                 created_at=today,
                 public=public
@@ -44,7 +45,7 @@ def createEvent_resolver(obj, info, username, name, event_date, start_time, end_
     return payload
 
 @convert_kwargs_to_snake_case
-def updateEvent_resolver(obj, info, id, name, date, start_time, end_time, location, activity_id, public):
+def updateEvent_resolver(obj, info, id, name, date, start_time, end_time, lat, lon, activity_id, public):
     try:
         event = Event.query.get(id)
         if event:
@@ -56,8 +57,10 @@ def updateEvent_resolver(obj, info, id, name, date, start_time, end_time, locati
                 event.start_time = start_time
             if end_time != None:
                 event.end_time = end_time
-            if location != None:
-                event.location = location
+            if lon != None:
+                event.lon = lon
+            if lat != None:
+                event.lat = lat
             if activity_id != None:
                 event.activity_id = activity_id
             if public != None:
