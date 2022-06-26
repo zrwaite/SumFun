@@ -4,6 +4,7 @@ import { Alert } from 'react-native'
 import { client } from './client'
 
 export const tryGetSetUser = async (setUser:(newUser:User)=>void):Promise<400|404|200> => {
+	console.log('get set user')
 	const username = await AsyncStorage.getItem('username')
 	if (!username) {
 		return 404

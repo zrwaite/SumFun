@@ -51,6 +51,7 @@ export const LoginView = (props: {goHome: () => void }) => {
 					await AsyncStorage.setItem('username', username)
 					Alert.alert('User Created!', `You are logged in as "${username}"`, [{ text: 'OK' }])
 					setUser(data.createUser.user)
+					props.goHome()
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}

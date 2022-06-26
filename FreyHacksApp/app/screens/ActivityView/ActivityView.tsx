@@ -22,7 +22,7 @@ export const ActivityView = ({ route }: { route: { params: { activity: Activity 
 		if (!response.errors) {
 			const data = response.data
 			if (data.subscribeToActivity.success) tryGetSetUser(setUser)
-			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+			else Alert.alert('Error', JSON.stringify(data.subscribeToActivity.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 	const tryUnSubscribe = async () => {
@@ -33,7 +33,7 @@ export const ActivityView = ({ route }: { route: { params: { activity: Activity 
 		if (!response.errors) {
 			const data = response.data
 			if (data.unsubscribeFromActivity.success) tryGetSetUser(setUser)
-			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+			else Alert.alert('Error', JSON.stringify(data.unsubscribeFromActivity.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
 
@@ -41,7 +41,7 @@ export const ActivityView = ({ route }: { route: { params: { activity: Activity 
 		<View style={styles.container}>
 			<Text style={styles.header}>{activity.name}</Text>
 			<ZacButton 
-				text={subscribed?'Unsubscribe from Activity':'Subscribe To Activity'} 
+				text={subscribed?'Unsubscribe':'Subscribe'} 
 				onPress={subscribed?tryUnSubscribe:trySubscribe} 
 			/>
 		</View>

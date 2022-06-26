@@ -27,8 +27,14 @@ export default function App() {
 
 	const tryGetUserSetUserState = async () => {
 		const status = await tryGetSetUser(setUser)
-		if (status===404) setUsernameState("NOT_FOUND")
-		else if (status===400) setUsernameState("ERROR")
+		if (status===404) {
+			await AsyncStorage.setItem('username', '')
+			setUsernameState("NOT_FOUND")
+		}
+		else if (status===400) {
+			await AsyncStorage.setItem('username', '')
+			setUsernameState("ERROR")
+		}
 		else if (status===200) setUsernameState("FOUND")
 	}
 	goLogin = () => {setUsernameState('NOT_FOUND')}

@@ -20,7 +20,7 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 			if (data.listEvents.success) {
 				setEvents(data.listEvents.events)
 			} else {
-				Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				Alert.alert('Error', JSON.stringify(data.listEvents.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 				setEventsState('NOT_FOUND')
 			}
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])

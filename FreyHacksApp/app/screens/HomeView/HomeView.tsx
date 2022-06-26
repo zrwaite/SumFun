@@ -16,10 +16,7 @@ import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
 import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { StackActions } from '@react-navigation/native'
 import {goLogin} from "../../../App"
-import RNLocation from 'react-native-location'
-import Geolocation from 'react-native-geolocation-service'
 
 const testGeolocate = async () => {
 	const options = {
@@ -52,7 +49,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
 	return (
 		<ScrollView>
-			<View>
+			<View style={styles.container}>
 			<View style={styles.header}>
 				<Image
 					source={sumFun}
