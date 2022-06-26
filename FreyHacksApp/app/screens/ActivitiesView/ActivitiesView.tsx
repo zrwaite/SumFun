@@ -23,10 +23,10 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 			if (data.listActivities.success) {
 				setActivities(data.listActivities.activities)
 			} else {
-				Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK'}])
 				setActivitiesState('NOT_FOUND')
 			}
-		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK'}])
 		setActivitiesState('FOUND')
 	}
 	if (activitiesState === 'LOADING') {

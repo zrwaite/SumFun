@@ -24,7 +24,6 @@ export const LoginView = (props: {goHome: () => void }) => {
 		})
 		if (!response.error) {
 			const data = response.data
-			console.log(data)
 			if (data.login.success) {
 				try {
 					await AsyncStorage.setItem('username', username)
@@ -35,7 +34,7 @@ export const LoginView = (props: {goHome: () => void }) => {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}
 			} else {
-				Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				Alert.alert('Error', JSON.stringify(data.login.errors), [{ text: 'OK'  }])
 			}
 		}
 	}
@@ -56,8 +55,8 @@ export const LoginView = (props: {goHome: () => void }) => {
 				} catch (e) {
 					Alert.alert('Something went wrong', 'Try again', [{ text: 'OK' }])
 				}
-			} else Alert.alert('Error', JSON.stringify(data.createUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
-		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+			} else Alert.alert('Error', JSON.stringify(data.createUser.errors), [{ text: 'OK'  }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK'  }])
 	}
 	return (
 		<View style={styles.container}>		

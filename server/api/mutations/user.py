@@ -157,7 +157,7 @@ def registerForEvent_resolver(obj, info, id, username):
             event = Event.query.get(id)
             if event:
                 if int(id) not in user.event_ids:
-                    user.activity_ids = user.event_ids + [id]
+                    user.event_ids = user.event_ids + [id]
                     db.session.add(user)
                     db.session.commit()
                     payload = {

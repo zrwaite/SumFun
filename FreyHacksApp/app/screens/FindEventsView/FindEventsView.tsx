@@ -18,12 +18,12 @@ export const FindEventsView = ({ navigation }: { navigation: any }) => {
 		if (!response.error) {
 			const data = response.data
 			if (data.listEvents.success) {
-				setEvents(data.listEvents.events)
+				setEvents(data.listEvents.events.filter((event:ActivityEvent) => new Date(event.date) > new Date()))
 			} else {
-				Alert.alert('Error', JSON.stringify(data.listEvents.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+				Alert.alert('Error', JSON.stringify(data.listEvents.errors), [{ text: 'OK'  }])
 				setEventsState('NOT_FOUND')
 			}
-		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
+		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK'  }])
 		setEventsState('FOUND')
 	}
 	if (eventsState === 'LOADING') {

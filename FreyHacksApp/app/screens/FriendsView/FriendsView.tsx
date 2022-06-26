@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: COLORS.white,
+		backgroundColor: COLORS.lighterblue,
 		width: '100%',
 		padding: 20,
 		overflow: 'scroll',
