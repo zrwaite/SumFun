@@ -80,7 +80,7 @@ The majority of our team would consider themselves beginner coders. Despite the 
 
 Thanks to Zac and Hargun, we were able to set up a completely custom cidc pipline through github actions digitalocean ssh.
 
-Being able to take real word data from the weather API and integrate it into our app to provide usful information for our user.
+Being able to take real word data from the weather API and integrate it into our app to provide useful information for our user.
 
 One of our biggest roadblocks was not being able to do more than one nested query within graphql. Being able to overcome this problem after many hours was a great accomplishment.
 
