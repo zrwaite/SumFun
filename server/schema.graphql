@@ -69,10 +69,9 @@ type Result {
 type Event {
 	id: ID!
 	name: String!
-	date: String!
-	start_time: String!
-	end_time: String!
-	location: String!
+	end_time: String
+	lat: Float!
+	lon: Float!
 	activity_id: ID!
 	activity: Activity!
 	validity_id: Int
@@ -149,7 +148,7 @@ type Mutation {
 	unsubscribeFromActivity(id: ID!, username: String!): Result!
 	unregisterFromEvent(id: ID!, username: String!): Result!
 
-	createEvent(username: String!, name: String!, date: String!, start_time: String!, end_time: String!, location: String!, activity_id: ID!, public: Boolean!): EventResult!
-	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, end_time: String, location: String, activity_id: ID, public: Boolean): EventResult!
+	createEvent(username: String!, name: String!, date: String!, start_time: String! end_time: String!, lat:Float!, lon:Float!, activity_id: ID!, public: Boolean!): EventResult!
+	updateEvent(id: ID!, username: String!, name: String, date: String, start_time: String, end_time: String, lat:Float, lon:Float, activity_id: ID, public: Boolean): EventResult!
 	deleteEvent(id: ID!): Result!
 }

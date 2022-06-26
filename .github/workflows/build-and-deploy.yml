@@ -1,0 +1,54 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: populate .env file
+      run: |
+          touch server/.env
+          echo "${{ secrets.ENV_FILE }}" >> server/.env
+          cat server/.env
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKERHUB_ACCESS_TOKEN}}
+      run: 
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker compose build
+    - name: Get image name from docker-compose.yml
+      id: image-name
+      uses: KJ002/read-yaml@main
+      with:
+        file: './docker-compose.yml'
+        key-path: '["services", "server", "image"]'
+    - name: Docker push
+      run: docker push ${{ steps.image-name.outputs.data }}
+    - name: Deploy to Digital Ocean droplet via SSH action
+      uses: appleboy/ssh-action@v0.1.3
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSHKEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        envs: IMAGE_NAME, REGISTRY, {{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}, GITHUB_SHA
+        script: |
+          # login to dockerhub
+          echo ${{ secrets.DOCKERHUB_ACCESS_TOKEN }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
+          # destroy all existing containers
+          docker stop $(docker ps -a -q)
+          docker rm $(docker ps -a -q)
+          # pull updated image
+          docker pull ${{ steps.image-name.outputs.data }}
+          # Run new container
+          docker run -d -p 80:80 --name server ${{ steps.image-name.outputs.data }}
