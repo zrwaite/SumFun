@@ -18,7 +18,7 @@ export const EventView = ({ route, navigation }: { navigation: any, route: { par
 		})
 		if (!response.errors) {
 			const data = response.data
-			if (data.listActivities.success) tryGetSetUser(setUser)
+			if (data.registerForEvent.success) tryGetSetUser(setUser)
 			else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 		} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	}
