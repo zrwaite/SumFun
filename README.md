@@ -7,8 +7,11 @@ This is our code repository for our project submission for FreyHacks
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg" alt="react" width="50rem" height="50rem" />
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/graphql/graphql-plain.svg" alt="graphql" width="50rem" height="50rem" /> 
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="50rem" height="50rem" /> 
-<img src=".github/flask-original.svg" alt="flask" width="50rem" height="50rem" /> 
-<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg" alt="python" width="50rem" height="50rem" /> 
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg" alt="flask" width="50rem" height="50rem" /> 
+<!-- <img src=".github/flask-original.svg" alt="flask" width="50rem" height="50rem" />  -->
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" alt="postgresql" width="50rem" height="50rem" /> 
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" alt="github" width="50rem" height="50rem" /> 
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/digitalocean/digitalocean-original.svg" alt="digitalocean" width="50rem" height="50rem" /> 
 </div>o
 
 ## Team Members:
@@ -34,6 +37,20 @@ As the weather gets warmer and more activties become accessible, it becomes incr
 - suggests activities and events based on conditions (weather, location, time, etc.)
 
 ## How we built it 💻:
+- We built our mobile application in react native with TypeScript
+- We used Bottom Tab Navigation as our primary navigation, then Stack Navigation as secondary navigation
+- We used graphql to integrate our mobile app with our server
+- We built our server in python with flask
+- For graphql, we used Ariadne and SQLAlchemy
+- We used PostgreSQL from our database
+
+
+## CI/CD Pipeline :
+- Automated by **Github Actions**
+- Builds docker image, and pushes to Docker Hub
+- Authenticates by SSH into **Digital Ocean** droplet linux server
+- Pulls image from Docker hub into remote server and runs container
+- GraphQL domain is live: sum-fun.xyz/graphql
 
 ## Challenges we ran into 💥:
 - nested queries in graphql didn't work
@@ -59,12 +76,3 @@ As the weather gets warmer and more activties become accessible, it becomes incr
 ## Backend
 - GraphQL API in python with flask
 
-## Hardware 
-- Probably nothing is gonna happen here
-
-## CI/CD Pipeline
-- Automated by Github Actions
-- Builds docker image, and pushes to Docker Hub
-- Authenticates by SSH into Digital Ocean droplet linux server
-- Pulls image from Docker hub into remote server and runs container
-- GraphQL domain is live: sum-fun.xyz/graphql

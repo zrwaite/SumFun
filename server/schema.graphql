@@ -69,7 +69,9 @@ type Result {
 type Event {
 	id: ID!
 	name: String!
-	end_time: String
+	date: String!
+	start_time: String!
+	end_time: String!
 	lat: Float!
 	lon: Float!
 	activity_id: ID!
