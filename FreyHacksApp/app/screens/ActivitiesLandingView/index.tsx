@@ -1,0 +1,1 @@
+export { ActivitiesLandingView } from './ActivitiesLandingView'

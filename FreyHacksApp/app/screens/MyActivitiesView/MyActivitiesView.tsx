@@ -8,6 +8,7 @@ export const MyActivitiesView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 	return (
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
+			<Text style={styles.headerText}>My Activities:</Text>
 			{user?.activities.map((activity, i) => {
 				return (
 					<TouchableOpacity key={i} style={styles.activitySection} onPress={() => navigation.navigate('Activity', { activity: activity })}>

@@ -1,0 +1,1 @@
+export { EventsLandingView } from './EventsLandingView'

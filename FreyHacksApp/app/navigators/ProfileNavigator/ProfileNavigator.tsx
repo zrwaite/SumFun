@@ -1,8 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { EventsView } from '../../screens/EventsView'
-import { EventView } from '../../screens/EventView'
-import { CreateEventView } from '../../screens/CreateEventView'
-import { MyEventsView } from '../../screens/MyEventsView'
 import { ProfileView } from '../../screens/ProfileView'
 const ActivitiesStack = createNativeStackNavigator() as any
 

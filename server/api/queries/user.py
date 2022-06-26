@@ -66,19 +66,19 @@ def getUserEvents(user):
 
 def getUserActivities(user):
     try:
-        validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
-        activities =db.session.query(Activity).filter(Activity.id.in_(user['activity_ids'])).all()
-        if not len(validities) == len(activities):
-            print('invalid data')
-        for activity in activities:
-            activity_validity_found = False
-            for validity in validities:
-                if validity.activity_id == activity.id:
-                    activity.validity = validity
-                    activity_validity_found = True
-            if not activity_validity_found:
-                print('failed to find matching activity and validity')
-                return []
+        # validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
+        # if not len(validities) == len(activities):
+        #     print('invalid data')
+        # for activity in activities:
+        #     activity_validity_found = False
+        #     for validity in validities:
+        #         if validity.activity_id == activity.id:
+        #             activity.validity = validity
+        #             activity_validity_found = True
+        #     if not activity_validity_found:
+        #         print('failed to find matching activity and validity')
+        #         return []
+        activities = Activity.query.filter(Activity.id.in_(user['activity_ids'])).all()
         return activities
     except Exception as error:
         print('failed to get validities')
