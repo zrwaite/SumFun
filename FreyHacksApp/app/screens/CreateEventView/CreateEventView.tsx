@@ -56,32 +56,23 @@ export const CreateEventView = ({ navigation }: { navigation: any }) => {
 
 const styles = StyleSheet.create({
 	header: {
-		margin: 20,
+		margin: 0,
 		flexDirection: 'row',
+		width: '100%',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
 	},
 	headerText: {
 		color: 'white',
 		fontSize: 25,
 		textAlign: 'center',
 	},
-	textInput: {
-		height: 50,
-		textAlign: 'center',
-		width: '80%',
-		backgroundColor: 'white',
-		borderRadius: 20,
-		margin: 10,
-		fontSize: 20,
-	},
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.green,
 	},
 	clickSection: {
-		backgroundColor: 'white',
+		backgroundColor: COLORS.lightblue,
 		width: '80%',
 		margin: 20,
 		flexDirection: 'row',
@@ -93,6 +84,15 @@ const styles = StyleSheet.create({
 	clickSectionText: {
 		color: 'black',
 		fontSize: 25,
+	},
+	textInput: {
+		height: 50,
+		textAlign: 'center',
+		width: '80%',
+		backgroundColor: 'white',
+		borderRadius: 10,
+		margin: 40,
+		fontSize: 20,
 	},
 	picker: {
 		backgroundColor: 'white',
