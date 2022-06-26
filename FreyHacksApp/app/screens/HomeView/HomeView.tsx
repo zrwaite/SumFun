@@ -9,6 +9,8 @@ const friendsImage = require('../../assets/friends-icon1.png')
 const homeImage = require('../../assets/home-icon.png')
 const waterpoloImage = require('../../assets/73987-200.png')
 const activitiesImage = require('../../assets/196067.png')
+const sumFun = require('../../assets/SumFun.png')
+const blackGradient = require('../../assets/black-gradient-png--MFj4tv.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { ZacButton } from '../../components/ZacButton'
@@ -16,6 +18,29 @@ import { UserContext } from '../../../contexts'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StackActions } from '@react-navigation/native'
 import {goLogin} from "../../../App"
+import RNLocation from 'react-native-location'
+import Geolocation from 'react-native-geolocation-service'
+
+const testGeolocate = async () => {
+	const options = {
+		enableHighAccuracy: true,
+		timeout: 5000,
+		maximumAge: 0
+	};
+	
+	function success(pos:any) {
+		const crd = pos.coords;
+		let lat = crd.latitude;
+		let lon = crd.longitude;
+	}
+	
+	function error(err:any) {
+		console.warn(`ERROR(${err.code}): ${err.message}`);
+	}
+	
+	navigator.geolocation.getCurrentPosition(success, error, options);
+}
+
 
 const logout = async (navigation: any, setUser: Function) => {
 	await AsyncStorage.setItem('username', '')
@@ -25,24 +50,26 @@ const logout = async (navigation: any, setUser: Function) => {
 
 export const HomeView = ({ navigation }: { navigation: any }) => {
 	const { user, setUser } = useContext(UserContext)
-
 	return (
 		<ScrollView>
+			<View>
 			<View style={styles.header}>
 				<Image
-					source={activityImage}
+					source={sumFun}
 					style={{
-						height: 40,
-						width: 40,
-						marginRight: 10,
+						height: 114,
+						width: 320,
+						marginRight: 0,
 					}}
-				/>
-				<Text style={styles.headerText}>OnlyPlans</Text>
+				/>				
+			</View>
+			<View style={styles.header}>
+				<Text style={styles.bodiesText}>Your favourite activities, done the right way</Text>
 			</View>
 			<View style={styles.header}>
 				<Text style={styles.bodyText}>Welcome, {user?.username}</Text>
 			</View>
-			<View style={styles.text}>
+			<View style={styles.text1}>
 				<Image
 					source={waterpoloImage}
 					style={{
@@ -51,7 +78,7 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 						marginRight: 10,
 					}}
 				/>
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Events')}>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
 					<Text style={styles.clickSectionText}>Upcoming Events</Text>
 				</TouchableOpacity>
 			</View>
@@ -63,14 +90,15 @@ export const HomeView = ({ navigation }: { navigation: any }) => {
 						width: 80,
 						marginRight: 10,
 					}}
-				/>
+				/>	
 				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Activities')}>
 					<Text style={styles.clickSectionText}>Suggested Activities</Text>
 				</TouchableOpacity>
 			</View>
 
 			<ZacButton style={styles.loginButton} onPress={() => logout(navigation, setUser)} text={'Logout'} color={'white'} />
-		</ScrollView>
+		</View>
+	</ScrollView>
 	)
 }
 
@@ -81,6 +109,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		width: '100%',
+		marginBottom: 0,
 	},
 	body: {
 		margin: 575,
@@ -95,9 +124,26 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: '100%',
+		width: '80%',
 		borderColor: 'black',
 		borderWidth: 3,
+		borderLeftWidth: 0,
+		borderRightWidth: 0,
+		borderTopWidth: 0,
+		marginTop: 0,
+	},
+	text1: {
+		margin: 20,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		width: '80%',
+		borderColor: 'black',
+		borderWidth: 3,
+		borderLeftWidth: 0,
+		borderRightWidth: 0,
+		marginBottom: 0,
+		
 	},
 	loginButton: {
 		margin: 20,
@@ -107,23 +153,29 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	headerText: {
-		color: 'white',
+		color: 'black',
 		fontSize: 40,
 		textAlign: 'left',
 	},
 	bodyText: {
-		color: 'white',
-		fontSize: 40,
+		color: 'black',
+		fontSize: 35,
 		textAlign: 'left',
+	},
+	bodiesText: {
+		color: 'black',
+		fontSize: 17,
+		textAlign: 'center',
+		marginTop: 0,
 	},
 	container: {
 		flex: 1,
-		backgroundColor: COLORS.green,
+		backgroundColor: COLORS.lightblue,
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 	},
 	clickSection: {
-		backgroundColor: 'white',
+		backgroundColor: COLORS.white,
 		width: '80%',
 		margin: 20,
 		flexDirection: 'row',
@@ -135,5 +187,6 @@ const styles = StyleSheet.create({
 	clickSectionText: {
 		color: 'black',
 		fontSize: 25,
+		textAlign: 'center',
 	},
 })

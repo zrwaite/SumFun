@@ -1,43 +1,47 @@
-import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from 'react-native'
 const logoImage = require('../../assets/icon.png')
 import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
 const addImage = require('../../assets/add.png')
+const sumFun = require('../../assets/SumFun.png')
+const events = require('../../assets/Events-icon.png')
 
 export const EventsView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.header}>
-				<Image
-					source={logoImage}
-					style={{
-						height: 40,
-						width: 80,
-						marginRight: 10,
-					}}
-				/>
-				<Text style={styles.headerText}>Welcome, {user?.username}</Text>
+		<ScrollView>
+			<View style={styles.container}>				
+				<Text style={styles.clickSectionText}>Events:</Text>		
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Events')}>
+					<Text style={styles.clickSectionText}>My Events</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Find Events')}>
+					<Text style={styles.clickSectionText}>Find Events</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Event')}>
+					<Image
+						source={addImage}
+						style={{
+							height: 30,
+							width: 30,
+							marginRight: 20,
+						}}/>
+					<Text style={styles.clickSectionText}>Create Event</Text>
+				</TouchableOpacity>
+					<View style={styles.text}>	
+						<Image
+							source={sumFun}
+							style={{
+								height:114,
+								width:320,
+								marginRight: 0,
+							
+							}}/>
+					</View>		
 			</View>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Events')}>
-				<Text style={styles.clickSectionText}>My Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Find Events')}>
-				<Text style={styles.clickSectionText}>Find Events</Text>
-			</TouchableOpacity>
-			<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Event')}>
-				<Image
-					source={addImage}
-					style={{
-						height: 30,
-						width: 30,
-						marginRight: 20,
-					}}/>
-				<Text style={styles.clickSectionText}>Create Event</Text>
-			</TouchableOpacity>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -46,8 +50,20 @@ const styles = StyleSheet.create({
 		margin: 20,
 		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'space-evenly',
+		width: '100%',	
+	},
+	text: {
+		marginTop: 187,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
 		width: '100%',
+		borderColor: 'black',
+		borderWidth: 3,
+		borderLeftWidth: 0,
+		borderRightWidth: 0,
+		borderBottomWidth: 0,	
 	},
 	headerText: {
 		color: 'white',
@@ -55,13 +71,13 @@ const styles = StyleSheet.create({
 		textAlign: 'left',
 	},
 	container: {
-		flex: 1,
-		backgroundColor: COLORS.green,
+		flexDirection: 'column' ,
+		backgroundColor: COLORS.vomitgreen,
 		alignItems: 'center',
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 	},
 	clickSection: {
-		backgroundColor: 'white',
+		backgroundColor: COLORS.white,
 		width: '80%',
 		margin: 20,
 		flexDirection: 'row',
@@ -72,6 +88,6 @@ const styles = StyleSheet.create({
 	},
 	clickSectionText: {
 		color: 'black',
-		fontSize: 25,
+		fontSize: 35,
 	},
 })

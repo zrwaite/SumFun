@@ -12,10 +12,10 @@ export const FriendsView = ({ navigation }: { navigation: any }) => {
 					<TouchableOpacity key={i} style={styles.friendSection} onPress={() => navigation.navigate('Friend', { friend: friend })}>
 						<Text style={styles.friendSectionHeader}>{friend.username}</Text>
 						<Text style={styles.friendSectionText}>{friend.display_name}</Text>
-					</TouchableOpacity>
+					</TouchableOpacity>					
 				)
 			})}
-		</ScrollView>
+		</ScrollView>		
 	)
 }
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: COLORS.yellow,
+		backgroundColor: COLORS.white,
 		width: '100%',
 		padding: 20,
 		overflow: 'scroll',

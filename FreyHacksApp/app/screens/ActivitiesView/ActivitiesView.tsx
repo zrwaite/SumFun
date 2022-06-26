@@ -6,6 +6,7 @@ import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
 const addImage = require('../../assets/add.png')
 import { LIST_ACTIVITIES } from './queries'
+const sumFun = require('../../assets/SumFun.png')
 
 
 
@@ -33,30 +34,35 @@ export const ActivitiesView = ({ navigation }: { navigation: any }) => {
 	}
 	return (
 
-
-
 		<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
-			{activitiesState === 'LOADING' ? (
-				<ActivityIndicator size="large" />
-			) : (<>
-				{activities.map((activity, i) => {
-					return (
-						<TouchableOpacity key={i} style={styles.activitySection} onPress={() => navigation.navigate('Activity', { activity: activity })}>
-							<Text style={styles.activitySectionHeader}>{activity.name}</Text>
-						</TouchableOpacity>
-					)
-				})}
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Activity')}>
+				{activitiesState === 'LOADING' ? (
+					<ActivityIndicator size="large" />
+				) : (<>
+				<Text style={styles.clickSectionText}>Activities:</Text>	
+					{activities.map((activity, i) => {
+						return (
+							<TouchableOpacity key={i} style={styles.activitySection} onPress={() => navigation.navigate('Activity', { activity: activity })}>
+								<Text style={styles.activitySectionHeader}>{activity.name}</Text>
+							</TouchableOpacity>
+						)
+					})}
+					<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Activity')}>
+						<Image
+							source={addImage}
+							style={{
+								height: 30,
+								width: 30,
+								marginRight: 20,
+							}}/>	
+						<Text style={styles.clickSectionText}>Create Activity</Text>
+					</TouchableOpacity>		
 					<Image
-						source={addImage}
+						source={sumFun}
 						style={{
-							height: 30,
-							width: 30,
-							marginRight: 20,
-						}}/>
-					<Text style={styles.clickSectionText}>Create Activity</Text>
-				</TouchableOpacity>
-			</>)}
+							height:114,
+							width:320,
+						}}/>	
+				</>)}
 		</ScrollView>
 	)
 }
@@ -69,6 +75,18 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		width: '100%',
 	},
+	text: {
+		margin: 180,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		width: '100%',
+		borderColor: 'black',
+		borderWidth: 3,
+		borderLeftWidth: 0,
+		borderRightWidth: 0,
+		borderBottomWidth: 0,	
+	},
 	headerText: {
 		color: 'white',
 		fontSize: 25,
@@ -76,7 +94,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: COLORS.yellow,
+		backgroundColor: COLORS.blue,
 		width: '100%',
 		padding: 20,
 		overflow: 'scroll',
@@ -112,6 +130,6 @@ const styles = StyleSheet.create({
 	},
 	clickSectionText: {
 		color: 'black',
-		fontSize: 25,
+		fontSize: 35,
 	},
 })

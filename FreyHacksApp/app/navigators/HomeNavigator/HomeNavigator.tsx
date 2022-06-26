@@ -10,6 +10,6 @@ export const HomeNavigator = () => {
             <ActivitiesStack.Screen name="Home page" component={HomeView} />   
             {/* <ActivitiesStack.Screen name="All Events" component={MyEventsView} />             
             <ActivitiesStack.Screen name="My Events" component={ActivitiesView} /> */}
-    </ActivitiesStack.Navigator>
+    </ActivitiesStack.Navigator> 
     )
 }

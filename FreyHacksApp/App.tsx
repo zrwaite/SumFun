@@ -17,6 +17,7 @@ import { ProfileNavigator } from './app/navigators/ProfileNavigator'
 import { ErrorScreen } from './app/screens/ErrorScreen'
 const Tab = createBottomTabNavigator() as any    //added thi
 
+
 export let goLogin = () => {}
 
 export default function App() {
