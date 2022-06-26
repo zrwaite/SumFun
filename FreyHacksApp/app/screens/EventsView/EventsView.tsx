@@ -14,12 +14,15 @@ export const EventsView = ({ navigation }: { navigation: any }) => {
 		<ScrollView>
 			<View style={styles.container}>				
 				<Text style={styles.clickSectionText}>Events:</Text>		
+				
 				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Events')}>
 					<Text style={styles.clickSectionText}>My Events</Text>
 				</TouchableOpacity>
+
 				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Find Events')}>
 					<Text style={styles.clickSectionText}>Find Events</Text>
 				</TouchableOpacity>
+				
 				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Event')}>
 					<Image
 						source={addImage}
@@ -30,6 +33,7 @@ export const EventsView = ({ navigation }: { navigation: any }) => {
 						}}/>
 					<Text style={styles.clickSectionText}>Create Event</Text>
 				</TouchableOpacity>
+					
 					<View style={styles.text}>	
 						<Image
 							source={sumFun}
@@ -89,5 +93,6 @@ const styles = StyleSheet.create({
 	clickSectionText: {
 		color: 'black',
 		fontSize: 35,
+		textAlign: 'center',
 	},
 })

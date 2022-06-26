@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { COLORS } from '../../settings'
 import { UserContext } from '../../../contexts'
 const profileImage = require('../../assets/profile-icon.png')
-  
+const sumFun = require('../../assets/SumFun.png')
 
 export const ProfileView = ({ navigation }: { navigation: any }) => {
 	const [text, onChangeText] = React.useState('Bio Input');
@@ -14,16 +14,8 @@ export const ProfileView = ({ navigation }: { navigation: any }) => {
   const { user } = useContext(UserContext)
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Image
-					source={logoImage}
-					style={{
-						height: 40,
-						width: 80,
-						marginRight: 10,
-					}}
-				/>
-				<Text style={styles.headerText}>Profile</Text>
+			<View style={styles.header}>				
+				<Text style={styles.headerText}>Profile:</Text>
 			</View>
 			<View style={styles.header}>
 				<Text style={styles.bodyText}>{user?.username}</Text>
@@ -34,15 +26,19 @@ export const ProfileView = ({ navigation }: { navigation: any }) => {
           onChangeText={onChangeText}
           value={text}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={(newNumber) => onChangeNumber(parseInt(newNumber))}
-          value={number.toString()}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
-        />
+    
       </SafeAreaView>
+	    <View style={styles.text}>	
+						<Image
+							source={sumFun}
+							style={{
+								height:114,
+								width:320,
+								marginRight: 0,
+							
+							}}/>
 		</View>
+	 </View>
 	);
 }
 
@@ -62,13 +58,25 @@ const styles = StyleSheet.create({
 		width: '100%',
 	},
 	headerText: {
-		color: 'white',
-		fontSize: 25,
+		color: 'black',
+		fontSize: 35,
 		textAlign: 'left',
+	},
+	text: {
+		marginTop: 310,
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		width: '100%',
+		borderColor: 'black',
+		borderWidth: 3,
+		borderLeftWidth: 0,
+		borderRightWidth: 0,
+		borderBottomWidth: 0,	
 	},
 	container: {
 		flex: 1,
-		backgroundColor: COLORS.lightgrey,
+		backgroundColor: COLORS.lightgreen,
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 	},
@@ -86,8 +94,9 @@ const styles = StyleSheet.create({
 		color: 'black',
 		fontSize: 25,
 	},
-  bodyText: {
-    color: 'black',
-    fontSize: 20,
-  }
+  	bodyText: {
+    	color: 'black',
+    	fontSize: 27,
+		textAlign: 'left',
+  	}
 });
