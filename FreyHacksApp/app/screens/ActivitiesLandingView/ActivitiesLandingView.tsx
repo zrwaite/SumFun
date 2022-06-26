@@ -7,23 +7,23 @@ const addImage = require('../../assets/add.png')
 const sumFun = require('../../assets/SumFun.png')
 const events = require('../../assets/Events-icon.png')
 
-export const EventsView = ({ navigation }: { navigation: any }) => {
+export const ActivitiesLandingView = ({ navigation }: { navigation: any }) => {
 	const { user } = useContext(UserContext)
 
 	return (
 		<ScrollView>
 			<View style={styles.container}>				
-				<Text style={styles.clickSectionText}>Events:</Text>		
+				<Text style={styles.clickSectionText}>Activities:</Text>		
 				
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Events')}>
-					<Text style={styles.clickSectionText}>My Events</Text>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('My Activities')}>
+					<Text style={styles.clickSectionText}>My Activities</Text>
 				</TouchableOpacity>
 
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Find Events')}>
-					<Text style={styles.clickSectionText}>Find Events</Text>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('All Activities')}>
+					<Text style={styles.clickSectionText}>All Activities</Text>
 				</TouchableOpacity>
 				
-				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Event')}>
+				<TouchableOpacity style={styles.clickSection} onPress={() => navigation.navigate('Create Activity')}>
 					<Image
 						source={addImage}
 						style={{
@@ -31,19 +31,19 @@ export const EventsView = ({ navigation }: { navigation: any }) => {
 							width: 30,
 							marginRight: 20,
 						}}/>
-					<Text style={styles.clickSectionText}>Create Event</Text>
+					<Text style={styles.clickSectionText}>Create Activity</Text>
 				</TouchableOpacity>
-					
-					<View style={styles.text}>	
-						<Image
-							source={sumFun}
-							style={{
-								height:114,
-								width:320,
-								marginRight: 0,
-							
-							}}/>
-					</View>		
+				<View style={styles.text}>	
+					<Image
+						source={sumFun}
+						style={{
+							height:114,
+							width:320,
+							marginRight: 0,
+						
+						}}
+					 />
+				</View>		
 			</View>
 		</ScrollView>
 	)
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flexDirection: 'column' ,
-		backgroundColor: COLORS.vomitgreen,
+		backgroundColor: COLORS.blue,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},

@@ -15,7 +15,8 @@ export const tryGetSetUser = async (setUser:(newUser:User)=>void):Promise<400|40
 	if (!response.error) {
 		const data = response.data
 		if (data.getUser.success) {
-			setUser({...data.getUser.user})
+			console.log(data.getUser.user)
+			setUser(data.getUser.user)
 			return 200
 		} else Alert.alert('Error', JSON.stringify(data.getUser.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
 	} else Alert.alert('Error', JSON.stringify(response.errors), [{ text: 'OK', onPress: () => console.log('OK Pressed') }])
