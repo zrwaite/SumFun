@@ -75,17 +75,28 @@ Creating the data pipeline was quite challenging, since our DevOps engineer had 
 - most of us had never written in the language our whole job was in
 
 ## Accomplishments that we're proud of 🍀🍾:
-- getting the weather api to work
-- solving nested queries issue
-- completely custom cidc piplines through github actions digitalocean ssh
+
+The majority of our team would consider themselves beginner coders. Despite the steep challenges and high goals, our team of inexperinced coders were able to overcome many difficult roadblocks. 
+
+Thanks to Zac and Hargun, we were able to set up a completely custom cidc pipline through github actions digitalocean ssh.
+
+Being able to take real word data from the weather API and integrate it into our app to provide useful information for our user.
+
+One of our biggest roadblocks was not being able to do more than one nested query within graphql. Being able to overcome this problem after many hours was a great accomplishment.
 
 ## What we learned 🧠👍:
-- Learned how to access and integrate data from an api
+
+- Learned how to access and integrate data from an APL
+- Graphql
+- Python Flask
+- React Native
 
 ## What's next for Activity 🥚🐣🐥:
+
 - Adding more activities
 - Adding more paramaters to validity
 - Improving UI
+- adding validity score for events
 
 ## Frontend
 - React Native with TypeScript
