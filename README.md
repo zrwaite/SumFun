@@ -1,6 +1,8 @@
 # FreyHacks
 This is our code repository for our project submission for FreyHacks
 
+Demo: [https://youtu.be/fpZoqBlySX0](https://youtu.be/fpZoqBlySX0)
+
 ## Tech Stack:
 <div align="center">
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="50rem" height="50rem" />
