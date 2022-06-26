@@ -21,7 +21,7 @@ jobs:
     - name: docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        DOCKER_PASSWORD: ${{secrets.DOCKERHUB_ACCESS_TOKEN}}
       run: 
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
@@ -44,7 +44,7 @@ jobs:
         envs: IMAGE_NAME, REGISTRY, {{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}, GITHUB_SHA
         script: |
           # login to dockerhub
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
+          echo ${{ secrets.DOCKERHUB_ACCESS_TOKEN }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin
           # destroy all existing containers
           docker stop $(docker ps -a -q)
           docker rm $(docker ps -a -q)
