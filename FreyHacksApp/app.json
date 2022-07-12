@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "FreyHacksApp",
-    "slug": "FreyHacksApp",
+    "name": "SumFun",
+    "slug": "SumFun",
+    "description": "Organize your passions with SumFun",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",

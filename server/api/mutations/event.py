@@ -1,9 +1,10 @@
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
-from api import db
+from database import db
 from api.models.event import Event
 from api.models.user import User
 from modules.hash import hash_password
+
 
 @convert_kwargs_to_snake_case
 def createEvent_resolver(obj, info, username, name, event_date, start_time, end_time, lat, lon, activity_id, public):
@@ -43,6 +44,7 @@ def createEvent_resolver(obj, info, username, name, event_date, start_time, end_
             "errors": ["Invalid date"]
         }
     return payload
+
 
 @convert_kwargs_to_snake_case
 def updateEvent_resolver(obj, info, id, name, date, start_time, end_time, lat, lon, activity_id, public):

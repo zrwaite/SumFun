@@ -1,4 +1,5 @@
-from app import db
+from database import db
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -23,18 +24,18 @@ class User(db.Model):
             "display_name": self.display_name,
             "activity_ids": self.activity_ids,
             "created_at": str(self.created_at.strftime('%d-%m-%Y')),
-            "show_unverified": self.show_unverified, 
-            #"do_not_disturb": self.do_not_disturb,
-            "friend_ids":self.friend_ids,
-            "event_ids":self.event_ids,
-            "validity_ids":self.validity_ids,
+            "show_unverified": self.show_unverified,
+            # "do_not_disturb": self.do_not_disturb,
+            "friend_ids": self.friend_ids,
+            "event_ids": self.event_ids,
+            "validity_ids": self.validity_ids,
             "lon": self.lon,
             "lat": self.lat,
         }
-    
+
     def do_not_disturb():
-       
-        weekday, weekend = [],[]
+
+        weekday, weekend = [], []
         weekday_start = input('Start')
         weekday_end = input('End')
         weekday = [weekday_start, weekday_end]
@@ -42,7 +43,7 @@ class User(db.Model):
         weekend_end = input('End')
         weekend = [weekend_start, weekend_end]
 
-        schedule = {'Weekday availability':weekday, 'Weekend availabilty':weekend}
+        schedule = {'Weekday availability': weekday,
+                    'Weekend availabilty': weekend}
 
         return schedule
-

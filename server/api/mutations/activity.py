@@ -1,11 +1,9 @@
+from database import db
+from api.models.user import User
+from api.models.activity import Activity
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
-from api import db
-from api.models.activity import Activity
-from api.models.user import User
-from modules.hash import hash_password
 
-	# createActivity(name: String!, ideal_temp: Int!, ideal_wind: Int!, rain: RAIN!): ActivityResult!
 
 @convert_kwargs_to_snake_case
 def createActivity_resolver(obj, info, username, name, ideal_temp, ideal_wind, rain, ideal_pop, ideal_visibility, ideal_uvi):
@@ -42,7 +40,7 @@ def createActivity_resolver(obj, info, username, name, ideal_temp, ideal_wind, r
                     "success": True,
                     "activity": activity.to_dict()
                 }
-            else: 
+            else:
                 payload = {
                     "success": False,
                     "errors": ['user not found']
@@ -56,7 +54,7 @@ def createActivity_resolver(obj, info, username, name, ideal_temp, ideal_wind, r
 
 
 @convert_kwargs_to_snake_case
-def updateActivity_resolver(obj, info, id, ideal_temp, ideal_wind, ideal_visibility, ideal_pop, ideal_uvi, rain):
+def updateActivity_resolver(obj, info, username, id, ideal_temp, ideal_wind, ideal_visibility, ideal_pop, ideal_uvi, rain):
     try:
         activity = User.query.get(id)
         if activity:

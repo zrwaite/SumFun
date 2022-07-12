@@ -1,7 +1,8 @@
-from app import db
+from database import db
+
 
 class Event(db.Model):
-    __tablename__  =  'events'
+    __tablename__ = 'events'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     date = db.Column(db.String, nullable=False)
@@ -20,8 +21,8 @@ class Event(db.Model):
             "date": self.date,
             "start_time": self.start_time,
             "end_time": self.end_time,
-            "lat":self.lat,
-            "lon":self.lon,
+            "lat": self.lat,
+            "lon": self.lon,
             "activity_id": self.activity_id,
             "public": self.public,
             "created at": str(self.created_at.strftime('%d-%m-%Y'))

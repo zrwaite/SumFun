@@ -1,4 +1,5 @@
-from app import db
+from database import db
+
 
 class Validity(db.Model):
     __tablename__ = 'validities'
@@ -6,7 +7,7 @@ class Validity(db.Model):
     activity_id = db.Column(db.Integer)
     event_id = db.Column(db.Integer)
     scores = db.Column(db.ARRAY(db.Float), nullable=False)
-    
+
     def to_dict(self):
         return {
             "id": self.id,

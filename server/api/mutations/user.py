@@ -1,7 +1,6 @@
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
-import flask_sqlalchemy
-from api import db
+from database import db
 from api.models.user import User
 from api.models.activity import Activity
 from api.models.event import Event
@@ -87,8 +86,6 @@ def deleteUser_resolver(obj, info, id):
     return payload
 
 
-
-
 def updateUserValidityIds(username, validity_ids=[]):
     try:
         user = User.query.filter(User.username == username).scalar()
@@ -112,6 +109,7 @@ def updateUserValidityIds(username, validity_ids=[]):
         }
     return payload
 
+
 @convert_kwargs_to_snake_case
 def subscribeToActivity_resolver(obj, info, id, username):
     try:
@@ -131,7 +129,7 @@ def subscribeToActivity_resolver(obj, info, id, username):
                         "success": False,
                         "errors": ["you are already subscribed"]
                     }
-            else: 
+            else:
                 payload = {
                     "success": False,
                     "errors": ['activity not found']
@@ -168,7 +166,7 @@ def registerForEvent_resolver(obj, info, id, username):
                         "success": False,
                         "errors": ["you are already registered"]
                     }
-            else: 
+            else:
                 payload = {
                     "success": False,
                     "errors": ['activity not found']
@@ -219,6 +217,7 @@ def unsubscribeFromActivity_resolver(obj, info, id, username):
             "errors": [str(error)]
         }
     return payload
+
 
 @convert_kwargs_to_snake_case
 def unregisterFromEvent_resolver(obj, info, id, username):

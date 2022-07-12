@@ -3,7 +3,8 @@ from api.models.user import User
 from api.models.activity import Activity
 from api.models.event import Event
 from api.models.validity import Validity
-from app import db
+from database import db
+
 
 def listUsers():
     try:
@@ -19,8 +20,10 @@ def listUsers():
         }
     return payload
 
+
 def listUsers_resolver(obj, info):
-   return listUsers()
+    return listUsers()
+
 
 @convert_kwargs_to_snake_case
 def getUser_resolver(obj, info, username):
@@ -43,10 +46,13 @@ def getUser_resolver(obj, info, username):
         }
     return payload
 
+
 def getUserEvents(user):
     try:
-        validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
-        events = db.session.query(Event).filter(Event.id.in_(user['event_ids'])).all()
+        validities = db.session.query(Validity).filter(
+            Validity.id.in_(user['validity_ids'])).all()
+        events = db.session.query(Event).filter(
+            Event.id.in_(user['event_ids'])).all()
         if not len(validities) == len(events):
             print('warning invalid data')
         for event in events:
@@ -64,6 +70,7 @@ def getUserEvents(user):
         print(str(error))
         return []
 
+
 def getUserActivities(user):
     try:
         # validities = db.session.query(Validity).filter(Validity.id.in_(user['validity_ids'])).all()
@@ -78,12 +85,14 @@ def getUserActivities(user):
         #     if not activity_validity_found:
         #         print('failed to find matching activity and validity')
         #         return []
-        activities = Activity.query.filter(Activity.id.in_(user['activity_ids'])).all()
+        activities = Activity.query.filter(
+            Activity.id.in_(user['activity_ids'])).all()
         return activities
     except Exception as error:
         print('failed to get validities')
         print(str(error))
         return []
+
 
 @convert_kwargs_to_snake_case
 def getUser_activities_resolver(obj, info):
@@ -92,6 +101,7 @@ def getUser_activities_resolver(obj, info):
     else:
         user = obj
     return getUserActivities(user)
+
 
 @convert_kwargs_to_snake_case
 def getUser_friends_resolver(obj, info):
@@ -104,6 +114,7 @@ def getUser_friends_resolver(obj, info):
         return friends
     except Exception as error:
         return []
+
 
 @convert_kwargs_to_snake_case
 def getUser_events_resolver(obj, info):

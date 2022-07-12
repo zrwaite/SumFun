@@ -1,8 +1,9 @@
 from datetime import date
 from ariadne import convert_kwargs_to_snake_case
-from api import db
+from database import db
 from api.models.validity import Validity
 from api.models.user import User
+
 
 def deleteValidity(id):
     try:
@@ -15,11 +16,13 @@ def deleteValidity(id):
             "success": False,
             "errors": ["validity not found"]
         }
-    return payload 
+    return payload
+
 
 @convert_kwargs_to_snake_case
 def deleteValidity_resolver(obj, info, id):
     return deleteValidity(id)
+
 
 def createValidity(username, scores, activity_id, event_id):
     try:
@@ -51,6 +54,7 @@ def createValidity(username, scores, activity_id, event_id):
             "errors": [str(error)]
         }
     return payload
+
 
 @convert_kwargs_to_snake_case
 def createValidity_resolver(obj, info, username, scores, activity_id, event_id):

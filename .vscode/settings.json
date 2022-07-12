@@ -1,2 +1,8 @@
 {
+	"python.linting.pylintEnabled": true,
+	"python.linting.enabled": true,
+	"python.defaultInterpreterPath": "server/bin/python",
+	"python.linting.pylintPath": "server/bin/pylint",
+	"python.autoComplete.extraPaths": ["./server"],
+	"python.linting.pylintArgs": ["--load-plugins", "pylint_flask_sqlalchemy", "pylint_flask", "--init-hook", "import sys; sys.path.append('/Users/zacharywaite/Coding/FreyHacks/server')"]
 }

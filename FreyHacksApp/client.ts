@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 export const client = new ApolloClient({
-	uri: 'http://10.0.0.249:80/graphql',
+	uri: 'http://sum-fun.xyz/graphql',
 	cache: new InMemoryCache(),
 })
